@@ -1,0 +1,3020 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.549">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="">
+<meta name="dcterms.date" content="2024-01-29">
+
+<title>2&nbsp; Data Pre-Processing</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../Applications/Notebooks/boosting.html" rel="next">
+<link href="../../index.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Applications/Application1/EDA.html">Weekly Report</a></li><li class="breadcrumb-item"><a href="../../Applications/Application1/EDA.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Pre-Processing</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+        <div class="sidebar-tools-collapse">
+    <a href="../../DATA495.github.io.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Weekly Report</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Applications/Application1/EDA.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Pre-Processing</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Post-Midterm</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Applications/Notebooks/boosting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">code adapted from https://stackoverflow.com/questions/17200114/how-to-split-data-into-training-testing-sets-using-sample-function</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#ds0214" id="toc-ds0214" class="nav-link active" data-scroll-target="#ds0214"><span class="header-section-number">2.1</span> DS0214</a></li>
+  <li><a href="#ds0215" id="toc-ds0215" class="nav-link" data-scroll-target="#ds0215"><span class="header-section-number">2.2</span> DS0215</a></li>
+  <li><a href="#ds0216" id="toc-ds0216" class="nav-link" data-scroll-target="#ds0216"><span class="header-section-number">2.3</span> DS0216</a></li>
+  <li><a href="#ds0235" id="toc-ds0235" class="nav-link" data-scroll-target="#ds0235"><span class="header-section-number">2.4</span> DS0235</a></li>
+  <li><a href="#year-to-year-survey-data-consistency" id="toc-year-to-year-survey-data-consistency" class="nav-link" data-scroll-target="#year-to-year-survey-data-consistency"><span class="header-section-number">2.5</span> Year to Year Survey Data Consistency</a></li>
+  <li><a href="#joining-datasets" id="toc-joining-datasets" class="nav-link" data-scroll-target="#joining-datasets"><span class="header-section-number">2.6</span> Joining Datasets</a></li>
+  <li><a href="#ds209---depression-screener" id="toc-ds209---depression-screener" class="nav-link" data-scroll-target="#ds209---depression-screener"><span class="header-section-number">2.7</span> DS209 - Depression Screener</a></li>
+  <li><a href="#distribution-of-target-variable" id="toc-distribution-of-target-variable" class="nav-link" data-scroll-target="#distribution-of-target-variable"><span class="header-section-number">2.8</span> Distribution of target variable</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Applications/Application1/EDA.html">Weekly Report</a></li><li class="breadcrumb-item"><a href="../../Applications/Application1/EDA.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Pre-Processing</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data Pre-Processing</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">2024-01-29</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div id="cell-0" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Want to see if each data set contains the seqn number and data release number</p>
+<div id="cell-3" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>data_master <span class="op">=</span> <span class="st">"ICPSR_25504</span><span class="ch">\\</span><span class="st">"</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>dataframes <span class="op">=</span> []</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>index <span class="op">=</span> []</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>os.listdir(data_master)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> root, dirs, files <span class="kw">in</span> os.walk(data_master):</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> name <span class="kw">in</span> files:</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> name.endswith(<span class="st">".tsv"</span>):</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>            <span class="bu">file</span> <span class="op">=</span> os.path.join(root, name)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>            dataframes.append(pd.read_csv(<span class="bu">file</span>, sep <span class="op">=</span> <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>, nrows <span class="op">=</span> <span class="dv">100</span>))</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>            index.append(root[<span class="op">-</span><span class="dv">6</span>:])</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>dataframes <span class="op">=</span> pd.Series(dataframes, index <span class="op">=</span> index)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>FileNotFoundError: [Errno 2] No such file or directory: 'ICPSR_25504\\'</code></pre>
+</div>
+</div>
+<div id="cell-4" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>num_seqn <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>num_SDDSRVYR <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> dataframes.index:</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> dataframes[i]</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">"SEQN"</span> <span class="kw">in</span> df.columns:</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        num_seqn <span class="op">+=</span><span class="dv">1</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(i)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">"SDDSRVYR"</span> <span class="kw">in</span> df.columns:</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        num_SDDSRVYR <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(i)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>DS0214
+DS0214
+DS0215
+DS0215
+DS0216
+DS0216
+DS0235
+DS0235</code></pre>
+</div>
+</div>
+<div id="cell-5" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(num_seqn<span class="op">/</span><span class="bu">len</span>(dataframes))</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(num_SDDSRVYR<span class="op">/</span><span class="bu">len</span>(dataframes))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0.963302752293578
+0.963302752293578</code></pre>
+</div>
+</div>
+<p>Some dataframes don’t contain the Serial Number and the Data Release Number. Let’s investigate why this occurs.</p>
+<section id="ds0214" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="ds0214"><span class="header-section-number">2.1</span> DS0214</h2>
+<p>Dietary Supplement Use – Supplement Information</p>
+<p>This data set stores dietary supplement information. The primary key to this dataset is the Supplement ID number. Let’s see if this is a foreign key in another dataset</p>
+<div id="cell-7" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> dataframes.index:</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> dataframes[i]</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">"DSDSUPID"</span> <span class="kw">in</span> df.columns:</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(i)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>DS0213
+DS0214
+DS0215</code></pre>
+</div>
+</div>
+<p>The Supplement ID number (DSDSUPID) is the primary key in DS0214 and is a foreign key in DS0213</p>
+<p>DS0213 is a dataset that contains the serial number and the data release number. DSO213 is Dietary Supplement Use – Participants Use of Supplement Let’s see how DSO213 is structured: Can one person be recorded taking multiple supplements? If so, what is the distribution of supplement usage in the same?</p>
+<div id="cell-9" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>DS2013 <span class="op">=</span> pd.read_csv(<span class="st">"ICPSR_25504</span><span class="ch">\\</span><span class="st">DS0213</span><span class="ch">\\</span><span class="st">25504-0213-Data.tsv"</span>, sep <span class="op">=</span> <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>supplement_usage <span class="op">=</span> DS2013.groupby(<span class="st">"SEQN"</span>).size().sort_values(ascending <span class="op">=</span> <span class="va">False</span>).reset_index(name<span class="op">=</span><span class="st">"Count"</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>supplement_usage</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">SEQN</th>
+<th data-quarto-table-cell-role="th">Count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>34656</td>
+<td>20</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>40551</td>
+<td>19</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>37134</td>
+<td>16</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>38637</td>
+<td>16</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>37164</td>
+<td>14</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4105</td>
+<td>35518</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">4106</td>
+<td>35522</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4107</td>
+<td>35524</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">4108</td>
+<td>35525</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4109</td>
+<td>36307</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+
+<p>4110 rows × 2 columns</p>
+</div>
+</div>
+</div>
+<div id="cell-10" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>plt.hist(supplement_usage[<span class="st">"Count"</span>], bins <span class="op">=</span> <span class="dv">12</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Number of Supplements Used"</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Number of Participants"</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Distribution of Supplement Usage Among Study Participants"</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EDA_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>A key thing to note is that a participant who is not using supplements is not included in this visualization. This analysis is only representative of a participant that uses one or multiple supplement(s)</p>
+<p>Let’s look at the next dataset that does not contain the sequence number or data release number</p>
+</section>
+<section id="ds0215" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="ds0215"><span class="header-section-number">2.2</span> DS0215</h2>
+<p>Dietary Supplement Use – Ingredient Information</p>
+<p>The Supplement ID number (DSDSUPID) is also the primary key in DS0214 and is a foreign key in DS0213</p>
+<p>Can a supplement have several ingredients and what is the distributions of number ingredients in a supplements</p>
+<div id="cell-13" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>DS2015 <span class="op">=</span> pd.read_csv(<span class="st">"ICPSR_25504</span><span class="ch">\\</span><span class="st">DS0215</span><span class="ch">\\</span><span class="st">25504-0215-Data.tsv"</span>, sep <span class="op">=</span> <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>num_ingredients <span class="op">=</span> DS2015.groupby(<span class="st">"DSDSUPP"</span>).size().sort_values(ascending <span class="op">=</span> <span class="va">False</span>).reset_index(name<span class="op">=</span><span class="st">"Count"</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>num_ingredients</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">DSDSUPP</th>
+<th data-quarto-table-cell-role="th">Count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>S1000579801</td>
+<td>68</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>S1000579800</td>
+<td>65</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>S1000580200</td>
+<td>65</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>S1000600500</td>
+<td>65</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>S1000582500</td>
+<td>64</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2138</td>
+<td>S1000649000</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2139</td>
+<td>S1000649100</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2140</td>
+<td>S1000649200</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2141</td>
+<td>S1000649300</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2142</td>
+<td>S1888690300</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+
+<p>2143 rows × 2 columns</p>
+</div>
+</div>
+</div>
+<div id="cell-14" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>plt.hist(num_ingredients[<span class="st">"Count"</span>], bins <span class="op">=</span> <span class="dv">12</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Number of Ingredients in Supplement"</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Number of Supplements"</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Distribution of Amount of Ingredients Among Supplements"</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EDA_files/figure-html/cell-10-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-15" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>DS2015[DS2015[<span class="st">"DSDSUPP"</span>]<span class="op">==</span><span class="st">"S1000579801"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">DSDSUPID</th>
+<th data-quarto-table-cell-role="th">DSDSUPP</th>
+<th data-quarto-table-cell-role="th">DSDINGID</th>
+<th data-quarto-table-cell-role="th">DSDINGR</th>
+<th data-quarto-table-cell-role="th">DSDOPER</th>
+<th data-quarto-table-cell-role="th">DSDQTY</th>
+<th data-quarto-table-cell-role="th">DSDUNIT</th>
+<th data-quarto-table-cell-role="th">DSDCAT</th>
+<th data-quarto-table-cell-role="th">DSDBLFLG</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">11661</td>
+<td>1000579801</td>
+<td>S1000579801</td>
+<td>10000037</td>
+<td>I10000037</td>
+<td>=</td>
+<td>100.0</td>
+<td>1</td>
+<td>4</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11662</td>
+<td>1000579801</td>
+<td>S1000579801</td>
+<td>10000038</td>
+<td>I10000038</td>
+<td>=</td>
+<td>50.0</td>
+<td>1</td>
+<td>4</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">11663</td>
+<td>1000579801</td>
+<td>S1000579801</td>
+<td>10000042</td>
+<td>I10000042</td>
+<td>=</td>
+<td>150.0</td>
+<td>4</td>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11664</td>
+<td>1000579801</td>
+<td>S1000579801</td>
+<td>10000052</td>
+<td>I10000052</td>
+<td>=</td>
+<td>1.5</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">11665</td>
+<td>1000579801</td>
+<td>S1000579801</td>
+<td>10000070</td>
+<td>I10000070</td>
+<td>=</td>
+<td>250.0</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">11724</td>
+<td>1000579801</td>
+<td>S1000579801</td>
+<td>10004592</td>
+<td>I10004592</td>
+<td>=</td>
+<td>400.0</td>
+<td>1</td>
+<td>4</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11725</td>
+<td>1000579801</td>
+<td>S1000579801</td>
+<td>10004593</td>
+<td>I10004593</td>
+<td>=</td>
+<td>100.0</td>
+<td>1</td>
+<td>4</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">11726</td>
+<td>1000579801</td>
+<td>S1000579801</td>
+<td>10004595</td>
+<td>I10004595</td>
+<td>=</td>
+<td>100.0</td>
+<td>1</td>
+<td>4</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11727</td>
+<td>1000579801</td>
+<td>S1000579801</td>
+<td>10004927</td>
+<td>I10004927</td>
+<td>=</td>
+<td>15.0</td>
+<td>1</td>
+<td>3</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">11728</td>
+<td>1000579801</td>
+<td>S1000579801</td>
+<td>10004928</td>
+<td>I10004928</td>
+<td>=</td>
+<td>125.0</td>
+<td>1</td>
+<td>4</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+
+<p>68 rows × 9 columns</p>
+</div>
+</div>
+</div>
+</section>
+<section id="ds0216" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="ds0216"><span class="header-section-number">2.3</span> DS0216</h2>
+<p>Dietary Supplement Use – Supplement Blend</p>
+<p>The primary key in DS0216 is the Ingredient ID number which is a foreign key in DS0215</p>
+</section>
+<section id="ds0235" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="ds0235"><span class="header-section-number">2.4</span> DS0235</h2>
+<p>Drug Information</p>
+<p>The primary key for DS0235 is the Generic Drug Code (RXDDRGID). Let’s find which dataset has the generic drug code as a foreign key.</p>
+<div id="cell-18" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> dataframes.index:</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> dataframes[i]</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">"RXDDRGID"</span> <span class="kw">in</span> df.columns:</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(i)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>DS0234
+DS0235</code></pre>
+</div>
+</div>
+<p>DS0234 contains RXDDRGID as a foreign key. This dataset is Prescription Medications</p>
+<div id="cell-20" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>DS2034 <span class="op">=</span> pd.read_csv(<span class="st">"ICPSR_25504</span><span class="ch">\\</span><span class="st">DS0234</span><span class="ch">\\</span><span class="st">25504-0234-Data.tsv"</span>, sep <span class="op">=</span> <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>num_drugs <span class="op">=</span> DS2034.groupby(<span class="st">"SEQN"</span>).size().sort_values(ascending <span class="op">=</span> <span class="va">False</span>).reset_index(name<span class="op">=</span><span class="st">"Count"</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>num_drugs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">SEQN</th>
+<th data-quarto-table-cell-role="th">Count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>41025</td>
+<td>20</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>34531</td>
+<td>18</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>34423</td>
+<td>17</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>38612</td>
+<td>16</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>33959</td>
+<td>16</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10343</td>
+<td>34985</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">10344</td>
+<td>34984</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10345</td>
+<td>34983</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">10346</td>
+<td>34982</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10347</td>
+<td>36301</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+
+<p>10348 rows × 2 columns</p>
+</div>
+</div>
+</div>
+<div id="cell-21" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Partipicant 41025 uses 20 perscription drugs</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>DS2034[DS2034[<span class="st">"SEQN"</span>] <span class="op">==</span> <span class="dv">41025</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">SEQN</th>
+<th data-quarto-table-cell-role="th">RXDUSE</th>
+<th data-quarto-table-cell-role="th">RXDDRUG</th>
+<th data-quarto-table-cell-role="th">RXDDRGID</th>
+<th data-quarto-table-cell-role="th">RXQSEEN</th>
+<th data-quarto-table-cell-role="th">RXDDAYS</th>
+<th data-quarto-table-cell-role="th">RXDCOUNT</th>
+<th data-quarto-table-cell-role="th">SDDSRVYR</th>
+<th data-quarto-table-cell-role="th">RIDSTATR</th>
+<th data-quarto-table-cell-role="th">RIDEXMON</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">FIAPROXY</th>
+<th data-quarto-table-cell-role="th">FIAINTRP</th>
+<th data-quarto-table-cell-role="th">MIALANG</th>
+<th data-quarto-table-cell-role="th">MIAPROXY</th>
+<th data-quarto-table-cell-role="th">MIAINTRP</th>
+<th data-quarto-table-cell-role="th">AIALANG</th>
+<th data-quarto-table-cell-role="th">WTINT2YR</th>
+<th data-quarto-table-cell-role="th">WTMEC2YR</th>
+<th data-quarto-table-cell-role="th">SDMVPSU</th>
+<th data-quarto-table-cell-role="th">SDMVSTRA</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">17125</td>
+<td>41025</td>
+<td>1</td>
+<td>ACETAMINOPHEN; HYDROCODONE</td>
+<td>d03428</td>
+<td>1</td>
+<td>1825</td>
+<td>20</td>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td>...</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>98473.732756</td>
+<td>100919.498403</td>
+<td>2</td>
+<td>47</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">17126</td>
+<td>41025</td>
+<td>1</td>
+<td>AZELASTINE NASAL</td>
+<td>d04068</td>
+<td>1</td>
+<td>182</td>
+<td>20</td>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td>...</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>98473.732756</td>
+<td>100919.498403</td>
+<td>2</td>
+<td>47</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">17127</td>
+<td>41025</td>
+<td>1</td>
+<td>BUSPIRONE</td>
+<td>d00182</td>
+<td>1</td>
+<td>122</td>
+<td>20</td>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td>...</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>98473.732756</td>
+<td>100919.498403</td>
+<td>2</td>
+<td>47</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">17128</td>
+<td>41025</td>
+<td>1</td>
+<td>CHOLESTYRAMINE</td>
+<td>d00193</td>
+<td>1</td>
+<td>547</td>
+<td>20</td>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td>...</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>98473.732756</td>
+<td>100919.498403</td>
+<td>2</td>
+<td>47</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">17129</td>
+<td>41025</td>
+<td>1</td>
+<td>CITALOPRAM</td>
+<td>d04332</td>
+<td>1</td>
+<td>243</td>
+<td>20</td>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td>...</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>98473.732756</td>
+<td>100919.498403</td>
+<td>2</td>
+<td>47</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">17130</td>
+<td>41025</td>
+<td>1</td>
+<td>DILTIAZEM</td>
+<td>d00045</td>
+<td>1</td>
+<td>365</td>
+<td>20</td>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td>...</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>98473.732756</td>
+<td>100919.498403</td>
+<td>2</td>
+<td>47</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">17131</td>
+<td>41025</td>
+<td>1</td>
+<td>ESOMEPRAZOLE</td>
+<td>d04749</td>
+<td>1</td>
+<td>730</td>
+<td>20</td>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td>...</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>98473.732756</td>
+<td>100919.498403</td>
+<td>2</td>
+<td>47</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">17132</td>
+<td>41025</td>
+<td>1</td>
+<td>FLUTICASONE</td>
+<td>d01296</td>
+<td>1</td>
+<td>1825</td>
+<td>20</td>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td>...</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>98473.732756</td>
+<td>100919.498403</td>
+<td>2</td>
+<td>47</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">17133</td>
+<td>41025</td>
+<td>1</td>
+<td>FLUTICASONE; SALMETEROL</td>
+<td>d04611</td>
+<td>1</td>
+<td>1095</td>
+<td>20</td>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td>...</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>98473.732756</td>
+<td>100919.498403</td>
+<td>2</td>
+<td>47</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">17134</td>
+<td>41025</td>
+<td>1</td>
+<td>GABAPENTIN</td>
+<td>d03182</td>
+<td>1</td>
+<td>730</td>
+<td>20</td>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td>...</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>98473.732756</td>
+<td>100919.498403</td>
+<td>2</td>
+<td>47</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">17135</td>
+<td>41025</td>
+<td>1</td>
+<td>GUAIFENESIN; PSEUDOEPHEDRINE</td>
+<td>d03379</td>
+<td>1</td>
+<td>730</td>
+<td>20</td>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td>...</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>98473.732756</td>
+<td>100919.498403</td>
+<td>2</td>
+<td>47</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">17136</td>
+<td>41025</td>
+<td>1</td>
+<td>LORAZEPAM</td>
+<td>d00149</td>
+<td>1</td>
+<td>365</td>
+<td>20</td>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td>...</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>98473.732756</td>
+<td>100919.498403</td>
+<td>2</td>
+<td>47</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">17137</td>
+<td>41025</td>
+<td>1</td>
+<td>METAXALONE</td>
+<td>d00964</td>
+<td>1</td>
+<td>1460</td>
+<td>20</td>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td>...</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>98473.732756</td>
+<td>100919.498403</td>
+<td>2</td>
+<td>47</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">17138</td>
+<td>41025</td>
+<td>1</td>
+<td>NABUMETONE</td>
+<td>d00310</td>
+<td>1</td>
+<td>243</td>
+<td>20</td>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td>...</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>98473.732756</td>
+<td>100919.498403</td>
+<td>2</td>
+<td>47</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">17139</td>
+<td>41025</td>
+<td>1</td>
+<td>OXYBUTYNIN</td>
+<td>d00328</td>
+<td>1</td>
+<td>730</td>
+<td>20</td>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td>...</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>98473.732756</td>
+<td>100919.498403</td>
+<td>2</td>
+<td>47</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">17140</td>
+<td>41025</td>
+<td>1</td>
+<td>OXYCODONE</td>
+<td>d00329</td>
+<td>1</td>
+<td>1825</td>
+<td>20</td>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td>...</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>98473.732756</td>
+<td>100919.498403</td>
+<td>2</td>
+<td>47</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">17141</td>
+<td>41025</td>
+<td>1</td>
+<td>QUININE</td>
+<td>d00366</td>
+<td>1</td>
+<td>10950</td>
+<td>20</td>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td>...</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>98473.732756</td>
+<td>100919.498403</td>
+<td>2</td>
+<td>47</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">17142</td>
+<td>41025</td>
+<td>1</td>
+<td>SUMATRIPTAN</td>
+<td>d03160</td>
+<td>1</td>
+<td>1825</td>
+<td>20</td>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td>...</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>98473.732756</td>
+<td>100919.498403</td>
+<td>2</td>
+<td>47</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">17143</td>
+<td>41025</td>
+<td>1</td>
+<td>TAMSULOSIN</td>
+<td>d04121</td>
+<td>1</td>
+<td>730</td>
+<td>20</td>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td>...</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>98473.732756</td>
+<td>100919.498403</td>
+<td>2</td>
+<td>47</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">17144</td>
+<td>41025</td>
+<td>1</td>
+<td>TRAZODONE</td>
+<td>d00395</td>
+<td>1</td>
+<td>365</td>
+<td>20</td>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td>...</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>98473.732756</td>
+<td>100919.498403</td>
+<td>2</td>
+<td>47</td>
+</tr>
+</tbody>
+</table>
+
+<p>20 rows × 49 columns</p>
+</div>
+</div>
+</div>
+<div id="cell-22" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>plt.hist(num_drugs[<span class="st">"Count"</span>], bins <span class="op">=</span> <span class="dv">10</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Number of Perscription Drugs Used"</span>)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Number of Participants"</span>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Perpsection Drug Usage Among Study Participants"</span>)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EDA_files/figure-html/cell-15-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="year-to-year-survey-data-consistency" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="year-to-year-survey-data-consistency"><span class="header-section-number">2.5</span> Year to Year Survey Data Consistency</h2>
+<p>The first data that we have been working with from the dataset ICPSR_25504 is the National Health and Nutrition Examination Survey (NHANES) from 2005-2006. Next we have downloaded the Survey from 2005-2006 and we will look to see if the data architecture is consistent across year.</p>
+<p>First let’s check if each data set exists in both surveys and if their columns are the same</p>
+<div id="cell-24" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>data_master <span class="op">=</span> <span class="st">"ICPSR_25505</span><span class="ch">\\</span><span class="st">"</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>dataframes2 <span class="op">=</span> []</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>index2 <span class="op">=</span> []</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>os.listdir(data_master)</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> root, dirs, files <span class="kw">in</span> os.walk(data_master):</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> name <span class="kw">in</span> files:</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> name.endswith(<span class="st">".tsv"</span>):</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>            <span class="bu">file</span> <span class="op">=</span> os.path.join(root, name)</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>            dataframes2.append(pd.read_csv(<span class="bu">file</span>, sep <span class="op">=</span> <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>, nrows <span class="op">=</span> <span class="dv">100</span>))</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>            index2.append(root[<span class="op">-</span><span class="dv">6</span>:])</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>dataframes2 <span class="op">=</span> pd.Series(dataframes2, index <span class="op">=</span> index2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-25" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Datasets included in 2005-2006 but not in 2007-2008"</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> index:</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="kw">not</span> <span class="kw">in</span> index2:</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(i)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Datasets not included in 2005-2006 but in 2007-2008"</span>)</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> index2:</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="kw">not</span> <span class="kw">in</span> index:</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(i)</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Datasets with mismatching columns"</span>)</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> index:</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="kw">in</span> index2:</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(dataframes[i].columns) <span class="op">!=</span> <span class="bu">len</span>(dataframes2[i].columns):</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(i)</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Datasets with consistent number of columns"</span>)</span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> index:</span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="kw">in</span> index2:</span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(dataframes[i].columns) <span class="op">==</span> <span class="bu">len</span>(dataframes2[i].columns):</span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(i)</span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>        </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Datasets included in 2005-2006 but not in 2007-2008
+DS0018
+DS0019
+DS0020
+DS0021
+DS0022
+DS0023
+DS0024
+DS0025
+DS0026
+DS0128
+DS0129
+DS0130
+DS0131
+DS0132
+DS0133
+DS0134
+DS0135
+DS0136
+DS0137
+DS0138
+DS0139
+DS0140
+DS0141
+DS0142
+DS0143
+DS0144
+DS0234
+DS0235
+DS0236
+DS0237
+DS0238
+DS0239
+DS0240
+DS0241
+DS0242
+DS0243
+DS0244
+DS0245
+DS0246
+DS0247
+DS0248
+Datasets not included in 2005-2006 but in 2007-2008
+DS0100
+Datasets with mismatching columns
+DS0011
+DS0012
+DS0013
+DS0014
+DS0015
+DS0016
+DS0017
+DS0101
+DS0102
+DS0103
+DS0104
+DS0105
+DS0106
+DS0107
+DS0108
+DS0109
+DS0110
+DS0111
+DS0113
+DS0114
+DS0115
+DS0116
+DS0117
+DS0118
+DS0119
+DS0120
+DS0121
+DS0122
+DS0123
+DS0124
+DS0125
+DS0126
+DS0127
+DS0203
+DS0204
+DS0206
+DS0207
+DS0208
+DS0209
+DS0210
+DS0211
+DS0212
+DS0214
+DS0215
+DS0216
+DS0217
+DS0218
+DS0219
+DS0220
+DS0221
+DS0222
+DS0223
+DS0224
+DS0225
+DS0226
+DS0227
+DS0228
+DS0229
+DS0230
+DS0231
+DS0232
+DS0233
+Datasets with consistent number of columns
+DS0001
+DS0112
+DS0201
+DS0202
+DS0205
+DS0213</code></pre>
+</div>
+</div>
+<div id="cell-26" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>name <span class="op">=</span> <span class="st">"DS0001"</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>i<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> i <span class="op">&lt;</span> <span class="bu">len</span>(dataframes[name].columns):</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> dataframes[name].columns[i] <span class="kw">in</span> dataframes2[name].columns:</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>        i <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> i <span class="op">==</span> <span class="bu">len</span>(dataframes[name].columns):</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"True"</span>)</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"False"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>False</code></pre>
+</div>
+</div>
+<div id="cell-27" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>dataframes[name].columns,dataframes2[name].columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="18">
+<pre><code>(Index(['SEQN', 'SDDSRVYR', 'RIDSTATR', 'RIDEXMON', 'RIAGENDR', 'RIDAGEYR',
+        'RIDAGEMN', 'RIDAGEEX', 'RIDRETH1', 'DMQMILIT', 'DMDBORN', 'DMDCITZN',
+        'DMDYRSUS', 'DMDEDUC3', 'DMDEDUC2', 'DMDSCHOL', 'DMDMARTL', 'DMDHHSIZ',
+        'DMDFMSIZ', 'INDHHINC', 'INDFMINC', 'INDFMPIR', 'RIDEXPRG', 'DMDHRGND',
+        'DMDHRAGE', 'DMDHRBRN', 'DMDHREDU', 'DMDHRMAR', 'DMDHSEDU', 'SIALANG',
+        'SIAPROXY', 'SIAINTRP', 'FIALANG', 'FIAPROXY', 'FIAINTRP', 'MIALANG',
+        'MIAPROXY', 'MIAINTRP', 'AIALANG', 'WTINT2YR', 'WTMEC2YR', 'SDMVPSU',
+        'SDMVSTRA'],
+       dtype='object'),
+ Index(['SEQN', 'SDDSRVYR', 'RIDSTATR', 'RIDEXMON', 'RIAGENDR', 'RIDAGEYR',
+        'RIDAGEMN', 'RIDAGEEX', 'RIDRETH1', 'DMQMILIT', 'DMDBORN2', 'DMDCITZN',
+        'DMDYRSUS', 'DMDEDUC3', 'DMDEDUC2', 'DMDSCHOL', 'DMDMARTL', 'DMDHHSIZ',
+        'DMDFMSIZ', 'INDHHIN2', 'INDFMIN2', 'INDFMPIR', 'RIDEXPRG', 'DMDHRGND',
+        'DMDHRAGE', 'DMDHRBR2', 'DMDHREDU', 'DMDHRMAR', 'DMDHSEDU', 'SIALANG',
+        'SIAPROXY', 'SIAINTRP', 'FIALANG', 'FIAPROXY', 'FIAINTRP', 'MIALANG',
+        'MIAPROXY', 'MIAINTRP', 'AIALANG', 'WTINT2YR', 'WTMEC2YR', 'SDMVPSU',
+        'SDMVSTRA'],
+       dtype='object'))</code></pre>
+</div>
+</div>
+<p>Columns are almost identical aside from DMDBORN and DMDBORN2</p>
+<p>Let’s see how many participants we have from both surveys</p>
+<div id="cell-30" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>ICPSR_25504 <span class="op">=</span> pd.read_csv(<span class="st">"ICPSR_25504</span><span class="ch">\\</span><span class="st">DS0001</span><span class="ch">\\</span><span class="st">25504-0001-Data.tsv"</span>, sep <span class="op">=</span> <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>ICPSR_25505 <span class="op">=</span> pd.read_csv(<span class="st">"ICPSR_25505</span><span class="ch">\\</span><span class="st">DS0001</span><span class="ch">\\</span><span class="st">25505-0001-Data.tsv"</span>, sep <span class="op">=</span> <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>ICPSR_25504[<span class="st">"SEQN"</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: x <span class="kw">in</span> ICPSR_25505[<span class="st">"SEQN"</span>].values).<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="19">
+<pre><code>0</code></pre>
+</div>
+</div>
+<p>There is no way of identifying previous participants in new surverys. There also seems to be little value in analyzing multiple surveys because we can’t create variables that look at year to year changes in the same patient and the data architecture is not consistent across years. The only potential uses of having surveys from different years is to see if a model built on data from one year generalizes to the survey data from other years. In order to do some we must choose variables and datasets that exist in all surveys.</p>
+</section>
+<section id="joining-datasets" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="joining-datasets"><span class="header-section-number">2.6</span> Joining Datasets</h2>
+<div id="cell-33" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>DS0132<span class="op">=</span> pd.read_csv(<span class="st">"ICPSR_25504</span><span class="ch">\\</span><span class="st">DS0132</span><span class="ch">\\</span><span class="st">25504-0132-Data.tsv"</span>, sep <span class="op">=</span> <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>DS0123 <span class="op">=</span> pd.read_csv(<span class="st">"ICPSR_25504</span><span class="ch">\\</span><span class="st">DS0123</span><span class="ch">\\</span><span class="st">25504-0123-Data.tsv"</span>, sep <span class="op">=</span> <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>joined <span class="op">=</span> DS0132.set_index(<span class="st">"SEQN"</span>).join(DS0123.set_index(<span class="st">"SEQN"</span>), lsuffix<span class="op">=</span><span class="st">"_DS0132"</span>, rsuffix<span class="op">=</span><span class="st">"_DS0123"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-34" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>joined</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="21">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">WTSAF2YR_DS0132</th>
+<th data-quarto-table-cell-role="th">LBXTR</th>
+<th data-quarto-table-cell-role="th">LBDTRSI</th>
+<th data-quarto-table-cell-role="th">LBDLDL</th>
+<th data-quarto-table-cell-role="th">LBDLDLSI</th>
+<th data-quarto-table-cell-role="th">LBXAPB</th>
+<th data-quarto-table-cell-role="th">LBDAPBSI</th>
+<th data-quarto-table-cell-role="th">SDDSRVYR_DS0132</th>
+<th data-quarto-table-cell-role="th">RIDSTATR_DS0132</th>
+<th data-quarto-table-cell-role="th">RIDEXMON_DS0132</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">FIAPROXY_DS0123</th>
+<th data-quarto-table-cell-role="th">FIAINTRP_DS0123</th>
+<th data-quarto-table-cell-role="th">MIALANG_DS0123</th>
+<th data-quarto-table-cell-role="th">MIAPROXY_DS0123</th>
+<th data-quarto-table-cell-role="th">MIAINTRP_DS0123</th>
+<th data-quarto-table-cell-role="th">AIALANG_DS0123</th>
+<th data-quarto-table-cell-role="th">WTINT2YR_DS0123</th>
+<th data-quarto-table-cell-role="th">WTMEC2YR_DS0123</th>
+<th data-quarto-table-cell-role="th">SDMVPSU_DS0123</th>
+<th data-quarto-table-cell-role="th">SDMVSTRA_DS0123</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">SEQN</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">31130</td>
+<td>0.000</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td>...</td>
+<td>2</td>
+<td>2</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>29960.839509</td>
+<td>34030.994786</td>
+<td>2</td>
+<td>46</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">31131</td>
+<td>67556.810</td>
+<td>86</td>
+<td>.971</td>
+<td>49</td>
+<td>1.267</td>
+<td>50</td>
+<td>.5</td>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td>...</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>26457.708180</td>
+<td>26770.584605</td>
+<td>1</td>
+<td>48</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">31132</td>
+<td>80193.962</td>
+<td>65</td>
+<td>.734</td>
+<td>75</td>
+<td>1.94</td>
+<td>75</td>
+<td>.75</td>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td>...</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>32961.509920</td>
+<td>35315.538900</td>
+<td>2</td>
+<td>52</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">31133</td>
+<td>15668.017</td>
+<td>61</td>
+<td>.689</td>
+<td>81</td>
+<td>2.095</td>
+<td>75</td>
+<td>.75</td>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td>...</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>5635.221296</td>
+<td>5920.617679</td>
+<td>1</td>
+<td>51</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">31134</td>
+<td>93399.539</td>
+<td>195</td>
+<td>2.202</td>
+<td>98</td>
+<td>2.534</td>
+<td>111</td>
+<td>1.11</td>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td>...</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>43718.506372</td>
+<td>44231.167252</td>
+<td>2</td>
+<td>48</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">41465</td>
+<td>21859.428</td>
+<td>81</td>
+<td>.914</td>
+<td>96</td>
+<td>2.483</td>
+<td>84</td>
+<td>.84</td>
+<td>4</td>
+<td>2</td>
+<td>1</td>
+<td>...</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>6659.491266</td>
+<td>6975.174925</td>
+<td>1</td>
+<td>49</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">41467</td>
+<td>8000.729</td>
+<td>69</td>
+<td>.779</td>
+<td>80</td>
+<td>2.069</td>
+<td>75</td>
+<td>.75</td>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td>...</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>3623.884248</td>
+<td>3780.835721</td>
+<td>2</td>
+<td>56</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">41471</td>
+<td>16274.316</td>
+<td>89</td>
+<td>1.005</td>
+<td>72</td>
+<td>1.862</td>
+<td>60</td>
+<td>.6</td>
+<td>4</td>
+<td>2</td>
+<td>1</td>
+<td>...</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>6283.305550</td>
+<td>6602.173657</td>
+<td>1</td>
+<td>52</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">41472</td>
+<td>175395.280</td>
+<td>120</td>
+<td>1.355</td>
+<td>86</td>
+<td>2.224</td>
+<td>91</td>
+<td>.91</td>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td>...</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>67347.579152</td>
+<td>69747.141506</td>
+<td>1</td>
+<td>48</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">41474</td>
+<td>17122.983</td>
+<td>88</td>
+<td>.994</td>
+<td>35</td>
+<td>.905</td>
+<td>37</td>
+<td>.37</td>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td>...</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>6174.551667</td>
+<td>6487.262494</td>
+<td>1</td>
+<td>47</td>
+</tr>
+</tbody>
+</table>
+
+<p>3352 rows × 98 columns</p>
+</div>
+</div>
+</div>
+<p>Let’s see if the columns that occur in both dataframes are redundant</p>
+<div id="cell-36" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>(joined[<span class="st">"AIALANG_DS0123"</span>] <span class="op">==</span> joined[<span class="st">"AIALANG_DS0132"</span>]).mean()</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co"># AIALANG is definitely redundant</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="22">
+<pre><code>1.0</code></pre>
+</div>
+</div>
+<div id="cell-37" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>DS1 <span class="op">=</span> <span class="st">"DS0123"</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>DS2 <span class="op">=</span> <span class="st">"DS0132"</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>total <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> column <span class="kw">in</span> joined.columns:</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">"_"</span> <span class="kw">in</span> column:</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>        total <span class="op">+=</span><span class="dv">1</span></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>        original <span class="op">=</span> column.split(<span class="st">"_"</span>)[<span class="dv">0</span>]</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>        n1 <span class="op">=</span> original <span class="op">+</span> <span class="st">"_"</span> <span class="op">+</span> DS1</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>        n2 <span class="op">=</span> original <span class="op">+</span> <span class="st">"_"</span> <span class="op">+</span> DS2</span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (joined[n1]<span class="op">==</span>joined[n2]).mean() <span class="op">==</span> <span class="dv">1</span>:</span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>            n <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>            joined.drop(n2, axis <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">str</span>(n<span class="op">/</span>total) <span class="op">+</span> <span class="st">" of the columns that occur in both datasets are redundant"</span>)</span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>        </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1.0 of the columns that occur in both datasets are redundant</code></pre>
+</div>
+</div>
+<div id="cell-38" class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>data_master <span class="op">=</span> <span class="st">"ICPSR_25504</span><span class="ch">\\</span><span class="st">"</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>joined_master <span class="op">=</span> DS0123.set_index(<span class="st">"SEQN"</span>)</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> root, dirs, files <span class="kw">in</span> os.walk(data_master):</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> name <span class="kw">in</span> files:</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> name.endswith(<span class="st">".tsv"</span>):</span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>            <span class="bu">file</span> <span class="op">=</span> os.path.join(root, name)</span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>            df <span class="op">=</span> pd.read_csv(<span class="bu">file</span>, sep <span class="op">=</span> <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="st">"SEQN"</span> <span class="kw">not</span> <span class="kw">in</span> df.columns:</span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>                <span class="cf">continue</span></span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>            name <span class="op">=</span> root[<span class="op">-</span><span class="dv">6</span>:]</span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>            new_columns <span class="op">=</span> df.columns.difference(joined_master.columns)</span>
+<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a>            <span class="co"># try:</span></span>
+<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a>            joined_master <span class="op">=</span> joined_master.join(df.loc[:,new_columns].set_index(<span class="st">"SEQN"</span>),how<span class="op">=</span><span class="st">"left"</span>,lsuffix<span class="op">=</span><span class="st">"_master"</span>, rsuffix<span class="op">=</span><span class="st">"_"</span><span class="op">+</span>name)</span>
+<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a>            <span class="co"># except:</span></span>
+<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a>            <span class="co">#     print(name)</span></span>
+<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a>            <span class="co"># n = 0</span></span>
+<span id="cb35-23"><a href="#cb35-23" aria-hidden="true" tabindex="-1"></a>            <span class="co"># total = 0</span></span>
+<span id="cb35-24"><a href="#cb35-24" aria-hidden="true" tabindex="-1"></a>            <span class="co"># for column in joined_master.columns:</span></span>
+<span id="cb35-25"><a href="#cb35-25" aria-hidden="true" tabindex="-1"></a>            <span class="co">#     if "_" in column:</span></span>
+<span id="cb35-26"><a href="#cb35-26" aria-hidden="true" tabindex="-1"></a>            <span class="co">#         print(column, name)</span></span>
+<span id="cb35-27"><a href="#cb35-27" aria-hidden="true" tabindex="-1"></a>            <span class="co">#         total +=1</span></span>
+<span id="cb35-28"><a href="#cb35-28" aria-hidden="true" tabindex="-1"></a>            <span class="co">#         original = column.split("_")[0]</span></span>
+<span id="cb35-29"><a href="#cb35-29" aria-hidden="true" tabindex="-1"></a>            <span class="co">#         n1 = original + "_master"</span></span>
+<span id="cb35-30"><a href="#cb35-30" aria-hidden="true" tabindex="-1"></a>            <span class="co">#         n2 = original + "_" + name</span></span>
+<span id="cb35-31"><a href="#cb35-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-32"><a href="#cb35-32" aria-hidden="true" tabindex="-1"></a>            <span class="co">#         if n2 not in joined_master.columns:</span></span>
+<span id="cb35-33"><a href="#cb35-33" aria-hidden="true" tabindex="-1"></a>            <span class="co">#             continue</span></span>
+<span id="cb35-34"><a href="#cb35-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-35"><a href="#cb35-35" aria-hidden="true" tabindex="-1"></a>            <span class="co">#         if (joined_master[n1]==joined_master[n2]).mean() == 1:</span></span>
+<span id="cb35-36"><a href="#cb35-36" aria-hidden="true" tabindex="-1"></a>            <span class="co">#             n += 1</span></span>
+<span id="cb35-37"><a href="#cb35-37" aria-hidden="true" tabindex="-1"></a>            <span class="co">#             joined_master.drop(n2, axis = 1)</span></span>
+<span id="cb35-38"><a href="#cb35-38" aria-hidden="true" tabindex="-1"></a>            <span class="co">#             joined_master.rename({n1:original})        </span></span>
+<span id="cb35-39"><a href="#cb35-39" aria-hidden="true" tabindex="-1"></a>            <span class="co"># if n/total != 1:</span></span>
+<span id="cb35-40"><a href="#cb35-40" aria-hidden="true" tabindex="-1"></a>            <span class="co">#     print(name + " - not redundant")</span></span>
+<span id="cb35-41"><a href="#cb35-41" aria-hidden="true" tabindex="-1"></a>            </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>MemoryError: Unable to allocate 1.30 GiB for an array with shape (222, 786976) and data type float64</code></pre>
+</div>
+</div>
+<div id="cell-39" class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>joined_master</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="30">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">WTSAF2YR</th>
+<th data-quarto-table-cell-role="th">LBXGLU</th>
+<th data-quarto-table-cell-role="th">LBDGLUSI</th>
+<th data-quarto-table-cell-role="th">LBXIN</th>
+<th data-quarto-table-cell-role="th">LBDINSI</th>
+<th data-quarto-table-cell-role="th">PHAFSTHR</th>
+<th data-quarto-table-cell-role="th">PHAFSTMN</th>
+<th data-quarto-table-cell-role="th">SDDSRVYR</th>
+<th data-quarto-table-cell-role="th">RIDSTATR</th>
+<th data-quarto-table-cell-role="th">RIDEXMON</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">DXXNKBMD</th>
+<th data-quarto-table-cell-role="th">DXXOFA</th>
+<th data-quarto-table-cell-role="th">DXXOFBMC</th>
+<th data-quarto-table-cell-role="th">DXXOFBMD</th>
+<th data-quarto-table-cell-role="th">DXXTRA</th>
+<th data-quarto-table-cell-role="th">DXXTRBMC</th>
+<th data-quarto-table-cell-role="th">DXXTRBMD</th>
+<th data-quarto-table-cell-role="th">DXXWDA</th>
+<th data-quarto-table-cell-role="th">DXXWDBMC</th>
+<th data-quarto-table-cell-role="th">DXXWDBMD</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">SEQN</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">31130</td>
+<td>0.000</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>10</td>
+<td>3</td>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td>...</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">31131</td>
+<td>67556.810</td>
+<td>90</td>
+<td>4.996</td>
+<td>10.03</td>
+<td>60.18</td>
+<td>14</td>
+<td>9</td>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td>...</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">31131</td>
+<td>67556.810</td>
+<td>90</td>
+<td>4.996</td>
+<td>10.03</td>
+<td>60.18</td>
+<td>14</td>
+<td>9</td>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td>...</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">31131</td>
+<td>67556.810</td>
+<td>90</td>
+<td>4.996</td>
+<td>10.03</td>
+<td>60.18</td>
+<td>14</td>
+<td>9</td>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td>...</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">31131</td>
+<td>67556.810</td>
+<td>90</td>
+<td>4.996</td>
+<td>10.03</td>
+<td>60.18</td>
+<td>14</td>
+<td>9</td>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td>...</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">41474</td>
+<td>17122.983</td>
+<td>93</td>
+<td>5.162</td>
+<td>20.12</td>
+<td>120.72</td>
+<td>9</td>
+<td>39</td>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td>...</td>
+<td>.825</td>
+<td>38.34</td>
+<td>30.73</td>
+<td>.802</td>
+<td>12.1</td>
+<td>6.63</td>
+<td>.548</td>
+<td>1.3</td>
+<td>.96</td>
+<td>.736</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">41474</td>
+<td>17122.983</td>
+<td>93</td>
+<td>5.162</td>
+<td>20.12</td>
+<td>120.72</td>
+<td>9</td>
+<td>39</td>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td>...</td>
+<td>.825</td>
+<td>38.34</td>
+<td>30.73</td>
+<td>.802</td>
+<td>12.1</td>
+<td>6.63</td>
+<td>.548</td>
+<td>1.3</td>
+<td>.96</td>
+<td>.736</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">41474</td>
+<td>17122.983</td>
+<td>93</td>
+<td>5.162</td>
+<td>20.12</td>
+<td>120.72</td>
+<td>9</td>
+<td>39</td>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td>...</td>
+<td>.825</td>
+<td>38.34</td>
+<td>30.73</td>
+<td>.802</td>
+<td>12.1</td>
+<td>6.63</td>
+<td>.548</td>
+<td>1.3</td>
+<td>.96</td>
+<td>.736</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">41474</td>
+<td>17122.983</td>
+<td>93</td>
+<td>5.162</td>
+<td>20.12</td>
+<td>120.72</td>
+<td>9</td>
+<td>39</td>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td>...</td>
+<td>.825</td>
+<td>38.34</td>
+<td>30.73</td>
+<td>.802</td>
+<td>12.1</td>
+<td>6.63</td>
+<td>.548</td>
+<td>1.3</td>
+<td>.96</td>
+<td>.736</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">41474</td>
+<td>17122.983</td>
+<td>93</td>
+<td>5.162</td>
+<td>20.12</td>
+<td>120.72</td>
+<td>9</td>
+<td>39</td>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td>...</td>
+<td>.825</td>
+<td>38.34</td>
+<td>30.73</td>
+<td>.802</td>
+<td>12.1</td>
+<td>6.63</td>
+<td>.548</td>
+<td>1.3</td>
+<td>.96</td>
+<td>.736</td>
+</tr>
+</tbody>
+</table>
+
+<p>786976 rows × 742 columns</p>
+</div>
+</div>
+</div>
+<div id="cell-40" class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The data is far too large to combine into one so I will choose critical datasets to focus the analysis on</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="ds209---depression-screener" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="ds209---depression-screener"><span class="header-section-number">2.7</span> DS209 - Depression Screener</h2>
+<p>This data set is a Questionnaire with 10 questions about depressive symptoms (Eg. Thought you would be better off dead.) The response are categorical from 0-3 with 0 being non-depressive behaviour (Not at all) and 4 being depressive behaviour (Nearly every day).</p>
+<p>We will create a target variable that aggregate the results of these questions, taking the mean response of the questions which scores a participants depressive state. 0 meaning low, 4 high</p>
+<p>The respondant can answer a question as “Don’t know” and will be assigned the number 9 which can throw off our scores. I will remove these values from the average calculations. So for example, if a respondant answers “Don’t know” for 2 questions, their score will be the average of their repsonses to the other 8 questions.</p>
+<div id="cell-42" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>DS209<span class="op">=</span> pd.read_csv(os.path.dirname(os.path.dirname(os.getcwd()))<span class="op">+</span><span class="st">"</span><span class="ch">\\</span><span class="st">Data</span><span class="ch">\\</span><span class="st">NHANES</span><span class="ch">\\</span><span class="st">ICPSR_25504\DS0209</span><span class="ch">\\</span><span class="st">25504-0209-Data.tsv"</span>, sep <span class="op">=</span> <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-43" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>DS209.dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<pre><code>SEQN          int64
+DPQ010       object
+DPQ020       object
+DPQ030       object
+DPQ040       object
+DPQ050       object
+DPQ060       object
+DPQ070       object
+DPQ080       object
+DPQ090       object
+DPQ100       object
+SDDSRVYR      int64
+RIDSTATR      int64
+RIDEXMON      int64
+RIAGENDR      int64
+RIDAGEYR      int64
+RIDAGEMN     object
+RIDAGEEX     object
+RIDRETH1      int64
+DMQMILIT      int64
+DMDBORN       int64
+DMDCITZN      int64
+DMDYRSUS     object
+DMDEDUC3     object
+DMDEDUC2     object
+DMDSCHOL     object
+DMDMARTL      int64
+DMDHHSIZ      int64
+DMDFMSIZ      int64
+INDHHINC     object
+INDFMINC     object
+INDFMPIR     object
+RIDEXPRG     object
+DMDHRGND      int64
+DMDHRAGE      int64
+DMDHRBRN     object
+DMDHREDU     object
+DMDHRMAR     object
+DMDHSEDU     object
+SIALANG      object
+SIAPROXY     object
+SIAINTRP     object
+FIALANG      object
+FIAPROXY     object
+FIAINTRP     object
+MIALANG      object
+MIAPROXY     object
+MIAINTRP     object
+AIALANG      object
+WTINT2YR    float64
+WTMEC2YR    float64
+SDMVPSU       int64
+SDMVSTRA      int64
+dtype: object</code></pre>
+</div>
+</div>
+<p>We need to turn some columns into integer</p>
+<div id="cell-45" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>DS209 <span class="op">=</span> DS209.replace(<span class="st">" "</span>, np.NaN )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-46" class="cell" data-scrolled="true" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>DS209[DS209.columns[<span class="dv">1</span>:<span class="dv">11</span>]]</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>convert_dict <span class="op">=</span> {}</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> column <span class="kw">in</span> DS209.columns[<span class="dv">1</span>:<span class="dv">11</span>]:</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>    DS209[column] <span class="op">=</span> pd.to_numeric(DS209[column], errors<span class="op">=</span><span class="st">'coerce'</span>)</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(DS209.dtypes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>SEQN          int64
+DPQ010      float64
+DPQ020      float64
+DPQ030      float64
+DPQ040      float64
+DPQ050      float64
+DPQ060      float64
+DPQ070      float64
+DPQ080      float64
+DPQ090      float64
+DPQ100      float64
+SDDSRVYR      int64
+RIDSTATR      int64
+RIDEXMON      int64
+RIAGENDR      int64
+RIDAGEYR      int64
+RIDAGEMN     object
+RIDAGEEX     object
+RIDRETH1      int64
+DMQMILIT      int64
+DMDBORN       int64
+DMDCITZN      int64
+DMDYRSUS     object
+DMDEDUC3     object
+DMDEDUC2     object
+DMDSCHOL     object
+DMDMARTL      int64
+DMDHHSIZ      int64
+DMDFMSIZ      int64
+INDHHINC     object
+INDFMINC     object
+INDFMPIR     object
+RIDEXPRG     object
+DMDHRGND      int64
+DMDHRAGE      int64
+DMDHRBRN     object
+DMDHREDU     object
+DMDHRMAR     object
+DMDHSEDU     object
+SIALANG      object
+SIAPROXY     object
+SIAINTRP     object
+FIALANG      object
+FIAPROXY     object
+FIAINTRP     object
+MIALANG      object
+MIAPROXY     object
+MIAINTRP     object
+AIALANG      object
+WTINT2YR    float64
+WTMEC2YR    float64
+SDMVPSU       int64
+SDMVSTRA      int64
+dtype: object</code></pre>
+</div>
+</div>
+<div id="cell-47" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>(DS209.iloc[:, <span class="dv">1</span>:<span class="dv">11</span>].isna().mean(axis <span class="op">=</span> <span class="dv">1</span>) <span class="op">==</span> <span class="dv">1</span>).<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="17">
+<pre><code>498</code></pre>
+</div>
+</div>
+<p>498 participants did not respond at all. Let’s remove these from the dataset</p>
+<div id="cell-49" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>clean <span class="op">=</span> DS209[DS209.iloc[:, <span class="dv">1</span>:<span class="dv">11</span>].isnull().mean(axis <span class="op">=</span> <span class="dv">1</span>) <span class="op">!=</span> <span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-50" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>depression_score <span class="op">=</span> clean.iloc[:, <span class="dv">1</span>:<span class="dv">11</span>].mean(axis <span class="op">=</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-51" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>final <span class="op">=</span> pd.concat([clean, depression_score], axis <span class="op">=</span> <span class="dv">1</span>).rename(columns <span class="op">=</span> {<span class="dv">0</span>:<span class="st">"DepressionScore"</span>}).set_index(<span class="st">"SEQN"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="distribution-of-target-variable" class="level2" data-number="2.8">
+<h2 data-number="2.8" class="anchored" data-anchor-id="distribution-of-target-variable"><span class="header-section-number">2.8</span> Distribution of target variable</h2>
+<div id="cell-53" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>final[<span class="st">"DepressionScore"</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="21">
+<pre><code>count    4836.000000
+mean        0.306493
+std         0.437908
+min         0.000000
+25%         0.000000
+50%         0.100000
+75%         0.400000
+max         4.900000
+Name: DepressionScore, dtype: float64</code></pre>
+</div>
+</div>
+<div id="cell-54" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> math <span class="im">import</span> log</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>plt.hist(final[<span class="st">"DepressionScore"</span>], bins <span class="op">=</span> <span class="dv">15</span>)</span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Distribution of Depression Scores"</span>)</span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Depression Score"</span>)</span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Count"</span>)</span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EDA_files/figure-html/cell-37-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-55" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>final.to_csv(os.path.dirname(os.path.dirname(os.getcwd()))<span class="op">+</span><span class="st">"/Data/NHANES/depression_table.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../index.html" class="pagination-link  aria-label=" &lt;span="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../Applications/Notebooks/boosting.html" class="pagination-link" aria-label="<span class='chapter-number'>3</span>&nbsp; <span class='chapter-title'>code adapted from https://stackoverflow.com/questions/17200114/how-to-split-data-into-training-testing-sets-using-sample-function</span>">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">code adapted from https://stackoverflow.com/questions/17200114/how-to-split-data-into-training-testing-sets-using-sample-function</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
