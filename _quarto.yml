@@ -25,10 +25,8 @@ book:
       - Weekly_Reports/R3.qmd
     - part: Applications
       chapters:
-        part: Application 1
         - Applications/Application1/EDA.ipynb
         - Applications/Application1/Elementary_Modeling.ipynb
-        part: Application 2
 
 execute: 
   warning: false
