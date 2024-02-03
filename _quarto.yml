@@ -20,9 +20,9 @@ book:
     - index.qmd
     - part: Weekly Report
       chapters:
-      - Applications/Weekly_Reports/R1.qmd
-      - Applications/Weekly_Reports/R2.qmd
-      - Applications/Weekly_Reports/R3.qmd
+      - Weekly_Reports/R1.qmd
+      - Weekly_Reports/R2.qmd
+      - Weekly_Reports/R3.qmd
     - part: Applications
       chapters:
         part: Application 1
