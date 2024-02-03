@@ -1,0 +1,66 @@
+```{r}
+library(tidyverse)
+master<-read.csv("C:\\Users\\gmandl\\Documents\\GitHub\\DATA495.github.io\\Data\\NHANES\\master_depression.csv")
+```
+
+Convert our target variable to binary
+```{r}
+master$DepressionScore<-master$DepressionScore>1
+master2 <- drop_na(master)
+rownames(master2) <- as.integer(master2$SEQN)
+master2 <- master2 |> select(-SEQN)
+```
+
+
+```{r}
+# code adapted from https://stackoverflow.com/questions/17200114/how-to-split-data-into-training-testing-sets-using-sample-function
+
+smp_size<-floor(0.75*nrow(master2))
+train_ind <- sort(sample(nrow(master2), nrow(master2)*.7))
+
+train <- master2[train_ind, ]
+test <- master2[-train_ind,]
+
+train_X <- train |> select(-DepressionScore)
+train_y <- as.factor(train$DepressionScore)
+
+test_X <- test |> select(-DepressionScore)
+test_y <- as.factor(test$DepressionScore)
+```
+
+
+## Boosting
+```{r}
+if(!require("adabag")){install.packages("adabag")}
+library(adabag)
+library(caret)
+library(ada)
+```
+
+```{r}
+model_boost <- ada(train_X, train_y, test.x = test_X, test.y = test_y)
+summary(model_boost)
+```
+
+```{r}
+plot(model_boost)
+```
+
+
+```{r}
+model_boost2 <- ada(train_X, train_y, type= "real")
+summary(model_boost2)
+
+model_boost3 <- ada(train_X, train_y, type= "gentle")
+summary(model_boost3)
+```
+
+```{r}
+fractions <- seq(0,1,0.2)
+
+for (i in fractions){
+  model <- ada(train_X, train_y, bag.frac = i)
+  summary(model)
+}
+```
+

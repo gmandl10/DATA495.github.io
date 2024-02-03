@@ -1,0 +1,24 @@
+---
+title: "DATA495 Weekly Report 1"
+format: html
+---
+
+# Weekly Report 1
+Date: January 19, 2024
+
+## Past Objective Status
+N/A
+
+## Weekly Work Log
+Activity|Description|Time Allocated
+----|------|--:
+Application 1|Search for dataset, data preprocessing in Python, exploratory data analysis|2 hours
+Elements of Statistical Learning|9.1 Generalized Additive Models, 9.4 Multivariate Adaptive Regression Splines|2 hours
+
+## Upcoming Objectives
+Objective|Description
+----|-------
+Literature Review|Explore explainability of GAMs and spline based methods, application of machine learning in precision medicine (specifically GAMs and splines)
+Elements of Statistical Learning|Read Chapter 10: Boosting and Additive Trees
+Application 1|Prepare elementary statistical models which we can improve on with the next application assignments 
+

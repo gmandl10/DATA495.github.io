@@ -1,0 +1,45 @@
+project:
+  type: book
+  output-dir: docs
+
+
+date-format: iso
+number-depth: 2
+author: ""
+date: last-modified
+
+book:
+  title: ""
+  subtitle: ""
+  author: ""
+  date: ""
+  repo-url: ""
+  repo-actions: [issue]
+  downloads: [pdf]
+  chapters:
+    - index.qmd
+    - part: Weekly Report
+      chapters:
+      - Applications/Weekly_Reports/R1.qmd
+      - Applications/Weekly_Reports/R2.qmd
+      - Applications/Weekly_Reports/R3.qmd
+    - part: Applications
+      chapters:
+        part: Application 1
+        - Applications/Application1/EDA.ipynb
+        - Applications/Application1/Elementary_Modeling.ipynb
+        part: Application 2
+
+execute: 
+  warning: false
+
+format:
+  html:
+    theme:
+      light: [flatly]
+      dark: [darkly]
+    mainfont: ubuntu, sans-serif
+    execute:
+        code-fold: true
+        code-summary: "Show the code"
+        warning: false

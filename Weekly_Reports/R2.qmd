@@ -1,0 +1,36 @@
+---
+title: "DATA495 Weekly Report 2"
+format: html
+---
+
+# Weekly Report 2
+Date: January 26, 2024
+
+## Past Objective Status
+Objective|Description|Status
+----|-------|---
+Literature Review|Explore explainability of GAMs and spline based methods, application of machine learning in precision medicine (specifically GAMs and splines)|Complete, see below
+Elements of Statistical Learning|Read Chapter 10: Boosting and Additive Trees|Partially Complete
+Application 1|Prepare elementary statistical models which we can improve on with the next application assignments|Complete
+
+## Weekly Work Log
+Activity|Description|Time Allocated
+----|------|--:
+Application 1|Exploratory Data Analysis, Preliminary Modeling|2 hours
+Elements of Statistical Learning|Chapter 10.1-10.4|1 hour
+Literature Review|See below|1 hour
+
+## Upcoming Objectives
+Objective|Description
+----|-------
+Literature Review|Explore explain ability boosting, application of machine learning in NHANES and precision medicine (specifically GAMs and boosting)
+Elements of Statistical Learning|Finish reading Chapter 10: Boosting and Additive Trees
+Application 2|Prepare applications of GAMs to NHANES data
+
+## Literature Review
+Title|ISSN|Comments
+---|-|-------
+Machine Learning Model for Predicting CVD Risk on NHANES Data (search: machine learning NHANEs)|2694-0604|*classify NHANES participants into 3 categories: Healthy, non-healthy, needs further tests.*used SVM with radial kernel as classifier.*tested independently on 4 different ages groups.*Let’s reproduce this with different types of machine learning models and try to analyze interpretability of our classifications
+GAMI-Net: An explainable neural network based on generalized additive models with structured interactions (search: explainability generalized additive models)|0031-3203|*contends to balance trade-off of prediction accuracy (from neural networks) and model interpretability (from GAMs)*	interpretability aspects: sparsity - only including the most important effects, heredity - interactions only include if parent terms are already present in the model, marginal clarity - “to make main effects and pairwise interactions mutually distinguishable” (not sure what this is supposed to mean) reduces the redundancy of the main terms and their presence in interactions.*training of the model occurs in two steps: first model is trained on main effects and then interaction terms are fit to residuals.*GAMI-net allows you to get local interpretations for individual observations.*Can calculate the importance ratio (IR) for each effect and use it to determine how important a variable was in 1. the entire model 2. in an individual observation. The higher the IR, the more important
+
+

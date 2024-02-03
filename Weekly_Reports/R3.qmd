@@ -1,0 +1,38 @@
+---
+title: "DATA495 Weekly Report 3"
+format: html
+---
+
+# Weekly Report 3
+Date: January 26, 2024
+
+## Past Objective Status
+Objective|Description|Status
+----|-------|---
+Literature Review|Explore explain ability boosting, application of machine learning in NHANES and precision medicine (specifically GAMs and boosting)|Complete, see below
+Elements of Statistical Learning|Read Chapter 10: Boosting and Additive Trees|Partially Complete
+Application 1|Prepare elementary statistical models which we can improve on with the next application assignments|Complete
+
+## Weekly Work Log
+Activity|Description|Time Allocated
+----|------|--:
+Application 2|New dataset loading, boosting and mars|2 hours
+Elements of Statistical Learning|Chapter 10 Boosting|1 hour
+Literature Review|See below|1.5 hour
+GitHub setup|/|1 hour
+
+## Upcoming Objectives
+Objective|Description
+----|-------
+Literature Review|Explainable/Trustworthy AI in Medicine - what are the requirements and how can we build models that meet these requirements
+Elements of Statistical Learning|Discuss topics with Devan in weekly meeting
+Application 2|Due Monday night, complete analysis of boosting and mars models.
+
+## Literature Review
+Title|ISSN|Comments
+---|-|-------
+Mining the breast cancer pattern using artificial neural networks and multivariate adaptive regression splines|0957-4174|In this paper, the authors suggest using MARS for determining important variables and then only using these variables as input in a neural network. This neural network, although more complex, performs worse than the MARS model on out of sample classification of breast cancer patients. Maybe interactions are significant in this data and MARS is able to pick these up better than an ANN.
+Multivariate adaptive regression splines analysis to predict biomarkers of spontaneous preterm birth|1600-0412|Focus of this analysis was not so much on importance of variables but the presence of certain variables in models for Caucasians and for African Americans. They looked at a MARS model for all the data and the basis functions and then the same for both races. Interesting is that the model for African Americans has a significantly better AUC than the model for Caucasians although the sample size for both categories is approximately the same
+Adaptive splines-based logistic regression with a ReLU neural network|https://hal.science/hal-03778323|The authors tried to combine the neural network structure but at each neuron they looked at the interaction between 2 knots. The formula for the model looks very similar to the MARS formula. Inside the activation function of the suggested NN-MARS model we add various components from the collection of basis functions C, whereas in MARS the activation function contains the products of functions in C. The results are nothing special: a regular neural network outpreforms the NN-MARS and quite similarily to a MARS model in both accuracy and AUC. Also the fitting of the NN-MARS model takes longer on average than a NN.
+
+
