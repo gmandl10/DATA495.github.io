@@ -107,5 +107,115 @@
       "Post-Midterm",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>code adapted from https://stackoverflow.com/questions/17200114/how-to-split-data-into-training-testing-sets-using-sample-function</span>"
     ]
+  },
+  {
+    "objectID": "Weekly_Reports/R3.html",
+    "href": "Weekly_Reports/R3.html",
+    "title": "4  DATA495 Weekly Report 3",
+    "section": "",
+    "text": "5 Weekly Report 3\nDate: January 26, 2024",
+    "crumbs": [
+      "Weekly Report",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>DATA495 Weekly Report 3</span>"
+    ]
+  },
+  {
+    "objectID": "Weekly_Reports/R3.html#past-objective-status",
+    "href": "Weekly_Reports/R3.html#past-objective-status",
+    "title": "4  DATA495 Weekly Report 3",
+    "section": "5.1 Past Objective Status",
+    "text": "5.1 Past Objective Status\n\n\n\n\n\n\n\n\nObjective\nDescription\nStatus\n\n\n\n\nLiterature Review\nExplore explain ability boosting, application of machine learning in NHANES and precision medicine (specifically GAMs and boosting)\nComplete, see below\n\n\nElements of Statistical Learning\nRead Chapter 10: Boosting and Additive Trees\nPartially Complete\n\n\nApplication 1\nPrepare elementary statistical models which we can improve on with the next application assignments\nComplete",
+    "crumbs": [
+      "Weekly Report",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>DATA495 Weekly Report 3</span>"
+    ]
+  },
+  {
+    "objectID": "Weekly_Reports/R3.html#weekly-work-log",
+    "href": "Weekly_Reports/R3.html#weekly-work-log",
+    "title": "4  DATA495 Weekly Report 3",
+    "section": "5.2 Weekly Work Log",
+    "text": "5.2 Weekly Work Log\n\n\n\nActivity\nDescription\nTime Allocated\n\n\n\n\nApplication 2\nNew dataset loading, boosting and mars\n2 hours\n\n\nElements of Statistical Learning\nChapter 10 Boosting\n1 hour\n\n\nLiterature Review\nSee below\n1.5 hour\n\n\nGitHub setup\n/\n1 hour",
+    "crumbs": [
+      "Weekly Report",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>DATA495 Weekly Report 3</span>"
+    ]
+  },
+  {
+    "objectID": "Weekly_Reports/R3.html#upcoming-objectives",
+    "href": "Weekly_Reports/R3.html#upcoming-objectives",
+    "title": "4  DATA495 Weekly Report 3",
+    "section": "5.3 Upcoming Objectives",
+    "text": "5.3 Upcoming Objectives\n\n\n\n\n\n\n\nObjective\nDescription\n\n\n\n\nLiterature Review\nExplainable/Trustworthy AI in Medicine - what are the requirements and how can we build models that meet these requirements\n\n\nElements of Statistical Learning\nDiscuss topics with Devan in weekly meeting\n\n\nApplication 2\nDue Monday night, complete analysis of boosting and mars models.",
+    "crumbs": [
+      "Weekly Report",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>DATA495 Weekly Report 3</span>"
+    ]
+  },
+  {
+    "objectID": "Weekly_Reports/R3.html#literature-review",
+    "href": "Weekly_Reports/R3.html#literature-review",
+    "title": "4  DATA495 Weekly Report 3",
+    "section": "5.4 Literature Review",
+    "text": "5.4 Literature Review\n\n\n\n\n\n\n\n\nTitle\nISSN\nComments\n\n\n\n\nMining the breast cancer pattern using artificial neural networks and multivariate adaptive regression splines\n0957-4174\nIn this paper, the authors suggest using MARS for determining important variables and then only using these variables as input in a neural network. This neural network, although more complex, performs worse than the MARS model on out of sample classification of breast cancer patients. Maybe interactions are significant in this data and MARS is able to pick these up better than an ANN.\n\n\nMultivariate adaptive regression splines analysis to predict biomarkers of spontaneous preterm birth\n1600-0412\nFocus of this analysis was not so much on importance of variables but the presence of certain variables in models for Caucasians and for African Americans. They looked at a MARS model for all the data and the basis functions and then the same for both races. Interesting is that the model for African Americans has a significantly better AUC than the model for Caucasians although the sample size for both categories is approximately the same\n\n\nAdaptive splines-based logistic regression with a ReLU neural network\nhttps://hal.science/hal-03778323\nThe authors tried to combine the neural network structure but at each neuron they looked at the interaction between 2 knots. The formula for the model looks very similar to the MARS formula. Inside the activation function of the suggested NN-MARS model we add various components from the collection of basis functions C, whereas in MARS the activation function contains the products of functions in C. The results are nothing special: a regular neural network outpreforms the NN-MARS and quite similarily to a MARS model in both accuracy and AUC. Also the fitting of the NN-MARS model takes longer on average than a NN.",
+    "crumbs": [
+      "Weekly Report",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>DATA495 Weekly Report 3</span>"
+    ]
+  },
+  {
+    "objectID": "Weekly_Reports/R1.html",
+    "href": "Weekly_Reports/R1.html",
+    "title": "2  DATA495 Weekly Report 1",
+    "section": "",
+    "text": "3 Weekly Report 1\nDate: January 19, 2024",
+    "crumbs": [
+      "Weekly Report",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>DATA495 Weekly Report 1</span>"
+    ]
+  },
+  {
+    "objectID": "Weekly_Reports/R1.html#past-objective-status",
+    "href": "Weekly_Reports/R1.html#past-objective-status",
+    "title": "2  DATA495 Weekly Report 1",
+    "section": "3.1 Past Objective Status",
+    "text": "3.1 Past Objective Status\nN/A",
+    "crumbs": [
+      "Weekly Report",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>DATA495 Weekly Report 1</span>"
+    ]
+  },
+  {
+    "objectID": "Weekly_Reports/R1.html#weekly-work-log",
+    "href": "Weekly_Reports/R1.html#weekly-work-log",
+    "title": "2  DATA495 Weekly Report 1",
+    "section": "3.2 Weekly Work Log",
+    "text": "3.2 Weekly Work Log\n\n\n\n\n\n\n\n\nActivity\nDescription\nTime Allocated\n\n\n\n\nApplication 1\nSearch for dataset, data preprocessing in Python, exploratory data analysis\n2 hours\n\n\nElements of Statistical Learning\n9.1 Generalized Additive Models, 9.4 Multivariate Adaptive Regression Splines\n2 hours",
+    "crumbs": [
+      "Weekly Report",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>DATA495 Weekly Report 1</span>"
+    ]
+  },
+  {
+    "objectID": "Weekly_Reports/R1.html#upcoming-objectives",
+    "href": "Weekly_Reports/R1.html#upcoming-objectives",
+    "title": "2  DATA495 Weekly Report 1",
+    "section": "3.3 Upcoming Objectives",
+    "text": "3.3 Upcoming Objectives\n\n\n\n\n\n\n\nObjective\nDescription\n\n\n\n\nLiterature Review\nExplore explainability of GAMs and spline based methods, application of machine learning in precision medicine (specifically GAMs and splines)\n\n\nElements of Statistical Learning\nRead Chapter 10: Boosting and Additive Trees\n\n\nApplication 1\nPrepare elementary statistical models which we can improve on with the next application assignments",
+    "crumbs": [
+      "Weekly Report",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>DATA495 Weekly Report 1</span>"
+    ]
+  },
+  {
+    "objectID": "Applications/Application1/Elementary_Modeling.html",
+    "href": "Applications/Application1/Elementary_Modeling.html",
+    "title": "6  Blood lead and Blood Cadmium",
+    "section": "",
+    "text": "6.1 Model Fitting\nfrom sklearn.model_selection import train_test_split\n\ntrainX, testX, trainy, testy = train_test_split(master.dropna().drop(\"DepressionScore\", axis = 1), master.dropna()[\"DepressionScore\"], test_size=0.2)\nfrom sklearn.linear_model import LinearRegression\nlm = LinearRegression().fit(trainX, trainy)\npreds_lm = lm.predict(testX)\nlm.score(trainX, trainy)\n\n0.05273780957104557\nR^2 is 0.05 - linear model preforms very poorly. Either the linear model poorly measures a non-linear relationship or the predictors contain very little information about the mental health of our participants. Let’s try a tree-based method:\nfrom sklearn.ensemble import RandomForestRegressor\n\nrf = RandomForestRegressor(max_depth = 2)\nrf.fit(trainX, trainy)\npreds_rf = rf.predict(testX)\nrf.score(trainX, trainy)\n\n0.060034486182498625\nR^2 is 0.06 - our coefficient of determination only improves slightly with a non-linear model. This would lead me to conclude that our predictors contain no information about the mental health of our participants.",
+    "crumbs": [
+      "Applications",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Model Fitting</span>"
+    ]
   }
 ]
