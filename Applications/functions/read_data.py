@@ -1,26 +1,36 @@
 # function for loading the data
 
+def load_cgc_metadata():
+    metadata = pd.DataFrame()
+
+    for file in os.listdir(os.path.dirname(os.path.dirname(os.getcwd()))+"\\Data\\GeneExpression\\"):
+        if "manifest" in file:
+            if metadata.empty:
+                metadata = pd.read_csv(os.path.dirname(os.path.dirname(os.getcwd()))+"\\Data\\GeneExpression\\" + file).loc[:, ["name", "disease_type", "id", 'vital_status']]
+            else:
+                data = pd.read_csv(os.path.dirname(os.path.dirname(os.getcwd()))+"\\Data\\GeneExpression\\" + file).loc[:, ["name", "disease_type", "id", 'vital_status']]
+                metadata = pd.concat([metadata, data])
+
+    metadata = metadata.reset_index(drop= True).drop_duplicates()
+
+    return metadata
+
 def load_cgc_data():
     import pandas as pd, os
 
-    metadata = pd.read_csv(os.path.dirname(os.path.dirname(os.getcwd()))+"\\Data\\GeneExpression\\manifest_20240128_210036.csv").loc[:, ["name", "disease_type", "id"]]
-    # read metadata file for id, name, and disease type (target variable)
-
+    metadata = load_cgc_metadata()
+    
     directory = os.path.dirname(os.path.dirname(os.getcwd())) + "\\Data\\GeneExpression\\Files\\"
-    master = pd.DataFrame() 
-    # initialize data frame
+    master = pd.DataFrame()
 
     for file in os.listdir(directory):
         tsv_file_path = directory + file
 
         df = pd.read_csv(tsv_file_path, sep='\t')
         df = pd.DataFrame(df.set_index("miRNA_ID")["reads_per_million_miRNA_mapped"]).rename(columns={"reads_per_million_miRNA_mapped":file}).T
-        # extract miRNA reads from sample
 
         master = pd.concat([master,df])
-        # add sample to master
     
     df = metadata.set_index("name").join(master).set_index("id")
-    # join miRNA data to master
         
     return df
