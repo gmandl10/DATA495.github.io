@@ -27,6 +27,8 @@ book:
       chapters:
         - Applications/Application1/EDA.ipynb
         - Applications/Application1/Elementary_Modeling.ipynb
+        - Applications/Application2/boosting.ipynb
+        - Applications/Application2/zero_inflated_model.qmd
 
 execute: 
   warning: false
