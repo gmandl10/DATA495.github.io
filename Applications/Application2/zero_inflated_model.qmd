@@ -1,0 +1,108 @@
+# NHANES Extension to Zero Inflated Models
+ 
+ ```{r}
+library(tidyverse)
+library(randomForest)
+library(caret)
+master<-read.csv("C:\\Users\\gmandl\\Documents\\GitHub\\DATA495.github.io\\Data\\NHANES\\master_depression.csv")
+ ``` 
+
+ ```{r}
+master2 <- drop_na(master)
+rownames(master2) <- as.integer(master2$SEQN)
+master2 <- master2 |> select(-SEQN)
+ ``` 
+
+Split into train and validation
+```{r}
+smp_size<-floor(0.8*nrow(master2))
+train_ind <- sort(sample(nrow(master2), nrow(master2)*.7))
+
+train <- master2[train_ind, ]
+val <- master2[-train_ind,]
+```
+```{r}
+smp_size<-floor(0.70*nrow(train))
+train_ind <- sort(sample(nrow(train), nrow(train)*.7))
+
+train2 <- train[train_ind, ]
+test <- train[-train_ind,]
+```
+
+## Previous Models
+
+ ```{r}
+ # Fit lm and rf
+model <- lm(DepressionScore ~ ., data = train2)
+summary(model)
+
+rf <- randomForest(DepressionScore~ ., data = train2)
+print(rf)
+ ``` 
+
+
+
+## Multicollinearity
+
+There seem to be problems with multicollinearity - lets check vifs.
+
+ ```{r}
+vif(model)
+# LBXBCD very high
+
+model <- lm(DepressionScore ~ . -LBXBCD , data = train2) 
+vif(model)
+
+# LBXWBCSI very high
+model <- lm(DepressionScore ~ . -LBXWBCSI -LBXBCD , data = train2) 
+vif(model)
+
+# LBXRBCSI still very high
+model <- lm(DepressionScore ~ . - LBXRBCSI -LBXWBCSI -LBXBCD , data = train2) 
+vif(model)
+
+# Now VIFs are pretty good
+rf <- randomForest(DepressionScore~ . - LBXRBCSI -LBXWBCSI -LBXBCD, data = train2)
+print(rf)
+ ``` 
+
+## Zero Inflated Model
+
+ ```{r}
+ # Turn depression score into even counts
+train$DepressionScore<-floor(train$DepressionScore)
+train2$DepressionScore<-floor(train2$DepressionScore)
+test$DepressionScore<-floor(test$DepressionScore)
+val$DepressionScore<-floor(val$DepressionScore)
+master2$DepressionScore<-floor(master2$DepressionScore)
+
+master2  |> filter(DepressionScore > 1)  |>  ggplot(aes(DepressionScore)) + geom_density() + ggtitle("Distribution of Non-Zero Values")
+ ``` 
+
+ ```{r}
+ library(pscl)
+zim <- zeroinfl(DepressionScore ~ . - LBXRBCSI -LBXWBCSI -LBXBCD | . - LBXRBCSI -LBXWBCSI -LBXBCD, data = train2, dist="poisson")
+summary(zim)
+ ``` 
+
+  ```{r}
+  # Evaluate models
+rf_preds <- predict(rf, test)
+lm_preds <- predict(model, test)
+zim_preds <- predict(zim, test)
+
+lm_mse<-sum((lm_preds - test$DepressionScore)^2)/length(lm_preds)
+rf_mse<-sum((rf_preds - test$DepressionScore)^2)/length(rf_preds)
+zim_mse<-sum((zim_preds - test$DepressionScore)^2)/length(zim_preds)
+  ``` 
+
+```{r}
+print("Linear Model MSE: ")
+print(lm_mse)
+print("Random Forest MSE: ")
+print(rf_mse)
+print("Zero Inflation Model MSE: ") 
+print(zim_mse)
+``` 
+
+Linear model still has a better MSE than the zero-inflation model. A key observation that I made when fitting the model is that the zero-inflation model assumes the non-zero component model is poisson. This would mean that the target variable is a count among other things such as equal mean and variance. This is something that can be explored further in the next application.
