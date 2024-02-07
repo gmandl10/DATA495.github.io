@@ -47,6 +47,7 @@ print(rf)
 There seem to be problems with multicollinearity - lets check vifs.
 
  ```{r}
+library(car)
 vif(model)
 # LBXBCD very high
 
