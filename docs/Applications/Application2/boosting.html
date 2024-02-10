@@ -9,7 +9,7 @@
 <meta name="author" content="">
 <meta name="dcterms.date" content="2024-02-05">
 
-<title>7&nbsp; Boosting on CGC Data</title>
+<title>8&nbsp; Boosting on CGC Data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -122,7 +122,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Applications/Application1/EDA.html">Applications</a></li><li class="breadcrumb-item"><a href="../../Applications/Application2/boosting.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Boosting on CGC Data</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Applications/Application1/EDA.html">Applications</a></li><li class="breadcrumb-item"><a href="../../Applications/Application2/boosting.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Boosting on CGC Data</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -179,6 +179,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">DATA495 Weekly Report 3</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Weekly_Reports/R4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">DATA495 Weekly Report 4</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -193,25 +199,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Applications/Application1/EDA.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data Pre-Processing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Pre-Processing</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Applications/Application1/Elementary_Modeling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Model Fitting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Model Fitting</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Applications/Application2/boosting.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Boosting on CGC Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Boosting on CGC Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Applications/Application2/zero_inflated_model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">NHANES Extension to Zero Inflated Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">NHANES Extension to Zero Inflated Models</span></span></a>
   </div>
 </li>
       </ul>
@@ -226,21 +232,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#pre-processing" id="toc-pre-processing" class="nav-link active" data-scroll-target="#pre-processing"><span class="header-section-number">7.1</span> Pre-processing</a></li>
-  <li><a href="#binary-ada-boost" id="toc-binary-ada-boost" class="nav-link" data-scroll-target="#binary-ada-boost"><span class="header-section-number">7.2</span> Binary ADA Boost</a>
+  <li><a href="#pre-processing" id="toc-pre-processing" class="nav-link active" data-scroll-target="#pre-processing"><span class="header-section-number">8.1</span> Pre-processing</a></li>
+  <li><a href="#binary-ada-boost" id="toc-binary-ada-boost" class="nav-link" data-scroll-target="#binary-ada-boost"><span class="header-section-number">8.2</span> Binary ADA Boost</a>
   <ul class="collapse">
   <li><a href="#hyperparameter-tuning" id="toc-hyperparameter-tuning" class="nav-link" data-scroll-target="#hyperparameter-tuning">Hyperparameter Tuning</a></li>
   </ul></li>
-  <li><a href="#variable-importance" id="toc-variable-importance" class="nav-link" data-scroll-target="#variable-importance"><span class="header-section-number">7.3</span> Variable Importance</a></li>
+  <li><a href="#variable-importance" id="toc-variable-importance" class="nav-link" data-scroll-target="#variable-importance"><span class="header-section-number">8.3</span> Variable Importance</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Applications/Application1/EDA.html">Applications</a></li><li class="breadcrumb-item"><a href="../../Applications/Application2/boosting.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Boosting on CGC Data</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Applications/Application1/EDA.html">Applications</a></li><li class="breadcrumb-item"><a href="../../Applications/Application2/boosting.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Boosting on CGC Data</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Boosting on CGC Data</span></h1>
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Boosting on CGC Data</span></h1>
 </div>
 
 
@@ -303,8 +309,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="cell-2" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> load_cgc_data()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="pre-processing" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="pre-processing"><span class="header-section-number">7.1</span> Pre-processing</h2>
+<section id="pre-processing" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="pre-processing"><span class="header-section-number">8.1</span> Pre-processing</h2>
 <div id="cell-4" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -323,8 +329,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#X_train, X_test, multiclass_y_train, multiclass_y_test = train_test_split(X, multiclass_y, train_size=0.7, random_state=4)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="binary-ada-boost" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="binary-ada-boost"><span class="header-section-number">7.2</span> Binary ADA Boost</h2>
+<section id="binary-ada-boost" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="binary-ada-boost"><span class="header-section-number">8.2</span> Binary ADA Boost</h2>
 <p>Here we will be using miRNA counts as predictors and vital status (aka whether the patient has survived the cancer (1) or not (0)) as the target.</p>
 <div id="cell-9" class="cell" data-execution_count="61">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> AdaBoostClassifier</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -683,8 +689,8 @@ Kappa =  0.0287413280475719</code></pre>
 </div>
 </section>
 </section>
-<section id="variable-importance" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="variable-importance"><span class="header-section-number">7.3</span> Variable Importance</h2>
+<section id="variable-importance" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="variable-importance"><span class="header-section-number">8.3</span> Variable Importance</h2>
 <div id="cell-39" class="cell" data-execution_count="136">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>top10_important <span class="op">=</span> pd.DataFrame({<span class="st">"miRNA_id"</span>:final_model.feature_names_in_, <span class="st">"Importance"</span>:final_model.feature_importances_}).sort_values(<span class="st">"Importance"</span>, ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>)</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>plt.barh(top10_important[<span class="st">"miRNA_id"</span>], top10_important[<span class="st">"Importance"</span>])</span>
@@ -1239,12 +1245,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../../Applications/Application1/Elementary_Modeling.html" class="pagination-link  aria-label=" &lt;span="" fitting&lt;="" span&gt;"="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Model Fitting</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Model Fitting</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../Applications/Application2/zero_inflated_model.html" class="pagination-link" aria-label="<span class='chapter-number'>8</span>&nbsp; <span class='chapter-title'>NHANES Extension to Zero Inflated Models</span>">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">NHANES Extension to Zero Inflated Models</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../Applications/Application2/zero_inflated_model.html" class="pagination-link" aria-label="<span class='chapter-number'>9</span>&nbsp; <span class='chapter-title'>NHANES Extension to Zero Inflated Models</span>">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">NHANES Extension to Zero Inflated Models</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
