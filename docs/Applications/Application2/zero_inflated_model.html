@@ -9,7 +9,7 @@
 <meta name="author" content="">
 <meta name="dcterms.date" content="2024-02-07">
 
-<title>9&nbsp; NHANES Extension to Zero Inflated Models</title>
+<title>10&nbsp; NHANES Extension to Zero Inflated Models</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -118,7 +118,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Applications/Application1/EDA.html">Applications</a></li><li class="breadcrumb-item"><a href="../../Applications/Application2/zero_inflated_model.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">NHANES Extension to Zero Inflated Models</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Applications/Application1/EDA.html">Applications</a></li><li class="breadcrumb-item"><a href="../../Applications/Application2/zero_inflated_model.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">NHANES Extension to Zero Inflated Models</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -181,6 +181,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">DATA495 Weekly Report 4</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Weekly_Reports/R5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">DATA495 Weekly Report 5</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -195,25 +201,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Applications/Application1/EDA.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Pre-Processing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data Pre-Processing</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Applications/Application1/Elementary_Modeling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Model Fitting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model Fitting</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Applications/Application2/boosting.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Boosting on CGC Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Boosting on CGC Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Applications/Application2/zero_inflated_model.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">NHANES Extension to Zero Inflated Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">NHANES Extension to Zero Inflated Models</span></span></a>
   </div>
 </li>
       </ul>
@@ -228,18 +234,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#previous-models" id="toc-previous-models" class="nav-link active" data-scroll-target="#previous-models"><span class="header-section-number">9.1</span> Previous Models</a></li>
-  <li><a href="#multicollinearity" id="toc-multicollinearity" class="nav-link" data-scroll-target="#multicollinearity"><span class="header-section-number">9.2</span> Multicollinearity</a></li>
-  <li><a href="#zero-inflated-model" id="toc-zero-inflated-model" class="nav-link" data-scroll-target="#zero-inflated-model"><span class="header-section-number">9.3</span> Zero Inflated Model</a></li>
+  <li><a href="#previous-models" id="toc-previous-models" class="nav-link active" data-scroll-target="#previous-models"><span class="header-section-number">10.1</span> Previous Models</a></li>
+  <li><a href="#multicollinearity" id="toc-multicollinearity" class="nav-link" data-scroll-target="#multicollinearity"><span class="header-section-number">10.2</span> Multicollinearity</a></li>
+  <li><a href="#zero-inflated-model" id="toc-zero-inflated-model" class="nav-link" data-scroll-target="#zero-inflated-model"><span class="header-section-number">10.3</span> Zero Inflated Model</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Applications/Application1/EDA.html">Applications</a></li><li class="breadcrumb-item"><a href="../../Applications/Application2/zero_inflated_model.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">NHANES Extension to Zero Inflated Models</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Applications/Application1/EDA.html">Applications</a></li><li class="breadcrumb-item"><a href="../../Applications/Application2/zero_inflated_model.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">NHANES Extension to Zero Inflated Models</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">NHANES Extension to Zero Inflated Models</span></h1>
+<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">NHANES Extension to Zero Inflated Models</span></h1>
 </div>
 
 
@@ -288,8 +294,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>train2 <span class="ot">&lt;-</span> train[train_ind, ]</span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> train[<span class="sc">-</span>train_ind,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="previous-models" class="level2" data-number="9.1">
-<h2 data-number="9.1" class="anchored" data-anchor-id="previous-models"><span class="header-section-number">9.1</span> Previous Models</h2>
+<section id="previous-models" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="previous-models"><span class="header-section-number">10.1</span> Previous Models</h2>
 <p>::: {.cell}</p>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit lm and rf</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(DepressionScore <span class="sc">~</span> ., <span class="at">data =</span> train2)</span>
@@ -301,34 +307,34 @@ lm(formula = DepressionScore ~ ., data = train2)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--0.8063 -0.2628 -0.1310  0.1160  4.4104 
+-0.7732 -0.2569 -0.1399  0.1029  4.4215 
 
 Coefficients:
-              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  1.4839283  0.8794883   1.687 0.091693 .  
-LBXBCD      26.5540889 27.5348268   0.964 0.334959    
-LBDBCDSI    -2.9801433  3.0951307  -0.963 0.335728    
-LBXBPB       0.0042473  0.0048523   0.875 0.381499    
-LBXWBCSI     0.0028440  0.0746787   0.038 0.969624    
-LBDLYMNO     0.0163933  0.0763402   0.215 0.829989    
-LBDMONO     -0.0315207  0.0915318  -0.344 0.730601    
-LBDNENO      0.0249834  0.0747615   0.334 0.738280    
-LBDEONO      0.0309711  0.0906259   0.342 0.732574    
-LBDBANO     -0.1404661  0.1686219  -0.833 0.404920    
-LBXRBCSI    -0.4470312  0.1752322  -2.551 0.010805 *  
-LBXHGB       0.1275717  0.0582327   2.191 0.028575 *  
-LBXMCHSI    -0.0556857  0.0277747  -2.005 0.045094 *  
-LBXRDW       0.0365151  0.0093809   3.893 0.000102 ***
-LBXPLTSI     0.0001356  0.0001615   0.840 0.400973    
-LBXMPSI      0.0188811  0.0122857   1.537 0.124476    
-LBXCRP       0.0330635  0.0127021   2.603 0.009302 ** 
-LBXVID      -0.0021751  0.0011134  -1.954 0.050885 .  
+              Estimate Std. Error t value Pr(&gt;|t|)   
+(Intercept)  2.2447947  0.8720939   2.574  0.01012 * 
+LBXBCD      53.0077302 26.7403878   1.982  0.04757 * 
+LBDBCDSI    -5.9539137  3.0059279  -1.981  0.04774 * 
+LBXBPB       0.0015737  0.0057518   0.274  0.78441   
+LBXWBCSI    -0.0073513  0.0650292  -0.113  0.91000   
+LBDLYMNO     0.0078341  0.0657535   0.119  0.90517   
+LBDMONO      0.0864344  0.0823735   1.049  0.29415   
+LBDNENO      0.0211538  0.0651417   0.325  0.74541   
+LBDEONO      0.0058532  0.0795519   0.074  0.94135   
+LBDBANO     -0.0626204  0.1594830  -0.393  0.69462   
+LBXRBCSI    -0.4736705  0.1752476  -2.703  0.00693 **
+LBXHGB       0.1364494  0.0582465   2.343  0.01924 * 
+LBXMCHSI    -0.0695939  0.0276424  -2.518  0.01188 * 
+LBXRDW       0.0263490  0.0100598   2.619  0.00887 **
+LBXPLTSI     0.0002361  0.0001567   1.507  0.13193   
+LBXMPSI     -0.0016371  0.0118758  -0.138  0.89037   
+LBXCRP       0.0159585  0.0113501   1.406  0.15985   
+LBXVID      -0.0030466  0.0010598  -2.875  0.00408 **
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.4508 on 2231 degrees of freedom
-Multiple R-squared:  0.05182,  Adjusted R-squared:  0.04459 
-F-statistic: 7.172 on 17 and 2231 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 0.4317 on 2231 degrees of freedom
+Multiple R-squared:  0.03879,  Adjusted R-squared:  0.03146 
+F-statistic: 5.296 on 17 and 2231 DF,  p-value: 1.117e-11</code></pre>
 <p>:::</p>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>rf <span class="ot">&lt;-</span> <span class="fu">randomForest</span>(DepressionScore<span class="sc">~</span> ., <span class="at">data =</span> train2)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(rf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -340,23 +346,23 @@ Call:
                      Number of trees: 500
 No. of variables tried at each split: 5
 
-          Mean of squared residuals: 0.2137103
-                    % Var explained: -0.53</code></pre>
+          Mean of squared residuals: 0.196269
+                    % Var explained: -2.05</code></pre>
 <p>::: :::</p>
 </section>
-<section id="multicollinearity" class="level2" data-number="9.2">
-<h2 data-number="9.2" class="anchored" data-anchor-id="multicollinearity"><span class="header-section-number">9.2</span> Multicollinearity</h2>
+<section id="multicollinearity" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="multicollinearity"><span class="header-section-number">10.2</span> Multicollinearity</h2>
 <p>There seem to be problems with multicollinearity - lets check vifs.</p>
 <p>::: {.cell}</p>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>::: {.cell-output .cell-output-stdout}</p>
 <pre><code>      LBXBCD     LBDBCDSI       LBXBPB     LBXWBCSI     LBDLYMNO      LBDMONO 
-3.177519e+06 3.177462e+06 1.082048e+00 2.911682e+02 3.814147e+01 3.406657e+00 
+2.846462e+06 2.846414e+06 1.103931e+00 3.196299e+02 1.049579e+02 3.345262e+00 
      LBDNENO      LBDEONO      LBDBANO     LBXRBCSI       LBXHGB     LBXMCHSI 
-2.000051e+02 2.893723e+00 1.217961e+00 9.332864e+01 9.408644e+01 4.462438e+01 
+1.601454e+02 2.818703e+00 1.295066e+00 1.034970e+02 1.046604e+02 4.881307e+01 
       LBXRDW     LBXPLTSI      LBXMPSI       LBXCRP       LBXVID 
-1.516431e+00 1.421446e+00 1.260032e+00 1.128415e+00 1.105965e+00 </code></pre>
+1.604654e+00 1.421253e+00 1.293857e+00 1.128027e+00 1.093606e+00 </code></pre>
 <p>:::</p>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># LBXBCD very high</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -364,29 +370,31 @@ No. of variables tried at each split: 5
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>::: {.cell-output .cell-output-stdout}</p>
 <pre><code>  LBDBCDSI     LBXBPB   LBXWBCSI   LBDLYMNO    LBDMONO    LBDNENO    LBDEONO 
-  1.110318   1.079912 290.713748  38.093285   3.406107 199.690249   2.892939 
+  1.117371   1.100116 319.322370 104.859867   3.345149 159.979446   2.816629 
    LBDBANO   LBXRBCSI     LBXHGB   LBXMCHSI     LBXRDW   LBXPLTSI    LBXMPSI 
-  1.217902  93.210566  93.928065  44.547627   1.512644   1.420073   1.259180 
+  1.294126 103.317684 104.420487  48.706228   1.597041   1.421140   1.292800 
     LBXCRP     LBXVID 
-  1.128243   1.103674 </code></pre>
+  1.126958   1.091720 </code></pre>
 <p>:::</p>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># LBXWBCSI very high</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(DepressionScore <span class="sc">~</span> . <span class="sc">-</span>LBXWBCSI <span class="sc">-</span>LBXBCD , <span class="at">data =</span> train2) </span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>::: {.cell-output .cell-output-stdout}</p>
-<pre><code> LBDBCDSI    LBXBPB  LBDLYMNO   LBDMONO   LBDNENO   LBDEONO   LBDBANO  LBXRBCSI 
- 1.109849  1.079573  1.219672  1.313030  1.307842  1.094757  1.099811 93.194532 
-   LBXHGB  LBXMCHSI    LBXRDW  LBXPLTSI   LBXMPSI    LBXCRP    LBXVID 
-93.906772 44.539386  1.512465  1.419878  1.259172  1.128091  1.103670 </code></pre>
+<pre><code>  LBDBCDSI     LBXBPB   LBDLYMNO    LBDMONO    LBDNENO    LBDEONO    LBDBANO 
+  1.117325   1.100000   1.286489   1.396576   1.330197   1.073298   1.194210 
+  LBXRBCSI     LBXHGB   LBXMCHSI     LBXRDW   LBXPLTSI    LBXMPSI     LBXCRP 
+103.247943 104.352822  48.675564   1.596943   1.420428   1.292661   1.126229 
+    LBXVID 
+  1.091351 </code></pre>
 <p>:::</p>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># LBXRBCSI still very high</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(DepressionScore <span class="sc">~</span> . <span class="sc">-</span> LBXRBCSI <span class="sc">-</span>LBXWBCSI <span class="sc">-</span>LBXBCD , <span class="at">data =</span> train2) </span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>::: {.cell-output .cell-output-stdout}</p>
 <pre><code>LBDBCDSI   LBXBPB LBDLYMNO  LBDMONO  LBDNENO  LBDEONO  LBDBANO   LBXHGB 
-1.108699 1.079491 1.218382 1.312787 1.307734 1.094051 1.096458 1.347890 
+1.116136 1.099909 1.286453 1.395975 1.329711 1.073286 1.194199 1.360977 
 LBXMCHSI   LBXRDW LBXPLTSI  LBXMPSI   LBXCRP   LBXVID 
-1.440835 1.510418 1.415534 1.258420 1.128090 1.103640 </code></pre>
+1.511993 1.593413 1.420258 1.292516 1.126038 1.091229 </code></pre>
 <p>:::</p>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Now VIFs are pretty good</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>rf <span class="ot">&lt;-</span> <span class="fu">randomForest</span>(DepressionScore<span class="sc">~</span> . <span class="sc">-</span> LBXRBCSI <span class="sc">-</span>LBXWBCSI <span class="sc">-</span>LBXBCD, <span class="at">data =</span> train2)</span>
@@ -399,12 +407,12 @@ Call:
                      Number of trees: 500
 No. of variables tried at each split: 4
 
-          Mean of squared residuals: 0.2142177
-                    % Var explained: -0.77</code></pre>
+          Mean of squared residuals: 0.195152
+                    % Var explained: -1.47</code></pre>
 <p>::: :::</p>
 </section>
-<section id="zero-inflated-model" class="level2" data-number="9.3">
-<h2 data-number="9.3" class="anchored" data-anchor-id="zero-inflated-model"><span class="header-section-number">9.3</span> Zero Inflated Model</h2>
+<section id="zero-inflated-model" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="zero-inflated-model"><span class="header-section-number">10.3</span> Zero Inflated Model</h2>
 <p>::: {.cell}</p>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Turn depression score into even counts</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>train<span class="sc">$</span>DepressionScore<span class="ot">&lt;-</span><span class="fu">floor</span>(train<span class="sc">$</span>DepressionScore)</span>
@@ -427,48 +435,48 @@ zeroinfl(formula = DepressionScore ~ . - LBXRBCSI - LBXWBCSI - LBXBCD |
 
 Pearson residuals:
     Min      1Q  Median      3Q     Max 
--0.8536 -0.3083 -0.2474 -0.1910 12.7192 
+-0.9114 -0.3129 -0.2524 -0.1957 13.7532 
 
 Count model coefficients (poisson with log link):
              Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept) -5.082039   2.566146  -1.980 0.047657 *  
-LBDBCDSI    -0.055829   0.017972  -3.106 0.001894 ** 
-LBXBPB       0.114688   0.046005   2.493 0.012669 *  
-LBDLYMNO     0.686953   0.141584   4.852 1.22e-06 ***
-LBDMONO     -0.631637   0.601734  -1.050 0.293859    
-LBDNENO      0.187348   0.049011   3.823 0.000132 ***
-LBDEONO      1.213193   0.530693   2.286 0.022251 *  
-LBDBANO     -2.420334   2.356796  -1.027 0.304440    
-LBXHGB      -0.113962   0.078963  -1.443 0.148953    
-LBXMCHSI    -0.027577   0.045553  -0.605 0.544918    
-LBXRDW      -0.038295   0.074680  -0.513 0.608099    
-LBXPLTSI     0.001320   0.001338   0.987 0.323573    
-LBXMPSI      0.480559   0.129732   3.704 0.000212 ***
-LBXCRP       0.133235   0.068536   1.944 0.051893 .  
-LBXVID       0.009713   0.013557   0.716 0.473727    
+(Intercept) -0.745803   2.590489  -0.288 0.773423    
+LBDBCDSI    -0.004239   0.015698  -0.270 0.787149    
+LBXBPB       0.281899   0.064854   4.347 1.38e-05 ***
+LBDLYMNO     0.253024   0.068418   3.698 0.000217 ***
+LBDMONO      1.357561   0.514111   2.641 0.008276 ** 
+LBDNENO      0.233848   0.063173   3.702 0.000214 ***
+LBDEONO      0.336851   0.567543   0.594 0.552830    
+LBDBANO      1.664053   1.896378   0.877 0.380220    
+LBXHGB      -0.250364   0.072570  -3.450 0.000561 ***
+LBXMCHSI    -0.032577   0.050422  -0.646 0.518232    
+LBXRDW      -0.138051   0.086181  -1.602 0.109185    
+LBXPLTSI     0.001612   0.001437   1.122 0.262032    
+LBXMPSI      0.197258   0.141618   1.393 0.163653    
+LBXCRP      -0.231973   0.096345  -2.408 0.016052 *  
+LBXVID       0.009374   0.012784   0.733 0.463387    
 
 Zero-inflation model coefficients (binomial with logit link):
-              Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)  6.9405351  5.3983287   1.286 0.198554    
-LBDBCDSI    -0.2834387  0.0646335  -4.385 1.16e-05 ***
-LBXBPB       0.1105619  0.0888169   1.245 0.213194    
-LBDLYMNO     1.0388659  0.2978517   3.488 0.000487 ***
-LBDMONO     -1.2094574  1.0903755  -1.109 0.267339    
-LBDNENO      0.1821822  0.0987247   1.845 0.064986 .  
-LBDEONO      2.2789074  1.0396956   2.192 0.028387 *  
-LBDBANO     -4.8281501  4.8467653  -0.996 0.319173    
-LBXHGB       0.0302060  0.1445115   0.209 0.834432    
-LBXMCHSI    -0.2658556  0.1004511  -2.647 0.008130 ** 
-LBXRDW      -0.6417317  0.2132851  -3.009 0.002623 ** 
-LBXPLTSI     0.0005104  0.0025830   0.198 0.843352    
-LBXMPSI      0.7602046  0.2582866   2.943 0.003248 ** 
-LBXCRP       0.1390445  0.1487329   0.935 0.349860    
-LBXVID       0.0535972  0.0224617   2.386 0.017025 *  
+             Estimate Std. Error z value Pr(&gt;|z|)   
+(Intercept)  6.559161   7.212170   0.909  0.36311   
+LBDBCDSI    -0.109699   0.050585  -2.169  0.03011 * 
+LBXBPB       0.472011   0.151320   3.119  0.00181 **
+LBDLYMNO     0.055889   0.157534   0.355  0.72276   
+LBDMONO      3.019059   1.340669   2.252  0.02433 * 
+LBDNENO      0.449112   0.177847   2.525  0.01156 * 
+LBDEONO      2.540135   1.306384   1.944  0.05185 . 
+LBDBANO      3.893923   4.281853   0.909  0.36314   
+LBXHGB      -0.310323   0.197697  -1.570  0.11649   
+LBXMCHSI    -0.187646   0.161152  -1.164  0.24426   
+LBXRDW      -0.958165   0.302869  -3.164  0.00156 **
+LBXPLTSI     0.002121   0.003981   0.533  0.59425   
+LBXMPSI      1.000399   0.363601   2.751  0.00593 **
+LBXCRP      -1.565063   0.509739  -3.070  0.00214 **
+LBXVID       0.087807   0.033259   2.640  0.00829 **
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 
-Number of iterations in BFGS optimization: 62 
-Log-likelihood: -701.8 on 30 Df</code></pre>
+Number of iterations in BFGS optimization: 66 
+Log-likelihood: -670.1 on 30 Df</code></pre>
 <p>::: :::</p>
 <p>::: {.cell}</p>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate models</span></span>
@@ -487,7 +495,7 @@ Log-likelihood: -701.8 on 30 Df</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(lm_mse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1496697</code></pre>
+<pre><code>[1] 0.1506757</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Random Forest MSE: "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -495,7 +503,7 @@ Log-likelihood: -701.8 on 30 Df</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(rf_mse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1679586</code></pre>
+<pre><code>[1] 0.1678489</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Zero Inflation Model MSE: "</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -503,7 +511,7 @@ Log-likelihood: -701.8 on 30 Df</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(zim_mse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.08912857</code></pre>
+<pre><code>[1] 0.1074267</code></pre>
 </div>
 </div>
 <p>Linear model still has a better MSE than the zero-inflation model. A key observation that I made when fitting the model is that the zero-inflation model assumes the non-zero component model is poisson. This would mean that the target variable is a count among other things such as equal mean and variance. This is something that can be explored further in the next application.</p>
@@ -1046,7 +1054,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../../Applications/Application2/boosting.html" class="pagination-link  aria-label=" &lt;span="" on="" cgc="" data&lt;="" span&gt;"="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Boosting on CGC Data</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Boosting on CGC Data</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
