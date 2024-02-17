@@ -1,0 +1,28 @@
+---
+title: "DATA495 Weekly Report 5"
+format: html
+---
+
+# Weekly Report 5
+Date: February 16th, 2024
+
+## Past Objective Status
+Objective|Description|Status
+----|-------|---
+Literature Review|Explainable tree-based methods|Incomplete, no new articles analyzed. Reviewed explainability of random forest classifier paper.
+Elements of Statistical Learning|9.3 Prim| Complete
+Application 3| Implement explainable trees| Incomplete - focus was on Midterm Assignments
+Midterm Knowledge Exchange|Prepare infographics|Complete
+## Weekly Work Log
+Activity|Description|Time Allocated
+----|------|--:
+Midterm Knowledge Exchange|Creating visualizations for infographics and building models to use in examples|4.5 hours
+Elements of Statistical Learning|Chapter 9.3 Prim|30 minutes
+IntepretML|Explainable Boosting Machines and API use|0.5 hour
+
+## Upcoming Objectives
+Objective|Description
+----|-------
+Literature Review|Requirements for explainable AI in health care
+IntepretML|Look further into use of API and libraries
+Application 3| Implement explainable trees
