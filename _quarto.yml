@@ -31,6 +31,8 @@ book:
         - Applications/Application1/Elementary_Modeling.ipynb
         - Applications/Application2/boosting.ipynb
         - Applications/Application2/zero_inflated_model.qmd
+        - Applications/Application3/boosting2.ipynb
+        - Applications/Application3/tree_based_zero_inflated_model.ipynb
 
 execute: 
   warning: false
