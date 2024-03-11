@@ -15,7 +15,7 @@ Application 3| Implement explainable trees|Complete
 ## Weekly Work Log
 Activity|Description|Time Allocated
 ----|------|--:
-Reading|Creating visualizations for infographics and building models to use in examples|2 hours
+Reading|SHAP, LIME, shapley values|2 hours
 Application 4|Clean up past applications and apply LIME and SHAP|3 hours
 
 ## Upcoming Objectives
