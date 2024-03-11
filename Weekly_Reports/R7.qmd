@@ -1,0 +1,26 @@
+---
+title: "DATA495 Weekly Report 5"
+format: html
+---
+
+# Weekly Report 5
+Date: February 16th, 2024
+
+## Past Objective Status
+Objective|Description|Status
+----|-------|---
+Literature Review|Requirements for explainable AI in health care|Incomplete
+IntepretML|Look further into use of API and libraries|Complete
+Application 3| Implement explainable trees|Complete
+## Weekly Work Log
+Activity|Description|Time Allocated
+----|------|--:
+Reading|Creating visualizations for infographics and building models to use in examples|2 hours
+Application 4|Clean up past applications and apply LIME and SHAP|3 hours
+
+## Upcoming Objectives
+Objective|Description
+----|-------
+Literature Review|SHAP and LIME applications in health care and use in compliance
+Reading|Neural Nets?
+Application 5| Implement Neural Nets with LIME and SHAP
