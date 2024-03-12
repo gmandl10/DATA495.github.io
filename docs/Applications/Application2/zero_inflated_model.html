@@ -214,7 +214,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Applications/Application1/Elementary_Modeling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Model Fitting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Initial Modeling of NHANES Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -239,6 +239,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="../../Applications/Application3/tree_based_zero_inflated_models.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Zero-Inflated Model Using Tree Based Methods</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Applications/Application4/interpretability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Interpretability</span></span></a>
   </div>
 </li>
       </ul>
@@ -326,34 +332,34 @@ lm(formula = DepressionScore ~ ., data = train2)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--0.7720 -0.2549 -0.1278  0.1016  4.4055 
+-0.8359 -0.2470 -0.1849 -0.1092  4.5441 
 
 Coefficients:
-              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)  7.961e-01  8.249e-01   0.965   0.3346    
-LBXBCD       4.632e+01  2.609e+01   1.775   0.0760 .  
-LBDBCDSI    -5.202e+00  2.933e+00  -1.774   0.0763 .  
-LBXBPB       1.398e-03  4.789e-03   0.292   0.7705    
-LBXWBCSI     2.614e-02  9.588e-02   0.273   0.7851    
-LBDLYMNO    -1.059e-02  9.633e-02  -0.110   0.9125    
-LBDMONO     -1.109e-01  1.091e-01  -1.016   0.3096    
-LBDNENO      5.583e-03  9.579e-02   0.058   0.9535    
-LBDEONO     -6.816e-03  1.055e-01  -0.065   0.9485    
-LBDBANO     -2.562e-01  1.742e-01  -1.471   0.1414    
-LBXRBCSI    -2.940e-01  1.634e-01  -1.799   0.0722 .  
-LBXHGB       7.544e-02  5.443e-02   1.386   0.1658    
-LBXMCHSI    -3.338e-02  2.601e-02  -1.283   0.1995    
-LBXRDW       4.592e-02  9.929e-03   4.625 3.96e-06 ***
-LBXPLTSI     9.141e-05  1.534e-04   0.596   0.5514    
-LBXMPSI      1.560e-02  1.151e-02   1.355   0.1755    
-LBXCRP       8.938e-03  1.137e-02   0.786   0.4317    
-LBXVID      -2.612e-03  1.048e-03  -2.492   0.0128 *  
+              Estimate Std. Error t value Pr(&gt;|t|)   
+(Intercept)  0.7744161  0.9479126   0.817  0.41403   
+LBXBCD      29.0246458 30.9414245   0.938  0.34832   
+LBDBCDSI    -3.2571381  3.4780713  -0.936  0.34913   
+LBXBPB       0.0171560  0.0071494   2.400  0.01649 * 
+LBXWBCSI    -0.1029998  0.1144815  -0.900  0.36837   
+LBDLYMNO     0.0990004  0.1153621   0.858  0.39089   
+LBDMONO      0.0596652  0.1289728   0.463  0.64368   
+LBDNENO      0.1193998  0.1143000   1.045  0.29631   
+LBDEONO      0.0517376  0.1296905   0.399  0.68998   
+LBDBANO      0.1077123  0.2018484   0.534  0.59365   
+LBXRBCSI    -0.1622751  0.1918778  -0.846  0.39780   
+LBXHGB       0.0300300  0.0639271   0.470  0.63858   
+LBXMCHSI    -0.0200546  0.0302096  -0.664  0.50686   
+LBXRDW       0.0210436  0.0104598   2.012  0.04436 * 
+LBXPLTSI     0.0001633  0.0001769   0.923  0.35603   
+LBXMPSI      0.0028701  0.0136457   0.210  0.83343   
+LBXCRP       0.0359170  0.0128272   2.800  0.00515 **
+LBXVID      -0.0020012  0.0012846  -1.558  0.11941   
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.429 on 2231 degrees of freedom
-Multiple R-squared:  0.05449,  Adjusted R-squared:  0.04729 
-F-statistic: 7.564 on 17 and 2231 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 0.5077 on 2231 degrees of freedom
+Multiple R-squared:  0.03484,  Adjusted R-squared:  0.02749 
+F-statistic: 4.738 on 17 and 2231 DF,  p-value: 4.928e-10</code></pre>
 <p>:::</p>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>rf <span class="ot">&lt;-</span> <span class="fu">randomForest</span>(DepressionScore<span class="sc">~</span> ., <span class="at">data =</span> train2)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(rf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -365,8 +371,8 @@ Call:
                      Number of trees: 500
 No. of variables tried at each split: 5
 
-          Mean of squared residuals: 0.195059
-                    % Var explained: -1</code></pre>
+          Mean of squared residuals: 0.2730899
+                    % Var explained: -3.08</code></pre>
 <p>::: :::</p>
 </section>
 <section id="multicollinearity" class="level2" data-number="11.2">
@@ -377,11 +383,11 @@ No. of variables tried at each split: 5
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>::: {.cell-output .cell-output-stdout}</p>
 <pre><code>      LBXBCD     LBDBCDSI       LBXBPB     LBXWBCSI     LBDLYMNO      LBDMONO 
-2.951828e+06 2.951761e+06 1.079662e+00 6.161189e+02 1.453825e+02 5.503459e+00 
+3.735345e+06 3.735307e+06 1.129208e+00 7.203690e+02 2.272329e+02 6.013417e+00 
      LBDNENO      LBDEONO      LBDBANO     LBXRBCSI       LBXHGB     LBXMCHSI 
-3.696374e+02 5.093857e+00 1.216881e+00 9.119405e+01 8.984061e+01 4.459757e+01 
+3.830983e+02 3.981250e+00 1.380601e+00 9.346293e+01 9.462173e+01 4.276292e+01 
       LBXRDW     LBXPLTSI      LBXMPSI       LBXCRP       LBXVID 
-1.534928e+00 1.431764e+00 1.258320e+00 1.101878e+00 1.103347e+00 </code></pre>
+1.481969e+00 1.402630e+00 1.228333e+00 1.177635e+00 1.101016e+00 </code></pre>
 <p>:::</p>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># LBXBCD very high</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -389,29 +395,29 @@ No. of variables tried at each split: 5
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>::: {.cell-output .cell-output-stdout}</p>
 <pre><code>  LBDBCDSI     LBXBPB   LBXWBCSI   LBDLYMNO    LBDMONO    LBDNENO    LBDEONO 
-  1.109517   1.076217 615.029775 145.156440   5.494332 368.965223   5.082438 
+  1.116981   1.124780 718.291565 226.534357   6.005213 381.935485   3.969052 
    LBDBANO   LBXRBCSI     LBXHGB   LBXMCHSI     LBXRDW   LBXPLTSI    LBXMPSI 
-  1.216223  91.191739  89.832200  44.585090   1.525909   1.431635   1.257357 
+  1.380343  93.441109  94.570246  42.743243   1.479813   1.401709   1.228052 
     LBXCRP     LBXVID 
-  1.101866   1.100830 </code></pre>
+  1.177187   1.097892 </code></pre>
 <p>:::</p>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># LBXWBCSI very high</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(DepressionScore <span class="sc">~</span> . <span class="sc">-</span>LBXWBCSI <span class="sc">-</span>LBXBCD , <span class="at">data =</span> train2) </span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>::: {.cell-output .cell-output-stdout}</p>
 <pre><code> LBDBCDSI    LBXBPB  LBDLYMNO   LBDMONO   LBDNENO   LBDEONO   LBDBANO  LBXRBCSI 
- 1.109483  1.076180  1.263670  1.384661  1.300109  1.087896  1.101548 91.169147 
+ 1.116510  1.124765  1.300736  1.342819  1.305087  1.068321  1.217799 93.438514 
    LBXHGB  LBXMCHSI    LBXRDW  LBXPLTSI   LBXMPSI    LBXCRP    LBXVID 
-89.811696 44.573964  1.525886  1.427984  1.255095  1.101613  1.099158 </code></pre>
+94.564232 42.741011  1.479739  1.401324  1.226458  1.177033  1.096341 </code></pre>
 <p>:::</p>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># LBXRBCSI still very high</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(DepressionScore <span class="sc">~</span> . <span class="sc">-</span> LBXRBCSI <span class="sc">-</span>LBXWBCSI <span class="sc">-</span>LBXBCD , <span class="at">data =</span> train2) </span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>::: {.cell-output .cell-output-stdout}</p>
 <pre><code>LBDBCDSI   LBXBPB LBDLYMNO  LBDMONO  LBDNENO  LBDEONO  LBDBANO   LBXHGB 
-1.109162 1.076149 1.262828 1.384472 1.300001 1.087696 1.100898 1.313343 
+1.113676 1.124386 1.300602 1.342116 1.305083 1.068321 1.217165 1.355098 
 LBXMCHSI   LBXRDW LBXPLTSI  LBXMPSI   LBXCRP   LBXVID 
-1.453175 1.524735 1.425219 1.255095 1.101180 1.099151 </code></pre>
+1.419149 1.471129 1.398864 1.226285 1.176990 1.096220 </code></pre>
 <p>:::</p>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Now VIFs are pretty good</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>rf <span class="ot">&lt;-</span> <span class="fu">randomForest</span>(DepressionScore<span class="sc">~</span> . <span class="sc">-</span> LBXRBCSI <span class="sc">-</span>LBXWBCSI <span class="sc">-</span>LBXBCD, <span class="at">data =</span> train2)</span>
@@ -424,8 +430,8 @@ Call:
                      Number of trees: 500
 No. of variables tried at each split: 4
 
-          Mean of squared residuals: 0.1941104
-                    % Var explained: -0.51</code></pre>
+          Mean of squared residuals: 0.2711362
+                    % Var explained: -2.35</code></pre>
 <p>::: :::</p>
 </section>
 <section id="zero-inflated-model" class="level2" data-number="11.3">
@@ -452,48 +458,48 @@ zeroinfl(formula = DepressionScore ~ . - LBXRBCSI - LBXWBCSI - LBXBCD |
 
 Pearson residuals:
     Min      1Q  Median      3Q     Max 
--1.0577 -0.2949 -0.2391 -0.1908 11.3714 
+-1.1566 -0.4787 -0.4002 -0.2887  6.8114 
 
 Count model coefficients (poisson with log link):
-             Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept) -1.814278   2.569632  -0.706 0.480160    
-LBDBCDSI    -0.011456   0.016667  -0.687 0.491868    
-LBXBPB      -0.066718   0.058054  -1.149 0.250464    
-LBDLYMNO     0.473743   0.163141   2.904 0.003686 ** 
-LBDMONO      0.111510   0.512934   0.217 0.827899    
-LBDNENO      0.286240   0.046765   6.121 9.31e-10 ***
-LBDEONO      0.635195   0.569680   1.115 0.264849    
-LBDBANO     -1.913100   2.130067  -0.898 0.369110    
-LBXHGB      -0.326323   0.073340  -4.449 8.61e-06 ***
-LBXMCHSI     0.007646   0.045804   0.167 0.867427    
-LBXRDW       0.024636   0.076796   0.321 0.748359    
-LBXPLTSI    -0.003763   0.001628  -2.311 0.020814 *  
-LBXMPSI      0.341693   0.129123   2.646 0.008139 ** 
-LBXCRP       0.340094   0.102329   3.324 0.000889 ***
-LBXVID      -0.009249   0.013055  -0.708 0.478638    
+              Estimate Std. Error z value Pr(&gt;|z|)   
+(Intercept)  0.6293500  1.6177059   0.389  0.69725   
+LBDBCDSI     0.0073217  0.0079023   0.927  0.35417   
+LBXBPB       0.0316059  0.0260981   1.211  0.22588   
+LBDLYMNO    -0.0298122  0.0706954  -0.422  0.67325   
+LBDMONO     -0.3303522  0.3391065  -0.974  0.32996   
+LBDNENO      0.0707741  0.0363646   1.946  0.05163 . 
+LBDEONO      0.1768090  0.4075124   0.434  0.66438   
+LBDBANO     -1.0056599  1.0030008  -1.003  0.31603   
+LBXHGB      -0.1416340  0.0475860  -2.976  0.00292 **
+LBXMCHSI     0.0008369  0.0294300   0.028  0.97731   
+LBXRDW      -0.0518729  0.0467399  -1.110  0.26708   
+LBXPLTSI    -0.0007027  0.0008816  -0.797  0.42540   
+LBXMPSI      0.1278757  0.0805014   1.588  0.11218   
+LBXCRP       0.1125455  0.0461174   2.440  0.01467 * 
+LBXVID      -0.0095127  0.0071210  -1.336  0.18159   
 
 Zero-inflation model coefficients (binomial with logit link):
              Estimate Std. Error z value Pr(&gt;|z|)   
-(Intercept) 11.537291   6.139402   1.879  0.06021 . 
-LBDBCDSI    -0.204183   0.087267  -2.340  0.01930 * 
-LBXBPB      -0.561496   0.206512  -2.719  0.00655 **
-LBDLYMNO     0.757802   0.369060   2.053  0.04004 * 
-LBDMONO      0.432621   1.158343   0.373  0.70879   
-LBDNENO      0.305631   0.118505   2.579  0.00991 **
-LBDEONO      1.540495   1.147826   1.342  0.17956   
-LBDBANO     -1.016041   4.937658  -0.206  0.83697   
-LBXHGB      -0.405860   0.185235  -2.191  0.02845 * 
-LBXMCHSI    -0.192630   0.108154  -1.781  0.07490 . 
-LBXRDW      -0.516574   0.254246  -2.032  0.04217 * 
-LBXPLTSI    -0.008107   0.004436  -1.828  0.06759 . 
-LBXMPSI      0.682623   0.273559   2.495  0.01258 * 
-LBXCRP       0.417242   0.191003   2.184  0.02893 * 
-LBXVID       0.030114   0.028803   1.046  0.29579   
+(Intercept) 18.182960   7.751014   2.346  0.01898 * 
+LBDBCDSI    -0.222690   0.088166  -2.526  0.01154 * 
+LBXBPB      -0.063571   0.101375  -0.627  0.53061   
+LBDLYMNO    -0.056340   0.364376  -0.155  0.87712   
+LBDMONO     -0.849441   1.307266  -0.650  0.51583   
+LBDNENO      0.051222   0.127021   0.403  0.68676   
+LBDEONO      1.928182   1.100234   1.753  0.07968 . 
+LBDBANO     -7.845803   4.979915  -1.575  0.11514   
+LBXHGB      -0.163036   0.152597  -1.068  0.28534   
+LBXMCHSI    -0.160154   0.129419  -1.237  0.21591   
+LBXRDW      -1.017790   0.335135  -3.037  0.00239 **
+LBXPLTSI    -0.006578   0.003454  -1.904  0.05685 . 
+LBXMPSI      0.484259   0.241590   2.004  0.04502 * 
+LBXCRP       0.140258   0.191055   0.734  0.46287   
+LBXVID      -0.006698   0.021516  -0.311  0.75557   
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
 
-Number of iterations in BFGS optimization: 53 
-Log-likelihood:  -648 on 30 Df</code></pre>
+Number of iterations in BFGS optimization: 62 
+Log-likelihood: -1269 on 30 Df</code></pre>
 <p>::: :::</p>
 <p>::: {.cell}</p>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate models</span></span>
@@ -512,7 +518,7 @@ Log-likelihood:  -648 on 30 Df</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(lm_mse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1522688</code></pre>
+<pre><code>[1] 0.2707646</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Random Forest MSE: "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -520,7 +526,7 @@ Log-likelihood:  -648 on 30 Df</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(rf_mse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1708909</code></pre>
+<pre><code>[1] 0.2805816</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Zero Inflation Model MSE: "</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -528,7 +534,7 @@ Log-likelihood:  -648 on 30 Df</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(zim_mse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.111112</code></pre>
+<pre><code>[1] 0.2693088</code></pre>
 </div>
 </div>
 <p>Linear model still has a better MSE than the zero-inflation model. A key observation that I made when fitting the model is that the zero-inflation model assumes the non-zero component model is poisson. This would mean that the target variable is a count among other things such as equal mean and variance. This is something that can be explored further in the next application.</p>

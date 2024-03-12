@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="">
-<meta name="dcterms.date" content="2024-01-29">
+<meta name="dcterms.date" content="2024-03-11">
 
 <title>8&nbsp; Data Pre-Processing</title>
 <style>
@@ -217,7 +217,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Applications/Application1/Elementary_Modeling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Model Fitting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Initial Modeling of NHANES Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -244,6 +244,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Zero-Inflated Model Using Tree Based Methods</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Applications/Application4/interpretability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Interpretability</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -256,14 +262,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#ds0214" id="toc-ds0214" class="nav-link active" data-scroll-target="#ds0214"><span class="header-section-number">8.1</span> DS0214</a></li>
-  <li><a href="#ds0215" id="toc-ds0215" class="nav-link" data-scroll-target="#ds0215"><span class="header-section-number">8.2</span> DS0215</a></li>
-  <li><a href="#ds0216" id="toc-ds0216" class="nav-link" data-scroll-target="#ds0216"><span class="header-section-number">8.3</span> DS0216</a></li>
-  <li><a href="#ds0235" id="toc-ds0235" class="nav-link" data-scroll-target="#ds0235"><span class="header-section-number">8.4</span> DS0235</a></li>
-  <li><a href="#year-to-year-survey-data-consistency" id="toc-year-to-year-survey-data-consistency" class="nav-link" data-scroll-target="#year-to-year-survey-data-consistency"><span class="header-section-number">8.5</span> Year to Year Survey Data Consistency</a></li>
-  <li><a href="#joining-datasets" id="toc-joining-datasets" class="nav-link" data-scroll-target="#joining-datasets"><span class="header-section-number">8.6</span> Joining Datasets</a></li>
-  <li><a href="#ds209---depression-screener" id="toc-ds209---depression-screener" class="nav-link" data-scroll-target="#ds209---depression-screener"><span class="header-section-number">8.7</span> DS209 - Depression Screener</a></li>
-  <li><a href="#distribution-of-target-variable" id="toc-distribution-of-target-variable" class="nav-link" data-scroll-target="#distribution-of-target-variable"><span class="header-section-number">8.8</span> Distribution of target variable</a></li>
+  <li><a href="#ds0215" id="toc-ds0215" class="nav-link active" data-scroll-target="#ds0215"><span class="header-section-number">8.1</span> DS0215</a></li>
+  <li><a href="#ds0216" id="toc-ds0216" class="nav-link" data-scroll-target="#ds0216"><span class="header-section-number">8.2</span> DS0216</a></li>
+  <li><a href="#ds0235" id="toc-ds0235" class="nav-link" data-scroll-target="#ds0235"><span class="header-section-number">8.3</span> DS0235</a></li>
+  <li><a href="#year-to-year-survey-data-consistency" id="toc-year-to-year-survey-data-consistency" class="nav-link" data-scroll-target="#year-to-year-survey-data-consistency"><span class="header-section-number">8.4</span> Year to Year Survey Data Consistency</a></li>
+  <li><a href="#joining-datasets" id="toc-joining-datasets" class="nav-link" data-scroll-target="#joining-datasets"><span class="header-section-number">8.5</span> Joining Datasets</a></li>
+  <li><a href="#ds209---depression-screener" id="toc-ds209---depression-screener" class="nav-link" data-scroll-target="#ds209---depression-screener"><span class="header-section-number">8.6</span> DS209 - Depression Screener</a></li>
+  <li><a href="#distribution-of-target-variable" id="toc-distribution-of-target-variable" class="nav-link" data-scroll-target="#distribution-of-target-variable"><span class="header-section-number">8.7</span> Distribution of target variable</a></li>
   </ul>
 </nav>
     </div>
@@ -283,7 +288,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2024-01-29</p>
+      <p class="date">2024-03-11</p>
     </div>
   </div>
   
@@ -295,78 +300,74 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div id="cell-0" class="cell" data-execution_count="2">
+<div id="cell-0" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Want to see if each data set contains the seqn number and data release number</p>
-<div id="cell-3" class="cell" data-execution_count="1">
+<p>It seems that most data sets contain a variable named the SEQN number and the data release number. My assumption is that the SEQN number is the attribute that unqiuely identifies a patient. Is this assumption is correct, I will be able to join tables from the NHANES repository using the SEQN numbers. In the following code, I want to see if each data set contains the seqn number and data release number</p>
+<div id="cell-3" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>data_master <span class="op">=</span> <span class="st">"ICPSR_25504</span><span class="ch">\\</span><span class="st">"</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>dataframes <span class="op">=</span> []</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>index <span class="op">=</span> []</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>os.listdir(data_master)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>data_master <span class="op">=</span> os.path.dirname(os.path.dirname(os.getcwd())) <span class="op">+</span> <span class="st">"</span><span class="ch">\\</span><span class="st">Data</span><span class="ch">\\</span><span class="st">NHANES</span><span class="ch">\\</span><span class="st">ICPSR_25504</span><span class="ch">\\</span><span class="st">"</span> </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># all our data sets are contain within the "ICPSR_25504" folder</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>dataframes <span class="op">=</span> [] <span class="co"># list for storing the dataframes</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>index <span class="op">=</span> [] <span class="co"># list for storing the name of the data set</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> root, dirs, files <span class="kw">in</span> os.walk(data_master):</span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> name <span class="kw">in</span> files:</span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> name.endswith(<span class="st">".tsv"</span>):</span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>            <span class="bu">file</span> <span class="op">=</span> os.path.join(root, name)</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>            dataframes.append(pd.read_csv(<span class="bu">file</span>, sep <span class="op">=</span> <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>, nrows <span class="op">=</span> <span class="dv">100</span>))</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>            dataframes.append(pd.read_csv(<span class="bu">file</span>, sep <span class="op">=</span> <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>, nrows <span class="op">=</span> <span class="dv">100</span>)) </span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>            index.append(root[<span class="op">-</span><span class="dv">6</span>:])</span>
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>dataframes <span class="op">=</span> pd.Series(dataframes, index <span class="op">=</span> index)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>FileNotFoundError: [Errno 2] No such file or directory: 'ICPSR_25504\\'</code></pre>
 </div>
-</div>
-<div id="cell-4" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>num_seqn <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>num_SDDSRVYR <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> dataframes.index:</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> dataframes[i]</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">"SEQN"</span> <span class="kw">in</span> df.columns:</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        num_seqn <span class="op">+=</span><span class="dv">1</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(i)</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">"SDDSRVYR"</span> <span class="kw">in</span> df.columns:</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        num_SDDSRVYR <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(i)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-4" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>num_seqn <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>num_SDDSRVYR <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> dataframes.index:</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> dataframes[i]</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">"SEQN"</span> <span class="kw">in</span> df.columns:</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        num_seqn <span class="op">+=</span><span class="dv">1</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(i, <span class="st">"does not contain SEQN"</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">"SDDSRVYR"</span> <span class="kw">in</span> df.columns:</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        num_SDDSRVYR <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(i, <span class="st">"does not contai SDDSRVYR"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>DS0214
-DS0214
-DS0215
-DS0215
-DS0216
-DS0216
-DS0235
-DS0235</code></pre>
+<pre><code>DS0214 does not contain SEQN
+DS0214 does not contai SDDSRVYR
+DS0215 does not contain SEQN
+DS0215 does not contai SDDSRVYR
+DS0216 does not contain SEQN
+DS0216 does not contai SDDSRVYR
+DS0235 does not contain SEQN
+DS0235 does not contai SDDSRVYR</code></pre>
 </div>
 </div>
-<div id="cell-5" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(num_seqn<span class="op">/</span><span class="bu">len</span>(dataframes))</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(num_SDDSRVYR<span class="op">/</span><span class="bu">len</span>(dataframes))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Interesting observation - data sets that do not contain the SEQN number also do not contain the data release number</p>
+<div id="cell-6" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Proportion of data sets that contain the SEQN number: </span><span class="sc">{:.2f}</span><span class="st">"</span>.<span class="bu">format</span>(num_seqn<span class="op">/</span><span class="bu">len</span>(dataframes)))</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Proportion of data sets that contain the data release number : </span><span class="sc">{:.2f}</span><span class="st">"</span>.<span class="bu">format</span>(num_SDDSRVYR<span class="op">/</span><span class="bu">len</span>(dataframes)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>0.963302752293578
-0.963302752293578</code></pre>
+<pre><code>Proportion of data sets that contain the SEQN number: 0.96
+Proportion of data sets that contain the data release number : 0.96</code></pre>
 </div>
 </div>
-<p>Some dataframes don’t contain the Serial Number and the Data Release Number. Let’s investigate why this occurs.</p>
-<section id="ds0214" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="ds0214"><span class="header-section-number">8.1</span> DS0214</h2>
-<p>Dietary Supplement Use – Supplement Information</p>
+<p>Let’s investigate the 4 datasets that do not have SEQN and data release number columns. ## DS0214 Dietary Supplement Use – Supplement Information</p>
 <p>This data set stores dietary supplement information. The primary key to this dataset is the Supplement ID number. Let’s see if this is a foreign key in another dataset</p>
-<div id="cell-7" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> dataframes.index:</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> dataframes[i]</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">"DSDSUPID"</span> <span class="kw">in</span> df.columns:</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(i)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-8" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> dataframes.index:</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> dataframes[i]</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">"DSDSUPID"</span> <span class="kw">in</span> df.columns:</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(i)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>DS0213
 DS0214
@@ -374,93 +375,18 @@ DS0215</code></pre>
 </div>
 </div>
 <p>The Supplement ID number (DSDSUPID) is the primary key in DS0214 and is a foreign key in DS0213</p>
-<p>DS0213 is a dataset that contains the serial number and the data release number. DSO213 is Dietary Supplement Use – Participants Use of Supplement Let’s see how DSO213 is structured: Can one person be recorded taking multiple supplements? If so, what is the distribution of supplement usage in the same?</p>
-<div id="cell-9" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>DS2013 <span class="op">=</span> pd.read_csv(<span class="st">"ICPSR_25504</span><span class="ch">\\</span><span class="st">DS0213</span><span class="ch">\\</span><span class="st">25504-0213-Data.tsv"</span>, sep <span class="op">=</span> <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>supplement_usage <span class="op">=</span> DS2013.groupby(<span class="st">"SEQN"</span>).size().sort_values(ascending <span class="op">=</span> <span class="va">False</span>).reset_index(name<span class="op">=</span><span class="st">"Count"</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>supplement_usage</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="5">
-<div>
-
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">SEQN</th>
-<th data-quarto-table-cell-role="th">Count</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>34656</td>
-<td>20</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>40551</td>
-<td>19</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>37134</td>
-<td>16</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>38637</td>
-<td>16</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>37164</td>
-<td>14</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">...</td>
-<td>...</td>
-<td>...</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4105</td>
-<td>35518</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">4106</td>
-<td>35522</td>
-<td>1</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4107</td>
-<td>35524</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">4108</td>
-<td>35525</td>
-<td>1</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4109</td>
-<td>36307</td>
-<td>1</td>
-</tr>
-</tbody>
-</table>
-
-<p>4110 rows × 2 columns</p>
+<p>DS0213 is a dataset that contains the serial number and the data release number. DSO213 is Dietary Supplement Use – Participants Use of Supplement</p>
+<p>Let’s see how DSO213 is structured: Can one person be recorded taking multiple supplements? If so, what is the distribution of supplement usage in the same?</p>
+<div id="cell-10" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>DS2013 <span class="op">=</span> pd.read_csv(os.path.dirname(os.path.dirname(os.getcwd())) <span class="op">+</span> <span class="st">"</span><span class="ch">\\</span><span class="st">Data</span><span class="ch">\\</span><span class="st">NHANES</span><span class="ch">\\</span><span class="st">ICPSR_25504</span><span class="ch">\\</span><span class="st">DS0213</span><span class="ch">\\</span><span class="st">25504-0213-Data.tsv"</span>, sep <span class="op">=</span> <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>supplement_usage <span class="op">=</span> DS2013.groupby(<span class="st">"SEQN"</span>).size().sort_values(ascending <span class="op">=</span> <span class="va">False</span>).reset_index(name<span class="op">=</span><span class="st">"Count"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-</div>
-<div id="cell-10" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>plt.hist(supplement_usage[<span class="st">"Count"</span>], bins <span class="op">=</span> <span class="dv">12</span>)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Number of Supplements Used"</span>)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Number of Participants"</span>)</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Distribution of Supplement Usage Among Study Participants"</span>)</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-11" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>plt.hist(supplement_usage[<span class="st">"Count"</span>], bins <span class="op">=</span> <span class="dv">12</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Number of Supplements Used"</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Number of Participants"</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Distribution of Supplement Usage Among Study Participants"</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -471,98 +397,21 @@ DS0215</code></pre>
 </div>
 <p>A key thing to note is that a participant who is not using supplements is not included in this visualization. This analysis is only representative of a participant that uses one or multiple supplement(s)</p>
 <p>Let’s look at the next dataset that does not contain the sequence number or data release number</p>
-</section>
-<section id="ds0215" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="ds0215"><span class="header-section-number">8.2</span> DS0215</h2>
+<section id="ds0215" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="ds0215"><span class="header-section-number">8.1</span> DS0215</h2>
 <p>Dietary Supplement Use – Ingredient Information</p>
 <p>The Supplement ID number (DSDSUPID) is also the primary key in DS0214 and is a foreign key in DS0213</p>
 <p>Can a supplement have several ingredients and what is the distributions of number ingredients in a supplements</p>
-<div id="cell-13" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>DS2015 <span class="op">=</span> pd.read_csv(<span class="st">"ICPSR_25504</span><span class="ch">\\</span><span class="st">DS0215</span><span class="ch">\\</span><span class="st">25504-0215-Data.tsv"</span>, sep <span class="op">=</span> <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>num_ingredients <span class="op">=</span> DS2015.groupby(<span class="st">"DSDSUPP"</span>).size().sort_values(ascending <span class="op">=</span> <span class="va">False</span>).reset_index(name<span class="op">=</span><span class="st">"Count"</span>)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>num_ingredients</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="7">
-<div>
-
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">DSDSUPP</th>
-<th data-quarto-table-cell-role="th">Count</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>S1000579801</td>
-<td>68</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>S1000579800</td>
-<td>65</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>S1000580200</td>
-<td>65</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>S1000600500</td>
-<td>65</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>S1000582500</td>
-<td>64</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">...</td>
-<td>...</td>
-<td>...</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2138</td>
-<td>S1000649000</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">2139</td>
-<td>S1000649100</td>
-<td>1</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2140</td>
-<td>S1000649200</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">2141</td>
-<td>S1000649300</td>
-<td>1</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2142</td>
-<td>S1888690300</td>
-<td>1</td>
-</tr>
-</tbody>
-</table>
-
-<p>2143 rows × 2 columns</p>
+<div id="cell-14" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>DS2015 <span class="op">=</span> pd.read_csv(os.path.dirname(os.path.dirname(os.getcwd())) <span class="op">+</span> <span class="st">"</span><span class="ch">\\</span><span class="st">Data</span><span class="ch">\\</span><span class="st">NHANES</span><span class="ch">\\</span><span class="st">ICPSR_25504</span><span class="ch">\\</span><span class="st">DS0215</span><span class="ch">\\</span><span class="st">25504-0215-Data.tsv"</span>, sep <span class="op">=</span> <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>num_ingredients <span class="op">=</span> DS2015.groupby(<span class="st">"DSDSUPP"</span>).size().sort_values(ascending <span class="op">=</span> <span class="va">False</span>).reset_index(name<span class="op">=</span><span class="st">"Count"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-</div>
-<div id="cell-14" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>plt.hist(num_ingredients[<span class="st">"Count"</span>], bins <span class="op">=</span> <span class="dv">12</span>)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Number of Ingredients in Supplement"</span>)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Number of Supplements"</span>)</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Distribution of Amount of Ingredients Among Supplements"</span>)</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-15" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>plt.hist(num_ingredients[<span class="st">"Count"</span>], bins <span class="op">=</span> <span class="dv">12</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Number of Ingredients in Supplement"</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Number of Supplements"</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Distribution of Amount of Ingredients Among Supplements"</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -571,272 +420,36 @@ DS0215</code></pre>
 </div>
 </div>
 </div>
-<div id="cell-15" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>DS2015[DS2015[<span class="st">"DSDSUPP"</span>]<span class="op">==</span><span class="st">"S1000579801"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="9">
-<div>
-
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">DSDSUPID</th>
-<th data-quarto-table-cell-role="th">DSDSUPP</th>
-<th data-quarto-table-cell-role="th">DSDINGID</th>
-<th data-quarto-table-cell-role="th">DSDINGR</th>
-<th data-quarto-table-cell-role="th">DSDOPER</th>
-<th data-quarto-table-cell-role="th">DSDQTY</th>
-<th data-quarto-table-cell-role="th">DSDUNIT</th>
-<th data-quarto-table-cell-role="th">DSDCAT</th>
-<th data-quarto-table-cell-role="th">DSDBLFLG</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">11661</td>
-<td>1000579801</td>
-<td>S1000579801</td>
-<td>10000037</td>
-<td>I10000037</td>
-<td>=</td>
-<td>100.0</td>
-<td>1</td>
-<td>4</td>
-<td>2</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">11662</td>
-<td>1000579801</td>
-<td>S1000579801</td>
-<td>10000038</td>
-<td>I10000038</td>
-<td>=</td>
-<td>50.0</td>
-<td>1</td>
-<td>4</td>
-<td>2</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">11663</td>
-<td>1000579801</td>
-<td>S1000579801</td>
-<td>10000042</td>
-<td>I10000042</td>
-<td>=</td>
-<td>150.0</td>
-<td>4</td>
-<td>1</td>
-<td>2</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">11664</td>
-<td>1000579801</td>
-<td>S1000579801</td>
-<td>10000052</td>
-<td>I10000052</td>
-<td>=</td>
-<td>1.5</td>
-<td>1</td>
-<td>2</td>
-<td>2</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">11665</td>
-<td>1000579801</td>
-<td>S1000579801</td>
-<td>10000070</td>
-<td>I10000070</td>
-<td>=</td>
-<td>250.0</td>
-<td>1</td>
-<td>2</td>
-<td>2</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">11724</td>
-<td>1000579801</td>
-<td>S1000579801</td>
-<td>10004592</td>
-<td>I10004592</td>
-<td>=</td>
-<td>400.0</td>
-<td>1</td>
-<td>4</td>
-<td>2</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">11725</td>
-<td>1000579801</td>
-<td>S1000579801</td>
-<td>10004593</td>
-<td>I10004593</td>
-<td>=</td>
-<td>100.0</td>
-<td>1</td>
-<td>4</td>
-<td>2</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">11726</td>
-<td>1000579801</td>
-<td>S1000579801</td>
-<td>10004595</td>
-<td>I10004595</td>
-<td>=</td>
-<td>100.0</td>
-<td>1</td>
-<td>4</td>
-<td>2</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">11727</td>
-<td>1000579801</td>
-<td>S1000579801</td>
-<td>10004927</td>
-<td>I10004927</td>
-<td>=</td>
-<td>15.0</td>
-<td>1</td>
-<td>3</td>
-<td>2</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">11728</td>
-<td>1000579801</td>
-<td>S1000579801</td>
-<td>10004928</td>
-<td>I10004928</td>
-<td>=</td>
-<td>125.0</td>
-<td>1</td>
-<td>4</td>
-<td>2</td>
-</tr>
-</tbody>
-</table>
-
-<p>68 rows × 9 columns</p>
-</div>
-</div>
-</div>
 </section>
-<section id="ds0216" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="ds0216"><span class="header-section-number">8.3</span> DS0216</h2>
+<section id="ds0216" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="ds0216"><span class="header-section-number">8.2</span> DS0216</h2>
 <p>Dietary Supplement Use – Supplement Blend</p>
 <p>The primary key in DS0216 is the Ingredient ID number which is a foreign key in DS0215</p>
 </section>
-<section id="ds0235" class="level2" data-number="8.4">
-<h2 data-number="8.4" class="anchored" data-anchor-id="ds0235"><span class="header-section-number">8.4</span> DS0235</h2>
+<section id="ds0235" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="ds0235"><span class="header-section-number">8.3</span> DS0235</h2>
 <p>Drug Information</p>
 <p>The primary key for DS0235 is the Generic Drug Code (RXDDRGID). Let’s find which dataset has the generic drug code as a foreign key.</p>
-<div id="cell-18" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> dataframes.index:</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> dataframes[i]</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">"RXDDRGID"</span> <span class="kw">in</span> df.columns:</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(i)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-18" class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> dataframes.index:</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> dataframes[i]</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">"RXDDRGID"</span> <span class="kw">in</span> df.columns:</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(i)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>DS0234
 DS0235</code></pre>
 </div>
 </div>
 <p>DS0234 contains RXDDRGID as a foreign key. This dataset is Prescription Medications</p>
-<div id="cell-20" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>DS2034 <span class="op">=</span> pd.read_csv(<span class="st">"ICPSR_25504</span><span class="ch">\\</span><span class="st">DS0234</span><span class="ch">\\</span><span class="st">25504-0234-Data.tsv"</span>, sep <span class="op">=</span> <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>num_drugs <span class="op">=</span> DS2034.groupby(<span class="st">"SEQN"</span>).size().sort_values(ascending <span class="op">=</span> <span class="va">False</span>).reset_index(name<span class="op">=</span><span class="st">"Count"</span>)</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>num_drugs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="12">
-<div>
-
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">SEQN</th>
-<th data-quarto-table-cell-role="th">Count</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>41025</td>
-<td>20</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>34531</td>
-<td>18</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>34423</td>
-<td>17</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>38612</td>
-<td>16</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>33959</td>
-<td>16</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">...</td>
-<td>...</td>
-<td>...</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">10343</td>
-<td>34985</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">10344</td>
-<td>34984</td>
-<td>1</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">10345</td>
-<td>34983</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">10346</td>
-<td>34982</td>
-<td>1</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">10347</td>
-<td>36301</td>
-<td>1</td>
-</tr>
-</tbody>
-</table>
-
-<p>10348 rows × 2 columns</p>
+<div id="cell-20" class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>DS2034 <span class="op">=</span> pd.read_csv(os.path.dirname(os.path.dirname(os.getcwd())) <span class="op">+</span> <span class="st">"</span><span class="ch">\\</span><span class="st">Data</span><span class="ch">\\</span><span class="st">NHANES</span><span class="ch">\\</span><span class="st">ICPSR_25504</span><span class="ch">\\</span><span class="st">DS0234</span><span class="ch">\\</span><span class="st">25504-0234-Data.tsv"</span>, sep <span class="op">=</span> <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>num_drugs <span class="op">=</span> DS2034.groupby(<span class="st">"SEQN"</span>).size().sort_values(ascending <span class="op">=</span> <span class="va">False</span>).reset_index(name<span class="op">=</span><span class="st">"Count"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-</div>
-<div id="cell-21" class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Partipicant 41025 uses 20 perscription drugs</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>DS2034[DS2034[<span class="st">"SEQN"</span>] <span class="op">==</span> <span class="dv">41025</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="13">
+<div id="cell-21" class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Partipicant 41025 uses 20 perscription drugs</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>DS2034[DS2034[<span class="st">"SEQN"</span>] <span class="op">==</span> <span class="dv">41025</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="26">
 <div>
 
 
@@ -1355,69 +968,70 @@ DS0235</code></pre>
 </div>
 </div>
 </div>
-<div id="cell-22" class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>plt.hist(num_drugs[<span class="st">"Count"</span>], bins <span class="op">=</span> <span class="dv">10</span>)</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Number of Perscription Drugs Used"</span>)</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Number of Participants"</span>)</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Perpsection Drug Usage Among Study Participants"</span>)</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-22" class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>plt.hist(num_drugs[<span class="st">"Count"</span>], bins <span class="op">=</span> <span class="dv">10</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Number of Perscription Drugs Used"</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Number of Participants"</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Perpsection Drug Usage Among Study Participants"</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="EDA_files/figure-html/cell-15-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="EDA_files/figure-html/cell-14-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
+<p>Note: Like with supplement usage, the patients who do not use prescription medications are not represented in this visualization</p>
 </section>
-<section id="year-to-year-survey-data-consistency" class="level2" data-number="8.5">
-<h2 data-number="8.5" class="anchored" data-anchor-id="year-to-year-survey-data-consistency"><span class="header-section-number">8.5</span> Year to Year Survey Data Consistency</h2>
-<p>The first data that we have been working with from the dataset ICPSR_25504 is the National Health and Nutrition Examination Survey (NHANES) from 2005-2006. Next we have downloaded the Survey from 2005-2006 and we will look to see if the data architecture is consistent across year.</p>
+<section id="year-to-year-survey-data-consistency" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="year-to-year-survey-data-consistency"><span class="header-section-number">8.4</span> Year to Year Survey Data Consistency</h2>
+<p>The data that we have been working with from the dataset ICPSR_25504 is the National Health and Nutrition Examination Survey (NHANES) from 2005-2006. Next we have downloaded the Survey from 2005-2006 and we will look to see if the data architecture is consistent across year.</p>
 <p>First let’s check if each data set exists in both surveys and if their columns are the same</p>
-<div id="cell-24" class="cell" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>data_master <span class="op">=</span> <span class="st">"ICPSR_25505</span><span class="ch">\\</span><span class="st">"</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>dataframes2 <span class="op">=</span> []</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>index2 <span class="op">=</span> []</span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>os.listdir(data_master)</span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> root, dirs, files <span class="kw">in</span> os.walk(data_master):</span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> name <span class="kw">in</span> files:</span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> name.endswith(<span class="st">".tsv"</span>):</span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>            <span class="bu">file</span> <span class="op">=</span> os.path.join(root, name)</span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>            dataframes2.append(pd.read_csv(<span class="bu">file</span>, sep <span class="op">=</span> <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>, nrows <span class="op">=</span> <span class="dv">100</span>))</span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>            index2.append(root[<span class="op">-</span><span class="dv">6</span>:])</span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>dataframes2 <span class="op">=</span> pd.Series(dataframes2, index <span class="op">=</span> index2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-25" class="cell" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>data_master <span class="op">=</span> os.path.dirname(os.path.dirname(os.getcwd())) <span class="op">+</span> <span class="st">"</span><span class="ch">\\</span><span class="st">Data</span><span class="ch">\\</span><span class="st">NHANES</span><span class="ch">\\</span><span class="st">ICPSR_25505</span><span class="ch">\\</span><span class="st">"</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>dataframes2 <span class="op">=</span> []</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>index2 <span class="op">=</span> []</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>os.listdir(data_master)</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> root, dirs, files <span class="kw">in</span> os.walk(data_master):</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> name <span class="kw">in</span> files:</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> name.endswith(<span class="st">".tsv"</span>):</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>            <span class="bu">file</span> <span class="op">=</span> os.path.join(root, name)</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>            dataframes2.append(pd.read_csv(<span class="bu">file</span>, sep <span class="op">=</span> <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>, nrows <span class="op">=</span> <span class="dv">100</span>))</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>            index2.append(root[<span class="op">-</span><span class="dv">6</span>:])</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>dataframes2 <span class="op">=</span> pd.Series(dataframes2, index <span class="op">=</span> index2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-25" class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Datasets included in 2005-2006 but not in 2007-2008"</span>)</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> index:</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="kw">not</span> <span class="kw">in</span> index2:</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(i)</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Datasets not included in 2005-2006 but in 2007-2008"</span>)</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> index2:</span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="kw">not</span> <span class="kw">in</span> index:</span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(i)</span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Datasets with mismatching columns"</span>)</span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> index:</span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="kw">in</span> index2:</span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(dataframes[i].columns) <span class="op">!=</span> <span class="bu">len</span>(dataframes2[i].columns):</span>
-<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(i)</span>
-<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Datasets with consistent number of columns"</span>)</span>
-<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> index:</span>
-<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="kw">in</span> index2:</span>
-<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(dataframes[i].columns) <span class="op">==</span> <span class="bu">len</span>(dataframes2[i].columns):</span>
-<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(i)</span>
-<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>        </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-26" class="cell" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Datasets included in 2005-2006 but not in 2007-2008"</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> index:</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="kw">not</span> <span class="kw">in</span> index2:</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(i)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Datasets not included in 2005-2006 but in 2007-2008"</span>)</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> index2:</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="kw">not</span> <span class="kw">in</span> index:</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(i)</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Datasets with mismatching columns"</span>)</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> index:</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="kw">in</span> index2:</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(dataframes[i].columns) <span class="op">!=</span> <span class="bu">len</span>(dataframes2[i].columns):</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(i)</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Datasets with consistent number of columns"</span>)</span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> index:</span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="kw">in</span> index2:</span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(dataframes[i].columns) <span class="op">==</span> <span class="bu">len</span>(dataframes2[i].columns):</span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(i)</span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>        </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Datasets included in 2005-2006 but not in 2007-2008
 DS0018
@@ -1535,70 +1149,30 @@ DS0205
 DS0213</code></pre>
 </div>
 </div>
-<div id="cell-26" class="cell" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>name <span class="op">=</span> <span class="st">"DS0001"</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>i<span class="op">=</span><span class="dv">0</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> i <span class="op">&lt;</span> <span class="bu">len</span>(dataframes[name].columns):</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> dataframes[name].columns[i] <span class="kw">in</span> dataframes2[name].columns:</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>        i <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> i <span class="op">==</span> <span class="bu">len</span>(dataframes[name].columns):</span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"True"</span>)</span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"False"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>False</code></pre>
-</div>
-</div>
-<div id="cell-27" class="cell" data-execution_count="18">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>dataframes[name].columns,dataframes2[name].columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="18">
-<pre><code>(Index(['SEQN', 'SDDSRVYR', 'RIDSTATR', 'RIDEXMON', 'RIAGENDR', 'RIDAGEYR',
-        'RIDAGEMN', 'RIDAGEEX', 'RIDRETH1', 'DMQMILIT', 'DMDBORN', 'DMDCITZN',
-        'DMDYRSUS', 'DMDEDUC3', 'DMDEDUC2', 'DMDSCHOL', 'DMDMARTL', 'DMDHHSIZ',
-        'DMDFMSIZ', 'INDHHINC', 'INDFMINC', 'INDFMPIR', 'RIDEXPRG', 'DMDHRGND',
-        'DMDHRAGE', 'DMDHRBRN', 'DMDHREDU', 'DMDHRMAR', 'DMDHSEDU', 'SIALANG',
-        'SIAPROXY', 'SIAINTRP', 'FIALANG', 'FIAPROXY', 'FIAINTRP', 'MIALANG',
-        'MIAPROXY', 'MIAINTRP', 'AIALANG', 'WTINT2YR', 'WTMEC2YR', 'SDMVPSU',
-        'SDMVSTRA'],
-       dtype='object'),
- Index(['SEQN', 'SDDSRVYR', 'RIDSTATR', 'RIDEXMON', 'RIAGENDR', 'RIDAGEYR',
-        'RIDAGEMN', 'RIDAGEEX', 'RIDRETH1', 'DMQMILIT', 'DMDBORN2', 'DMDCITZN',
-        'DMDYRSUS', 'DMDEDUC3', 'DMDEDUC2', 'DMDSCHOL', 'DMDMARTL', 'DMDHHSIZ',
-        'DMDFMSIZ', 'INDHHIN2', 'INDFMIN2', 'INDFMPIR', 'RIDEXPRG', 'DMDHRGND',
-        'DMDHRAGE', 'DMDHRBR2', 'DMDHREDU', 'DMDHRMAR', 'DMDHSEDU', 'SIALANG',
-        'SIAPROXY', 'SIAINTRP', 'FIALANG', 'FIAPROXY', 'FIAINTRP', 'MIALANG',
-        'MIAPROXY', 'MIAINTRP', 'AIALANG', 'WTINT2YR', 'WTMEC2YR', 'SDMVPSU',
-        'SDMVSTRA'],
-       dtype='object'))</code></pre>
-</div>
-</div>
-<p>Columns are almost identical aside from DMDBORN and DMDBORN2</p>
 <p>Let’s see how many participants we have from both surveys</p>
-<div id="cell-30" class="cell" data-execution_count="19">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>ICPSR_25504 <span class="op">=</span> pd.read_csv(<span class="st">"ICPSR_25504</span><span class="ch">\\</span><span class="st">DS0001</span><span class="ch">\\</span><span class="st">25504-0001-Data.tsv"</span>, sep <span class="op">=</span> <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>ICPSR_25505 <span class="op">=</span> pd.read_csv(<span class="st">"ICPSR_25505</span><span class="ch">\\</span><span class="st">DS0001</span><span class="ch">\\</span><span class="st">25505-0001-Data.tsv"</span>, sep <span class="op">=</span> <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>ICPSR_25504[<span class="st">"SEQN"</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: x <span class="kw">in</span> ICPSR_25505[<span class="st">"SEQN"</span>].values).<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-28" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>ICPSR_25504 <span class="op">=</span> pd.read_csv(<span class="st">"ICPSR_25504</span><span class="ch">\\</span><span class="st">DS0001</span><span class="ch">\\</span><span class="st">25504-0001-Data.tsv"</span>, sep <span class="op">=</span> <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>ICPSR_25505 <span class="op">=</span> pd.read_csv(<span class="st">"ICPSR_25505</span><span class="ch">\\</span><span class="st">DS0001</span><span class="ch">\\</span><span class="st">25505-0001-Data.tsv"</span>, sep <span class="op">=</span> <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>ICPSR_25504[<span class="st">"SEQN"</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: x <span class="kw">in</span> ICPSR_25505[<span class="st">"SEQN"</span>].values).<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="19">
 <pre><code>0</code></pre>
 </div>
 </div>
-<p>There is no way of identifying previous participants in new surverys. There also seems to be little value in analyzing multiple surveys because we can’t create variables that look at year to year changes in the same patient and the data architecture is not consistent across years. The only potential uses of having surveys from different years is to see if a model built on data from one year generalizes to the survey data from other years. In order to do some we must choose variables and datasets that exist in all surveys.</p>
+<p>There is no way of identifying previous participants in new surverys.</p>
+<p>There seems to be little value in analyzing multiple surveys because we can’t create variables that look at year to year changes in the same patient and the data architecture is not consistent across years.</p>
+<p>The only potential uses of having surveys from different years is to see if a model built on data from one year generalizes to the survey data from other years. In order to do some we must choose variables and datasets that exist in all surveys.</p>
 </section>
-<section id="joining-datasets" class="level2" data-number="8.6">
-<h2 data-number="8.6" class="anchored" data-anchor-id="joining-datasets"><span class="header-section-number">8.6</span> Joining Datasets</h2>
-<div id="cell-33" class="cell" data-execution_count="20">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>DS0132<span class="op">=</span> pd.read_csv(<span class="st">"ICPSR_25504</span><span class="ch">\\</span><span class="st">DS0132</span><span class="ch">\\</span><span class="st">25504-0132-Data.tsv"</span>, sep <span class="op">=</span> <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>DS0123 <span class="op">=</span> pd.read_csv(<span class="st">"ICPSR_25504</span><span class="ch">\\</span><span class="st">DS0123</span><span class="ch">\\</span><span class="st">25504-0123-Data.tsv"</span>, sep <span class="op">=</span> <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>joined <span class="op">=</span> DS0132.set_index(<span class="st">"SEQN"</span>).join(DS0123.set_index(<span class="st">"SEQN"</span>), lsuffix<span class="op">=</span><span class="st">"_DS0132"</span>, rsuffix<span class="op">=</span><span class="st">"_DS0123"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="joining-datasets" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="joining-datasets"><span class="header-section-number">8.5</span> Joining Datasets</h2>
+<div id="cell-31" class="cell" data-execution_count="34">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>DS0132<span class="op">=</span> pd.read_csv(os.path.dirname(os.path.dirname(os.getcwd())) <span class="op">+</span> <span class="st">"</span><span class="ch">\\</span><span class="st">Data</span><span class="ch">\\</span><span class="st">NHANES</span><span class="ch">\\</span><span class="st">ICPSR_25504</span><span class="ch">\\</span><span class="st">DS0132</span><span class="ch">\\</span><span class="st">25504-0132-Data.tsv"</span>, sep <span class="op">=</span> <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>DS0123 <span class="op">=</span> pd.read_csv(os.path.dirname(os.path.dirname(os.getcwd())) <span class="op">+</span> <span class="st">"</span><span class="ch">\\</span><span class="st">Data</span><span class="ch">\\</span><span class="st">NHANES</span><span class="ch">\\</span><span class="st">ICPSR_25504</span><span class="ch">\\</span><span class="st">DS0123</span><span class="ch">\\</span><span class="st">25504-0123-Data.tsv"</span>, sep <span class="op">=</span> <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>joined <span class="op">=</span> DS0132.set_index(<span class="st">"SEQN"</span>).join(DS0123.set_index(<span class="st">"SEQN"</span>), lsuffix<span class="op">=</span><span class="st">"_DS0132"</span>, rsuffix<span class="op">=</span><span class="st">"_DS0123"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-34" class="cell" data-execution_count="21">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>joined</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="21">
+<div id="cell-32" class="cell" data-execution_count="36">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>joined.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="36">
 <div>
 
 
@@ -1774,238 +1348,95 @@ DS0213</code></pre>
 <td>2</td>
 <td>48</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">41465</td>
-<td>21859.428</td>
-<td>81</td>
-<td>.914</td>
-<td>96</td>
-<td>2.483</td>
-<td>84</td>
-<td>.84</td>
-<td>4</td>
-<td>2</td>
-<td>1</td>
-<td>...</td>
-<td>2</td>
-<td>2</td>
-<td>1</td>
-<td>2</td>
-<td>2</td>
-<td>1</td>
-<td>6659.491266</td>
-<td>6975.174925</td>
-<td>1</td>
-<td>49</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">41467</td>
-<td>8000.729</td>
-<td>69</td>
-<td>.779</td>
-<td>80</td>
-<td>2.069</td>
-<td>75</td>
-<td>.75</td>
-<td>4</td>
-<td>2</td>
-<td>2</td>
-<td>...</td>
-<td>2</td>
-<td>2</td>
-<td>1</td>
-<td>2</td>
-<td>2</td>
-<td>1</td>
-<td>3623.884248</td>
-<td>3780.835721</td>
-<td>2</td>
-<td>56</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">41471</td>
-<td>16274.316</td>
-<td>89</td>
-<td>1.005</td>
-<td>72</td>
-<td>1.862</td>
-<td>60</td>
-<td>.6</td>
-<td>4</td>
-<td>2</td>
-<td>1</td>
-<td>...</td>
-<td>2</td>
-<td>2</td>
-<td>1</td>
-<td>2</td>
-<td>2</td>
-<td>1</td>
-<td>6283.305550</td>
-<td>6602.173657</td>
-<td>1</td>
-<td>52</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">41472</td>
-<td>175395.280</td>
-<td>120</td>
-<td>1.355</td>
-<td>86</td>
-<td>2.224</td>
-<td>91</td>
-<td>.91</td>
-<td>4</td>
-<td>2</td>
-<td>2</td>
-<td>...</td>
-<td>2</td>
-<td>2</td>
-<td>1</td>
-<td>2</td>
-<td>2</td>
-<td>1</td>
-<td>67347.579152</td>
-<td>69747.141506</td>
-<td>1</td>
-<td>48</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">41474</td>
-<td>17122.983</td>
-<td>88</td>
-<td>.994</td>
-<td>35</td>
-<td>.905</td>
-<td>37</td>
-<td>.37</td>
-<td>4</td>
-<td>2</td>
-<td>2</td>
-<td>...</td>
-<td>2</td>
-<td>2</td>
-<td>1</td>
-<td>2</td>
-<td>2</td>
-<td>1</td>
-<td>6174.551667</td>
-<td>6487.262494</td>
-<td>1</td>
-<td>47</td>
-</tr>
 </tbody>
 </table>
 
-<p>3352 rows × 98 columns</p>
+<p>5 rows × 98 columns</p>
 </div>
 </div>
 </div>
 <p>Let’s see if the columns that occur in both dataframes are redundant</p>
-<div id="cell-36" class="cell" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>(joined[<span class="st">"AIALANG_DS0123"</span>] <span class="op">==</span> joined[<span class="st">"AIALANG_DS0132"</span>]).mean()</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co"># AIALANG is definitely redundant</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="22">
+<div id="cell-34" class="cell" data-execution_count="37">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>(joined[<span class="st">"AIALANG_DS0123"</span>] <span class="op">==</span> joined[<span class="st">"AIALANG_DS0132"</span>]).mean()</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co"># AIALANG is definitely redundant</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="37">
 <pre><code>1.0</code></pre>
 </div>
 </div>
-<div id="cell-37" class="cell" data-execution_count="23">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>DS1 <span class="op">=</span> <span class="st">"DS0123"</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>DS2 <span class="op">=</span> <span class="st">"DS0132"</span></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>total <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> column <span class="kw">in</span> joined.columns:</span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">"_"</span> <span class="kw">in</span> column:</span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>        total <span class="op">+=</span><span class="dv">1</span></span>
-<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>        original <span class="op">=</span> column.split(<span class="st">"_"</span>)[<span class="dv">0</span>]</span>
-<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>        n1 <span class="op">=</span> original <span class="op">+</span> <span class="st">"_"</span> <span class="op">+</span> DS1</span>
-<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>        n2 <span class="op">=</span> original <span class="op">+</span> <span class="st">"_"</span> <span class="op">+</span> DS2</span>
-<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (joined[n1]<span class="op">==</span>joined[n2]).mean() <span class="op">==</span> <span class="dv">1</span>:</span>
-<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>            n <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>            joined.drop(n2, axis <span class="op">=</span> <span class="dv">1</span>)</span>
-<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">str</span>(n<span class="op">/</span>total) <span class="op">+</span> <span class="st">" of the columns that occur in both datasets are redundant"</span>)</span>
-<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>        </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-35" class="cell" data-execution_count="38">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute the proportion of columns that occur in both data sets that are redundant</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>DS1 <span class="op">=</span> <span class="st">"DS0123"</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>DS2 <span class="op">=</span> <span class="st">"DS0132"</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>total <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> column <span class="kw">in</span> joined.columns:</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">"_"</span> <span class="kw">in</span> column:</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>        total <span class="op">+=</span><span class="dv">1</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>        original <span class="op">=</span> column.split(<span class="st">"_"</span>)[<span class="dv">0</span>]</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>        n1 <span class="op">=</span> original <span class="op">+</span> <span class="st">"_"</span> <span class="op">+</span> DS1</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>        n2 <span class="op">=</span> original <span class="op">+</span> <span class="st">"_"</span> <span class="op">+</span> DS2</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (joined[n1]<span class="op">==</span>joined[n2]).mean() <span class="op">==</span> <span class="dv">1</span>:</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>            n <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>            joined.drop(n2, axis <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">str</span>(n<span class="op">/</span>total) <span class="op">+</span> <span class="st">" of the columns that occur in both datasets are redundant"</span>)</span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>        </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>1.0 of the columns that occur in both datasets are redundant</code></pre>
 </div>
 </div>
-<div id="cell-38" class="cell" data-execution_count="29">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>data_master <span class="op">=</span> <span class="st">"ICPSR_25504</span><span class="ch">\\</span><span class="st">"</span></span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>joined_master <span class="op">=</span> DS0123.set_index(<span class="st">"SEQN"</span>)</span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> root, dirs, files <span class="kw">in</span> os.walk(data_master):</span>
-<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> name <span class="kw">in</span> files:</span>
-<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> name.endswith(<span class="st">".tsv"</span>):</span>
-<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>            <span class="bu">file</span> <span class="op">=</span> os.path.join(root, name)</span>
-<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>            df <span class="op">=</span> pd.read_csv(<span class="bu">file</span>, sep <span class="op">=</span> <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span>
-<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="st">"SEQN"</span> <span class="kw">not</span> <span class="kw">in</span> df.columns:</span>
-<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>                <span class="cf">continue</span></span>
-<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>            name <span class="op">=</span> root[<span class="op">-</span><span class="dv">6</span>:]</span>
-<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>            new_columns <span class="op">=</span> df.columns.difference(joined_master.columns)</span>
-<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a>            <span class="co"># try:</span></span>
-<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a>            joined_master <span class="op">=</span> joined_master.join(df.loc[:,new_columns].set_index(<span class="st">"SEQN"</span>),how<span class="op">=</span><span class="st">"left"</span>,lsuffix<span class="op">=</span><span class="st">"_master"</span>, rsuffix<span class="op">=</span><span class="st">"_"</span><span class="op">+</span>name)</span>
-<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a>            <span class="co"># except:</span></span>
-<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a>            <span class="co">#     print(name)</span></span>
-<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a>            <span class="co"># n = 0</span></span>
-<span id="cb35-23"><a href="#cb35-23" aria-hidden="true" tabindex="-1"></a>            <span class="co"># total = 0</span></span>
-<span id="cb35-24"><a href="#cb35-24" aria-hidden="true" tabindex="-1"></a>            <span class="co"># for column in joined_master.columns:</span></span>
-<span id="cb35-25"><a href="#cb35-25" aria-hidden="true" tabindex="-1"></a>            <span class="co">#     if "_" in column:</span></span>
-<span id="cb35-26"><a href="#cb35-26" aria-hidden="true" tabindex="-1"></a>            <span class="co">#         print(column, name)</span></span>
-<span id="cb35-27"><a href="#cb35-27" aria-hidden="true" tabindex="-1"></a>            <span class="co">#         total +=1</span></span>
-<span id="cb35-28"><a href="#cb35-28" aria-hidden="true" tabindex="-1"></a>            <span class="co">#         original = column.split("_")[0]</span></span>
-<span id="cb35-29"><a href="#cb35-29" aria-hidden="true" tabindex="-1"></a>            <span class="co">#         n1 = original + "_master"</span></span>
-<span id="cb35-30"><a href="#cb35-30" aria-hidden="true" tabindex="-1"></a>            <span class="co">#         n2 = original + "_" + name</span></span>
-<span id="cb35-31"><a href="#cb35-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-32"><a href="#cb35-32" aria-hidden="true" tabindex="-1"></a>            <span class="co">#         if n2 not in joined_master.columns:</span></span>
-<span id="cb35-33"><a href="#cb35-33" aria-hidden="true" tabindex="-1"></a>            <span class="co">#             continue</span></span>
-<span id="cb35-34"><a href="#cb35-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-35"><a href="#cb35-35" aria-hidden="true" tabindex="-1"></a>            <span class="co">#         if (joined_master[n1]==joined_master[n2]).mean() == 1:</span></span>
-<span id="cb35-36"><a href="#cb35-36" aria-hidden="true" tabindex="-1"></a>            <span class="co">#             n += 1</span></span>
-<span id="cb35-37"><a href="#cb35-37" aria-hidden="true" tabindex="-1"></a>            <span class="co">#             joined_master.drop(n2, axis = 1)</span></span>
-<span id="cb35-38"><a href="#cb35-38" aria-hidden="true" tabindex="-1"></a>            <span class="co">#             joined_master.rename({n1:original})        </span></span>
-<span id="cb35-39"><a href="#cb35-39" aria-hidden="true" tabindex="-1"></a>            <span class="co"># if n/total != 1:</span></span>
-<span id="cb35-40"><a href="#cb35-40" aria-hidden="true" tabindex="-1"></a>            <span class="co">#     print(name + " - not redundant")</span></span>
-<span id="cb35-41"><a href="#cb35-41" aria-hidden="true" tabindex="-1"></a>            </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-36" class="cell" data-execution_count="42">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>data_master <span class="op">=</span> os.path.dirname(os.path.dirname(os.getcwd())) <span class="op">+</span> <span class="st">"</span><span class="ch">\\</span><span class="st">Data</span><span class="ch">\\</span><span class="st">NHANES</span><span class="ch">\\</span><span class="st">ICPSR_25504</span><span class="ch">\\</span><span class="st">"</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>joined_master <span class="op">=</span> DS0123.set_index(<span class="st">"SEQN"</span>)</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> root, dirs, files <span class="kw">in</span> os.walk(data_master):</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> name <span class="kw">in</span> files:</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> name.endswith(<span class="st">".tsv"</span>):</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>            <span class="bu">file</span> <span class="op">=</span> os.path.join(root, name)</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>            df <span class="op">=</span> pd.read_csv(<span class="bu">file</span>, sep <span class="op">=</span> <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="st">"SEQN"</span> <span class="kw">not</span> <span class="kw">in</span> df.columns:</span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>                <span class="cf">continue</span></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>            name <span class="op">=</span> root[<span class="op">-</span><span class="dv">6</span>:]</span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>            new_columns <span class="op">=</span> df.columns.difference(joined_master.columns)</span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>            <span class="co"># try:</span></span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>            joined_master <span class="op">=</span> joined_master.join(df.loc[:,new_columns].set_index(<span class="st">"SEQN"</span>),how<span class="op">=</span><span class="st">"left"</span>,lsuffix<span class="op">=</span><span class="st">"_master"</span>, rsuffix<span class="op">=</span><span class="st">"_"</span><span class="op">+</span>name)</span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>            <span class="co"># except:</span></span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>            <span class="co">#     print(name)</span></span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a>            <span class="co"># n = 0</span></span>
+<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>            <span class="co"># total = 0</span></span>
+<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a>            <span class="co"># for column in joined_master.columns:</span></span>
+<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a>            <span class="co">#     if "_" in column:</span></span>
+<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a>            <span class="co">#         print(column, name)</span></span>
+<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a>            <span class="co">#         total +=1</span></span>
+<span id="cb29-28"><a href="#cb29-28" aria-hidden="true" tabindex="-1"></a>            <span class="co">#         original = column.split("_")[0]</span></span>
+<span id="cb29-29"><a href="#cb29-29" aria-hidden="true" tabindex="-1"></a>            <span class="co">#         n1 = original + "_master"</span></span>
+<span id="cb29-30"><a href="#cb29-30" aria-hidden="true" tabindex="-1"></a>            <span class="co">#         n2 = original + "_" + name</span></span>
+<span id="cb29-31"><a href="#cb29-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-32"><a href="#cb29-32" aria-hidden="true" tabindex="-1"></a>            <span class="co">#         if n2 not in joined_master.columns:</span></span>
+<span id="cb29-33"><a href="#cb29-33" aria-hidden="true" tabindex="-1"></a>            <span class="co">#             continue</span></span>
+<span id="cb29-34"><a href="#cb29-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-35"><a href="#cb29-35" aria-hidden="true" tabindex="-1"></a>            <span class="co">#         if (joined_master[n1]==joined_master[n2]).mean() == 1:</span></span>
+<span id="cb29-36"><a href="#cb29-36" aria-hidden="true" tabindex="-1"></a>            <span class="co">#             n += 1</span></span>
+<span id="cb29-37"><a href="#cb29-37" aria-hidden="true" tabindex="-1"></a>            <span class="co">#             joined_master.drop(n2, axis = 1)</span></span>
+<span id="cb29-38"><a href="#cb29-38" aria-hidden="true" tabindex="-1"></a>            <span class="co">#             joined_master.rename({n1:original})        </span></span>
+<span id="cb29-39"><a href="#cb29-39" aria-hidden="true" tabindex="-1"></a>            <span class="co"># if n/total != 1:</span></span>
+<span id="cb29-40"><a href="#cb29-40" aria-hidden="true" tabindex="-1"></a>            <span class="co">#     print(name + " - not redundant")</span></span>
+<span id="cb29-41"><a href="#cb29-41" aria-hidden="true" tabindex="-1"></a>            </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>MemoryError: Unable to allocate 1.30 GiB for an array with shape (222, 786976) and data type float64</code></pre>
+<pre><code>KeyboardInterrupt: </code></pre>
 </div>
 </div>
-<div id="cell-39" class="cell" data-execution_count="30">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>joined_master</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="30">
+<div id="cell-37" class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>joined_master.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="41">
 <div>
 
 
@@ -2024,16 +1455,16 @@ DS0213</code></pre>
 <th data-quarto-table-cell-role="th">RIDSTATR</th>
 <th data-quarto-table-cell-role="th">RIDEXMON</th>
 <th data-quarto-table-cell-role="th">...</th>
-<th data-quarto-table-cell-role="th">DXXNKBMD</th>
-<th data-quarto-table-cell-role="th">DXXOFA</th>
-<th data-quarto-table-cell-role="th">DXXOFBMC</th>
-<th data-quarto-table-cell-role="th">DXXOFBMD</th>
-<th data-quarto-table-cell-role="th">DXXTRA</th>
-<th data-quarto-table-cell-role="th">DXXTRBMC</th>
-<th data-quarto-table-cell-role="th">DXXTRBMD</th>
-<th data-quarto-table-cell-role="th">DXXWDA</th>
-<th data-quarto-table-cell-role="th">DXXWDBMC</th>
-<th data-quarto-table-cell-role="th">DXXWDBMD</th>
+<th data-quarto-table-cell-role="th">FIAPROXY</th>
+<th data-quarto-table-cell-role="th">FIAINTRP</th>
+<th data-quarto-table-cell-role="th">MIALANG</th>
+<th data-quarto-table-cell-role="th">MIAPROXY</th>
+<th data-quarto-table-cell-role="th">MIAINTRP</th>
+<th data-quarto-table-cell-role="th">AIALANG</th>
+<th data-quarto-table-cell-role="th">WTINT2YR</th>
+<th data-quarto-table-cell-role="th">WTMEC2YR</th>
+<th data-quarto-table-cell-role="th">SDMVPSU</th>
+<th data-quarto-table-cell-role="th">SDMVSTRA</th>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">SEQN</th>
@@ -2074,16 +1505,16 @@ DS0213</code></pre>
 <td>2</td>
 <td>2</td>
 <td>...</td>
+<td>2</td>
+<td>2</td>
 <td></td>
 <td></td>
 <td></td>
 <td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>29960.839509</td>
+<td>34030.994786</td>
+<td>2</td>
+<td>46</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">31131</td>
@@ -2098,431 +1529,351 @@ DS0213</code></pre>
 <td>2</td>
 <td>2</td>
 <td>...</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>26457.708180</td>
+<td>26770.584605</td>
+<td>1</td>
+<td>48</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">31131</td>
-<td>67556.810</td>
-<td>90</td>
-<td>4.996</td>
-<td>10.03</td>
-<td>60.18</td>
+<td data-quarto-table-cell-role="th">31132</td>
+<td>80193.962</td>
+<td>157</td>
+<td>8.715</td>
+<td>8.99</td>
+<td>53.94</td>
+<td>11</td>
+<td>29</td>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td>...</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>32961.509920</td>
+<td>35315.538900</td>
+<td>2</td>
+<td>52</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">31133</td>
+<td>15668.017</td>
+<td>84</td>
+<td>4.663</td>
+<td>11.27</td>
+<td>67.62</td>
+<td>12</td>
+<td>32</td>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td>...</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>5635.221296</td>
+<td>5920.617679</td>
+<td>1</td>
+<td>51</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">31134</td>
+<td>93399.539</td>
+<td>100</td>
+<td>5.551</td>
+<td>14.51</td>
+<td>87.06</td>
 <td>14</td>
-<td>9</td>
+<td>35</td>
 <td>4</td>
 <td>2</td>
 <td>2</td>
 <td>...</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">31131</td>
-<td>67556.810</td>
-<td>90</td>
-<td>4.996</td>
-<td>10.03</td>
-<td>60.18</td>
-<td>14</td>
-<td>9</td>
-<td>4</td>
 <td>2</td>
 <td>2</td>
-<td>...</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">31131</td>
-<td>67556.810</td>
-<td>90</td>
-<td>4.996</td>
-<td>10.03</td>
-<td>60.18</td>
-<td>14</td>
-<td>9</td>
-<td>4</td>
+<td>1</td>
 <td>2</td>
 <td>2</td>
-<td>...</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">41474</td>
-<td>17122.983</td>
-<td>93</td>
-<td>5.162</td>
-<td>20.12</td>
-<td>120.72</td>
-<td>9</td>
-<td>39</td>
-<td>4</td>
+<td>1</td>
+<td>43718.506372</td>
+<td>44231.167252</td>
 <td>2</td>
-<td>2</td>
-<td>...</td>
-<td>.825</td>
-<td>38.34</td>
-<td>30.73</td>
-<td>.802</td>
-<td>12.1</td>
-<td>6.63</td>
-<td>.548</td>
-<td>1.3</td>
-<td>.96</td>
-<td>.736</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">41474</td>
-<td>17122.983</td>
-<td>93</td>
-<td>5.162</td>
-<td>20.12</td>
-<td>120.72</td>
-<td>9</td>
-<td>39</td>
-<td>4</td>
-<td>2</td>
-<td>2</td>
-<td>...</td>
-<td>.825</td>
-<td>38.34</td>
-<td>30.73</td>
-<td>.802</td>
-<td>12.1</td>
-<td>6.63</td>
-<td>.548</td>
-<td>1.3</td>
-<td>.96</td>
-<td>.736</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">41474</td>
-<td>17122.983</td>
-<td>93</td>
-<td>5.162</td>
-<td>20.12</td>
-<td>120.72</td>
-<td>9</td>
-<td>39</td>
-<td>4</td>
-<td>2</td>
-<td>2</td>
-<td>...</td>
-<td>.825</td>
-<td>38.34</td>
-<td>30.73</td>
-<td>.802</td>
-<td>12.1</td>
-<td>6.63</td>
-<td>.548</td>
-<td>1.3</td>
-<td>.96</td>
-<td>.736</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">41474</td>
-<td>17122.983</td>
-<td>93</td>
-<td>5.162</td>
-<td>20.12</td>
-<td>120.72</td>
-<td>9</td>
-<td>39</td>
-<td>4</td>
-<td>2</td>
-<td>2</td>
-<td>...</td>
-<td>.825</td>
-<td>38.34</td>
-<td>30.73</td>
-<td>.802</td>
-<td>12.1</td>
-<td>6.63</td>
-<td>.548</td>
-<td>1.3</td>
-<td>.96</td>
-<td>.736</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">41474</td>
-<td>17122.983</td>
-<td>93</td>
-<td>5.162</td>
-<td>20.12</td>
-<td>120.72</td>
-<td>9</td>
-<td>39</td>
-<td>4</td>
-<td>2</td>
-<td>2</td>
-<td>...</td>
-<td>.825</td>
-<td>38.34</td>
-<td>30.73</td>
-<td>.802</td>
-<td>12.1</td>
-<td>6.63</td>
-<td>.548</td>
-<td>1.3</td>
-<td>.96</td>
-<td>.736</td>
+<td>48</td>
 </tr>
 </tbody>
 </table>
 
-<p>786976 rows × 742 columns</p>
+<p>5 rows × 49 columns</p>
 </div>
 </div>
 </div>
-<div id="cell-40" class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The data is far too large to combine into one so I will choose critical datasets to focus the analysis on</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<p>The data is far too large to combine into one so I will choose critical datasets to focus the analysis on</p>
 </section>
-<section id="ds209---depression-screener" class="level2" data-number="8.7">
-<h2 data-number="8.7" class="anchored" data-anchor-id="ds209---depression-screener"><span class="header-section-number">8.7</span> DS209 - Depression Screener</h2>
+<section id="ds209---depression-screener" class="level2" data-number="8.6">
+<h2 data-number="8.6" class="anchored" data-anchor-id="ds209---depression-screener"><span class="header-section-number">8.6</span> DS209 - Depression Screener</h2>
 <p>This data set is a Questionnaire with 10 questions about depressive symptoms (Eg. Thought you would be better off dead.) The response are categorical from 0-3 with 0 being non-depressive behaviour (Not at all) and 4 being depressive behaviour (Nearly every day).</p>
 <p>We will create a target variable that aggregate the results of these questions, taking the mean response of the questions which scores a participants depressive state. 0 meaning low, 4 high</p>
 <p>The respondant can answer a question as “Don’t know” and will be assigned the number 9 which can throw off our scores. I will remove these values from the average calculations. So for example, if a respondant answers “Don’t know” for 2 questions, their score will be the average of their repsonses to the other 8 questions.</p>
-<div id="cell-42" class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>DS209<span class="op">=</span> pd.read_csv(os.path.dirname(os.path.dirname(os.getcwd()))<span class="op">+</span><span class="st">"</span><span class="ch">\\</span><span class="st">Data</span><span class="ch">\\</span><span class="st">NHANES</span><span class="ch">\\</span><span class="st">ICPSR_25504\DS0209</span><span class="ch">\\</span><span class="st">25504-0209-Data.tsv"</span>, sep <span class="op">=</span> <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-40" class="cell" data-execution_count="43">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>DS209<span class="op">=</span> pd.read_csv(os.path.dirname(os.path.dirname(os.getcwd()))<span class="op">+</span><span class="st">"</span><span class="ch">\\</span><span class="st">Data</span><span class="ch">\\</span><span class="st">NHANES</span><span class="ch">\\</span><span class="st">ICPSR_25504\DS0209</span><span class="ch">\\</span><span class="st">25504-0209-Data.tsv"</span>, sep <span class="op">=</span> <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-43" class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>DS209.dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="14">
-<pre><code>SEQN          int64
-DPQ010       object
-DPQ020       object
-DPQ030       object
-DPQ040       object
-DPQ050       object
-DPQ060       object
-DPQ070       object
-DPQ080       object
-DPQ090       object
-DPQ100       object
-SDDSRVYR      int64
-RIDSTATR      int64
-RIDEXMON      int64
-RIAGENDR      int64
-RIDAGEYR      int64
-RIDAGEMN     object
-RIDAGEEX     object
-RIDRETH1      int64
-DMQMILIT      int64
-DMDBORN       int64
-DMDCITZN      int64
-DMDYRSUS     object
-DMDEDUC3     object
-DMDEDUC2     object
-DMDSCHOL     object
-DMDMARTL      int64
-DMDHHSIZ      int64
-DMDFMSIZ      int64
-INDHHINC     object
-INDFMINC     object
-INDFMPIR     object
-RIDEXPRG     object
-DMDHRGND      int64
-DMDHRAGE      int64
-DMDHRBRN     object
-DMDHREDU     object
-DMDHRMAR     object
-DMDHSEDU     object
-SIALANG      object
-SIAPROXY     object
-SIAINTRP     object
-FIALANG      object
-FIAPROXY     object
-FIAINTRP     object
-MIALANG      object
-MIAPROXY     object
-MIAINTRP     object
-AIALANG      object
-WTINT2YR    float64
-WTMEC2YR    float64
-SDMVPSU       int64
-SDMVSTRA      int64
-dtype: object</code></pre>
+<div id="cell-41" class="cell" data-execution_count="46">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>DS209.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="46">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">SEQN</th>
+<th data-quarto-table-cell-role="th">DPQ010</th>
+<th data-quarto-table-cell-role="th">DPQ020</th>
+<th data-quarto-table-cell-role="th">DPQ030</th>
+<th data-quarto-table-cell-role="th">DPQ040</th>
+<th data-quarto-table-cell-role="th">DPQ050</th>
+<th data-quarto-table-cell-role="th">DPQ060</th>
+<th data-quarto-table-cell-role="th">DPQ070</th>
+<th data-quarto-table-cell-role="th">DPQ080</th>
+<th data-quarto-table-cell-role="th">DPQ090</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">FIAPROXY</th>
+<th data-quarto-table-cell-role="th">FIAINTRP</th>
+<th data-quarto-table-cell-role="th">MIALANG</th>
+<th data-quarto-table-cell-role="th">MIAPROXY</th>
+<th data-quarto-table-cell-role="th">MIAINTRP</th>
+<th data-quarto-table-cell-role="th">AIALANG</th>
+<th data-quarto-table-cell-role="th">WTINT2YR</th>
+<th data-quarto-table-cell-role="th">WTMEC2YR</th>
+<th data-quarto-table-cell-role="th">SDMVPSU</th>
+<th data-quarto-table-cell-role="th">SDMVSTRA</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>31130</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>...</td>
+<td>2</td>
+<td>2</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>29960.839509</td>
+<td>34030.994786</td>
+<td>2</td>
+<td>46</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>31131</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>...</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>26457.708180</td>
+<td>26770.584605</td>
+<td>1</td>
+<td>48</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>31132</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>...</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>32961.509920</td>
+<td>35315.538900</td>
+<td>2</td>
+<td>52</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>31134</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>...</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>43718.506372</td>
+<td>44231.167252</td>
+<td>2</td>
+<td>48</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>31139</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>3</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>...</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>5675.705534</td>
+<td>5963.152246</td>
+<td>1</td>
+<td>44</td>
+</tr>
+</tbody>
+</table>
+
+<p>5 rows × 53 columns</p>
 </div>
 </div>
-<p>We need to turn some columns into integer</p>
-<div id="cell-45" class="cell" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>DS209 <span class="op">=</span> DS209.replace(<span class="st">" "</span>, np.NaN )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-46" class="cell" data-scrolled="true" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>DS209[DS209.columns[<span class="dv">1</span>:<span class="dv">11</span>]]</span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>convert_dict <span class="op">=</span> {}</span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> column <span class="kw">in</span> DS209.columns[<span class="dv">1</span>:<span class="dv">11</span>]:</span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>    DS209[column] <span class="op">=</span> pd.to_numeric(DS209[column], errors<span class="op">=</span><span class="st">'coerce'</span>)</span>
-<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(DS209.dtypes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-42" class="cell" data-execution_count="47">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>DS209.dtypes[<span class="st">"DPQ010"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="47">
+<pre><code>dtype('O')</code></pre>
+</div>
+</div>
+<p>Some of the columns are strings even though their columns contain number. We need to turn these columns into integers</p>
+<div id="cell-44" class="cell" data-execution_count="48">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>DS209 <span class="op">=</span> DS209.replace(<span class="st">" "</span>, np.NaN )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-45" class="cell" data-scrolled="true" data-execution_count="50">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>DS209[DS209.columns[<span class="dv">1</span>:<span class="dv">11</span>]]</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>convert_dict <span class="op">=</span> {}</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> column <span class="kw">in</span> DS209.columns[<span class="dv">1</span>:<span class="dv">11</span>]:</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>    DS209[column] <span class="op">=</span> pd.to_numeric(DS209[column], errors<span class="op">=</span><span class="st">'coerce'</span>)</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(DS209.dtypes[<span class="dv">1</span>:<span class="dv">11</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>SEQN          int64
-DPQ010      float64
-DPQ020      float64
-DPQ030      float64
-DPQ040      float64
-DPQ050      float64
-DPQ060      float64
-DPQ070      float64
-DPQ080      float64
-DPQ090      float64
-DPQ100      float64
-SDDSRVYR      int64
-RIDSTATR      int64
-RIDEXMON      int64
-RIAGENDR      int64
-RIDAGEYR      int64
-RIDAGEMN     object
-RIDAGEEX     object
-RIDRETH1      int64
-DMQMILIT      int64
-DMDBORN       int64
-DMDCITZN      int64
-DMDYRSUS     object
-DMDEDUC3     object
-DMDEDUC2     object
-DMDSCHOL     object
-DMDMARTL      int64
-DMDHHSIZ      int64
-DMDFMSIZ      int64
-INDHHINC     object
-INDFMINC     object
-INDFMPIR     object
-RIDEXPRG     object
-DMDHRGND      int64
-DMDHRAGE      int64
-DMDHRBRN     object
-DMDHREDU     object
-DMDHRMAR     object
-DMDHSEDU     object
-SIALANG      object
-SIAPROXY     object
-SIAINTRP     object
-FIALANG      object
-FIAPROXY     object
-FIAINTRP     object
-MIALANG      object
-MIAPROXY     object
-MIAINTRP     object
-AIALANG      object
-WTINT2YR    float64
-WTMEC2YR    float64
-SDMVPSU       int64
-SDMVSTRA      int64
+<pre><code>DPQ010    float64
+DPQ020    float64
+DPQ030    float64
+DPQ040    float64
+DPQ050    float64
+DPQ060    float64
+DPQ070    float64
+DPQ080    float64
+DPQ090    float64
+DPQ100    float64
 dtype: object</code></pre>
 </div>
 </div>
-<div id="cell-47" class="cell" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>(DS209.iloc[:, <span class="dv">1</span>:<span class="dv">11</span>].isna().mean(axis <span class="op">=</span> <span class="dv">1</span>) <span class="op">==</span> <span class="dv">1</span>).<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="17">
+<div id="cell-46" class="cell" data-execution_count="51">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>(DS209.iloc[:, <span class="dv">1</span>:<span class="dv">11</span>].isna().mean(axis <span class="op">=</span> <span class="dv">1</span>) <span class="op">==</span> <span class="dv">1</span>).<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="51">
 <pre><code>498</code></pre>
 </div>
 </div>
 <p>498 participants did not respond at all. Let’s remove these from the dataset</p>
-<div id="cell-49" class="cell" data-execution_count="18">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>clean <span class="op">=</span> DS209[DS209.iloc[:, <span class="dv">1</span>:<span class="dv">11</span>].isnull().mean(axis <span class="op">=</span> <span class="dv">1</span>) <span class="op">!=</span> <span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-48" class="cell" data-execution_count="52">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>clean <span class="op">=</span> DS209[DS209.iloc[:, <span class="dv">1</span>:<span class="dv">11</span>].isnull().mean(axis <span class="op">=</span> <span class="dv">1</span>) <span class="op">!=</span> <span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-50" class="cell" data-execution_count="19">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>depression_score <span class="op">=</span> clean.iloc[:, <span class="dv">1</span>:<span class="dv">11</span>].mean(axis <span class="op">=</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>I want to create one variable that summarizes the overall presence of depression in a patient (observations). I will call this the depression score and it will be the average response to the questionaire and rounding the response to the nearest integer.</p>
+<div id="cell-50" class="cell" data-execution_count="60">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>depression_score <span class="op">=</span> clean.iloc[:, <span class="dv">1</span>:<span class="dv">11</span>].mean(axis <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>depression_score <span class="op">=</span> <span class="bu">round</span>(depression_score)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-51" class="cell" data-execution_count="20">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>final <span class="op">=</span> pd.concat([clean, depression_score], axis <span class="op">=</span> <span class="dv">1</span>).rename(columns <span class="op">=</span> {<span class="dv">0</span>:<span class="st">"DepressionScore"</span>}).set_index(<span class="st">"SEQN"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-51" class="cell" data-execution_count="62">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>final <span class="op">=</span> pd.concat([clean, depression_score], axis <span class="op">=</span> <span class="dv">1</span>).rename(columns <span class="op">=</span> {<span class="dv">0</span>:<span class="st">"DepressionScore"</span>}).set_index(<span class="st">"SEQN"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="distribution-of-target-variable" class="level2" data-number="8.8">
-<h2 data-number="8.8" class="anchored" data-anchor-id="distribution-of-target-variable"><span class="header-section-number">8.8</span> Distribution of target variable</h2>
-<div id="cell-53" class="cell" data-execution_count="21">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>final[<span class="st">"DepressionScore"</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="21">
+<section id="distribution-of-target-variable" class="level2" data-number="8.7">
+<h2 data-number="8.7" class="anchored" data-anchor-id="distribution-of-target-variable"><span class="header-section-number">8.7</span> Distribution of target variable</h2>
+<div id="cell-53" class="cell" data-execution_count="63">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>final[<span class="st">"DepressionScore"</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="63">
 <pre><code>count    4836.000000
-mean        0.306493
-std         0.437908
+mean        0.228908
+std         0.507971
 min         0.000000
 25%         0.000000
-50%         0.100000
-75%         0.400000
-max         4.900000
+50%         0.000000
+75%         0.000000
+max         5.000000
 Name: DepressionScore, dtype: float64</code></pre>
 </div>
 </div>
-<div id="cell-54" class="cell" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> math <span class="im">import</span> log</span>
-<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>plt.hist(final[<span class="st">"DepressionScore"</span>], bins <span class="op">=</span> <span class="dv">15</span>)</span>
-<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Distribution of Depression Scores"</span>)</span>
-<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Depression Score"</span>)</span>
-<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Count"</span>)</span>
-<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-54" class="cell" data-execution_count="67">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> math <span class="im">import</span> log</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>plt.hist(final[<span class="st">"DepressionScore"</span>], bins <span class="op">=</span> <span class="dv">4</span>)</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Distribution of Depression Scores"</span>)</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Depression Score"</span>)</span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Count"</span>)</span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="EDA_files/figure-html/cell-37-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="EDA_files/figure-html/cell-34-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-<div id="cell-55" class="cell" data-execution_count="23">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>final.to_csv(os.path.dirname(os.path.dirname(os.getcwd()))<span class="op">+</span><span class="st">"/Data/NHANES/depression_table.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-55" class="cell" data-execution_count="68">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>final.to_csv(os.path.dirname(os.path.dirname(os.getcwd()))<span class="op">+</span><span class="st">"/Data/NHANES/depression_table.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
@@ -3067,8 +2418,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../Applications/Application1/Elementary_Modeling.html" class="pagination-link" aria-label="<span class='chapter-number'>9</span>&nbsp; <span class='chapter-title'>Model Fitting</span>">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Model Fitting</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../Applications/Application1/Elementary_Modeling.html" class="pagination-link" aria-label="<span class='chapter-number'>9</span>&nbsp; <span class='chapter-title'>Initial Modeling of NHANES Data</span>">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Initial Modeling of NHANES Data</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

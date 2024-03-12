@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="">
-<meta name="dcterms.date" content="2024-01-29">
+<meta name="dcterms.date" content="2024-03-11">
 
-<title>9&nbsp; Blood lead and Blood Cadmium</title>
+<title>9&nbsp; Initial Modeling of NHANES Data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -122,7 +122,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Applications/Application1/EDA.html">Applications</a></li><li class="breadcrumb-item"><a href="../../Applications/Application1/Elementary_Modeling.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Model Fitting</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Applications/Application1/EDA.html">Applications</a></li><li class="breadcrumb-item"><a href="../../Applications/Application1/Elementary_Modeling.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Initial Modeling of NHANES Data</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -217,7 +217,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Applications/Application1/Elementary_Modeling.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Model Fitting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Initial Modeling of NHANES Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -244,6 +244,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Zero-Inflated Model Using Tree Based Methods</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Applications/Application4/interpretability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Interpretability</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -256,16 +262,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#model-fitting" id="toc-model-fitting" class="nav-link active" data-scroll-target="#model-fitting"><span class="header-section-number">9.1</span> Model Fitting</a></li>
+  <li><a href="#loading-target-variable" id="toc-loading-target-variable" class="nav-link active" data-scroll-target="#loading-target-variable"><span class="header-section-number">9.1</span> Loading Target Variable</a></li>
+  <li><a href="#loading-predictors" id="toc-loading-predictors" class="nav-link" data-scroll-target="#loading-predictors"><span class="header-section-number">9.2</span> Loading Predictors</a></li>
+  <li><a href="#correlations" id="toc-correlations" class="nav-link" data-scroll-target="#correlations"><span class="header-section-number">9.3</span> Correlations</a></li>
+  <li><a href="#model-fitting" id="toc-model-fitting" class="nav-link" data-scroll-target="#model-fitting"><span class="header-section-number">9.4</span> Model Fitting</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Applications/Application1/EDA.html">Applications</a></li><li class="breadcrumb-item"><a href="../../Applications/Application1/Elementary_Modeling.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Model Fitting</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Applications/Application1/EDA.html">Applications</a></li><li class="breadcrumb-item"><a href="../../Applications/Application1/Elementary_Modeling.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Initial Modeling of NHANES Data</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Blood lead and Blood Cadmium</span></h1>
+<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Initial Modeling of NHANES Data</span></h1>
 </div>
 
 
@@ -276,7 +285,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2024-01-29</p>
+      <p class="date">2024-03-11</p>
     </div>
   </div>
   
@@ -288,128 +297,90 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div id="7a769e40-64de-451a-9e34-a50ad8948064" class="cell" data-execution_count="2">
+<div id="7a769e40-64de-451a-9e34-a50ad8948064" class="cell" data-execution_count="44">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="84a28b4e-d9d2-4cf4-825b-e88a413d9a42" class="cell" data-execution_count="19">
+<section id="loading-target-variable" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="loading-target-variable"><span class="header-section-number">9.1</span> Loading Target Variable</h2>
+<div id="84a28b4e-d9d2-4cf4-825b-e88a413d9a42" class="cell" data-execution_count="45">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>master <span class="op">=</span> pd.read_csv(os.path.dirname(os.path.dirname(os.getcwd()))<span class="op">+</span><span class="st">"/Data/NHANES/depression_table.csv"</span>).set_index(<span class="st">"SEQN"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>master <span class="op">=</span> pd.DataFrame(master.loc[:, <span class="st">"DepressionScore"</span>])</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>master.dropna().shape[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="19">
-<pre><code>4836</code></pre>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"We have the depression score for </span><span class="sc">{}</span><span class="st"> patients"</span>.<span class="bu">format</span>(master.dropna().shape[<span class="dv">0</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>We have the depression score for 4836 patients</code></pre>
 </div>
 </div>
-<div id="469bdf71-c5e0-4227-b678-2458fe325470" class="cell" data-execution_count="20">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>DS0102 <span class="op">=</span> pd.read_csv(os.path.dirname(os.path.dirname(os.getcwd()))<span class="op">+</span><span class="st">"/Data/NHANES/ICPSR_25504/"</span><span class="op">+</span><span class="st">"DS0102/25504-0102-Data.tsv"</span>, sep <span class="op">=</span> <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>).set_index(<span class="st">"SEQN"</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>columns <span class="op">=</span> DS0102.columns[:np.where(DS0102.columns.values <span class="op">==</span> (<span class="st">"SDDSRVYR"</span>))[<span class="dv">0</span>][<span class="dv">0</span>]]</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>master <span class="op">=</span> master.join(DS0102[columns].replace(<span class="st">" "</span>, np.NaN).astype(<span class="st">'float32'</span>))</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>master <span class="op">=</span> master.replace(<span class="st">" "</span>, np.NaN )</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>master.dropna().shape[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="20">
-<pre><code>4644</code></pre>
+</section>
+<section id="loading-predictors" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="loading-predictors"><span class="header-section-number">9.2</span> Loading Predictors</h2>
+<div id="469bdf71-c5e0-4227-b678-2458fe325470" class="cell" data-execution_count="46">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Blood lead and Blood Cadmium</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>DS0102 <span class="op">=</span> pd.read_csv(os.path.dirname(os.path.dirname(os.getcwd()))<span class="op">+</span><span class="st">"/Data/NHANES/ICPSR_25504/"</span><span class="op">+</span><span class="st">"DS0102/25504-0102-Data.tsv"</span>, sep <span class="op">=</span> <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>).set_index(<span class="st">"SEQN"</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>columns <span class="op">=</span> DS0102.columns[:np.where(DS0102.columns.values <span class="op">==</span> (<span class="st">"SDDSRVYR"</span>))[<span class="dv">0</span>][<span class="dv">0</span>]]</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>master <span class="op">=</span> master.join(DS0102[columns].replace(<span class="st">" "</span>, np.NaN).astype(<span class="st">'float32'</span>))</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>master <span class="op">=</span> master.replace(<span class="st">" "</span>, np.NaN )</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"We have the depression score and blood lead and cadmium levels for </span><span class="sc">{}</span><span class="st"> patients"</span>.<span class="bu">format</span>(master.dropna().shape[<span class="dv">0</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>We have the depression score and blood lead and cadmium levels for 4644 patients</code></pre>
 </div>
 </div>
-<div id="3eb81b62-a352-4f86-8d0f-8739d4c258c8" class="cell" data-execution_count="21">
+<div id="3eb81b62-a352-4f86-8d0f-8739d4c258c8" class="cell" data-execution_count="47">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Complete blood count</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>DS0103 <span class="op">=</span> pd.read_csv(os.path.dirname(os.path.dirname(os.getcwd()))<span class="op">+</span><span class="st">"/Data/NHANES/ICPSR_25504/"</span><span class="op">+</span><span class="st">"DS0103/25504-0103-Data.tsv"</span>, sep <span class="op">=</span> <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>).set_index(<span class="st">"SEQN"</span>)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>columns <span class="op">=</span> DS0103.columns[:np.where(DS0103.columns.values <span class="op">==</span> (<span class="st">"SDDSRVYR"</span>))[<span class="dv">0</span>][<span class="dv">0</span>]]</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>master <span class="op">=</span> master.join(DS0103[columns].replace(<span class="st">" "</span>, np.NaN).astype(<span class="st">'float32'</span>))</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>master <span class="op">=</span> master.replace(<span class="st">" "</span>, np.NaN )</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>master.dropna().shape[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="21">
-<pre><code>4614</code></pre>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"We have the depression score, blood counts, and blood lead and cadmium levels for </span><span class="sc">{}</span><span class="st"> patients"</span>.<span class="bu">format</span>(master.dropna().shape[<span class="dv">0</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>We have the depression score, blood counts, and blood lead and cadmium levels for 4614 patients</code></pre>
 </div>
 </div>
-<div id="6ef37cc9-9df5-4925-be95-52e4b8517035" class="cell" data-execution_count="22">
+<div id="6ef37cc9-9df5-4925-be95-52e4b8517035" class="cell" data-execution_count="48">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># C-reactive proteins</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>DS0104 <span class="op">=</span> pd.read_csv(os.path.dirname(os.path.dirname(os.getcwd()))<span class="op">+</span><span class="st">"/Data/NHANES/ICPSR_25504/"</span><span class="op">+</span><span class="st">"DS0104/25504-0104-Data.tsv"</span>, sep <span class="op">=</span> <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>).set_index(<span class="st">"SEQN"</span>)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>columns <span class="op">=</span> DS0104.columns[:np.where(DS0104.columns.values <span class="op">==</span> (<span class="st">"SDDSRVYR"</span>))[<span class="dv">0</span>][<span class="dv">0</span>]]</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>master <span class="op">=</span> master.join(DS0104[columns].replace(<span class="st">" "</span>, np.NaN).astype(<span class="st">'float32'</span>))</span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>master <span class="op">=</span> master.replace(<span class="st">" "</span>, np.NaN )</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>master.dropna().shape[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="22">
-<pre><code>4591</code></pre>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"We have the depression score, blood counts, blood lead and cadmium levels, and c-reactive protien levels for </span><span class="sc">{}</span><span class="st"> patients"</span>.<span class="bu">format</span>(master.dropna().shape[<span class="dv">0</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>We have the depression score, blood counts, blood lead and cadmium levels, and c-reactive protien levels for 4591 patients</code></pre>
 </div>
 </div>
-<div id="43c112eb-8445-47f3-b1e3-66c076471f54" class="cell" data-execution_count="23">
+<div id="43c112eb-8445-47f3-b1e3-66c076471f54" class="cell" data-execution_count="49">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Environmental Pesticides</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>DS0105 <span class="op">=</span> pd.read_csv(os.path.dirname(os.path.dirname(os.getcwd()))<span class="op">+</span><span class="st">"/Data/NHANES/ICPSR_25504/"</span><span class="op">+</span><span class="st">"DS0105/25504-0105-Data.tsv"</span>, sep <span class="op">=</span> <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>).set_index(<span class="st">"SEQN"</span>)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>columns <span class="op">=</span> DS0105.columns[:np.where(DS0105.columns.values <span class="op">==</span> (<span class="st">"SDDSRVYR"</span>))[<span class="dv">0</span>][<span class="dv">0</span>]]</span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>master <span class="op">=</span> master.join(DS0105[columns].replace(<span class="st">" "</span>, np.NaN).astype(<span class="st">'float32'</span>))</span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>master <span class="op">=</span> master.replace(<span class="st">" "</span>, np.NaN )</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>master.dropna().shape[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="23">
-<pre><code>1447</code></pre>
-</div>
-</div>
-<div id="f012884d-2eec-45dd-9aa1-f04bd3020c99" class="cell" data-execution_count="24">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>master.isnull().<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">0</span>),columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="24">
-<pre><code>(DepressionScore       0
- LBXBCD              192
- LBDBCDSI            192
- LBXBPB              192
- LBDBPBSI            192
- LBXWBCSI            192
- LBXLYPCT            211
- LBXMOPCT            211
- LBXNEPCT            211
- LBXEOPCT            211
- LBXBAPCT            211
- LBDLYMNO            211
- LBDMONO             211
- LBDNENO             211
- LBDEONO             211
- LBDBANO             211
- LBXRBCSI            192
- LBXHGB              192
- LBXHCT              192
- LBXMCVSI            192
- LBXMCHSI            192
- LBXMC               192
- LBXRDW              192
- LBXPLTSI            192
- LBXMPSI             192
- LBXCRP              207
- WTSB2YR            3279
- URX14D             3306
- URD14DLC           3306
- URXOPP             3306
- URDOPPLC           3306
- URXDCB             3306
- URDDCBLC           3306
- URX1TB             3306
- URD1TBLC           3306
- URX3TB             3306
- URD3TBLC           3306
- URXUCR             3297
- dtype: int64,
- Index(['WTSB2YR', 'URX14D', 'URD14DLC', 'URXOPP', 'URDOPPLC', 'URXDCB',
-        'URDDCBLC', 'URX1TB', 'URD1TBLC', 'URX3TB', 'URD3TBLC', 'URXUCR'],
-       dtype='object'))</code></pre>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"We have the depression score, environmental pesticide levels, blood counts, blood lead and cadmium levels, and c-reactive protien levels for </span><span class="sc">{}</span><span class="st"> patients"</span>.<span class="bu">format</span>(master.dropna().shape[<span class="dv">0</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>We have the depression score, environmental pesticide levels, blood counts, blood lead and cadmium levels, and c-reactive protien levels for 1447 patients</code></pre>
 </div>
 </div>
 <p>We lose a lot of observations due to NA’s in DS0105 so we will not include the variables from DS0105 in our predictor space</p>
-<div id="c36d04bb-2063-40e0-87e8-f34c3eea051b" class="cell" data-execution_count="25">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>master.drop(columns, axis <span class="op">=</span> <span class="dv">1</span>, inplace <span class="op">=</span> <span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="c36d04bb-2063-40e0-87e8-f34c3eea051b" class="cell" data-execution_count="50">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>master.drop(columns, axis <span class="op">=</span> <span class="dv">1</span>, inplace <span class="op">=</span> <span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="13565c6f-a9c0-4e02-836e-36c6ebe4bb4f" class="cell" data-execution_count="26">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Vitamin D levels</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>DS0143 <span class="op">=</span> pd.read_csv(os.path.dirname(os.path.dirname(os.getcwd()))<span class="op">+</span><span class="st">"/Data/NHANES/ICPSR_25504/"</span><span class="op">+</span><span class="st">"DS0143/25504-0143-Data.tsv"</span>, sep <span class="op">=</span> <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>).set_index(<span class="st">"SEQN"</span>)</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>columns <span class="op">=</span> DS0143.columns[:np.where(DS0143.columns.values <span class="op">==</span> (<span class="st">"SDDSRVYR"</span>))[<span class="dv">0</span>][<span class="dv">0</span>]]</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>master <span class="op">=</span> master.join(DS0143[columns].replace(<span class="st">" "</span>, np.NaN).astype(<span class="st">'float32'</span>))</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>master <span class="op">=</span> master.replace(<span class="st">" "</span>, np.NaN )</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>master.dropna().shape[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="26">
-<pre><code>4591</code></pre>
+<div id="13565c6f-a9c0-4e02-836e-36c6ebe4bb4f" class="cell" data-execution_count="51">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Vitamin D levels</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>DS0143 <span class="op">=</span> pd.read_csv(os.path.dirname(os.path.dirname(os.getcwd()))<span class="op">+</span><span class="st">"/Data/NHANES/ICPSR_25504/"</span><span class="op">+</span><span class="st">"DS0143/25504-0143-Data.tsv"</span>, sep <span class="op">=</span> <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>).set_index(<span class="st">"SEQN"</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>columns <span class="op">=</span> DS0143.columns[:np.where(DS0143.columns.values <span class="op">==</span> (<span class="st">"SDDSRVYR"</span>))[<span class="dv">0</span>][<span class="dv">0</span>]]</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>master <span class="op">=</span> master.join(DS0143[columns].replace(<span class="st">" "</span>, np.NaN).astype(<span class="st">'float32'</span>))</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>master <span class="op">=</span> master.replace(<span class="st">" "</span>, np.NaN )</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"We have the depression score, vitamin D levels, blood counts, blood lead and cadmium levels, and c-reactive protien levels for </span><span class="sc">{}</span><span class="st"> patients"</span>.<span class="bu">format</span>(master.dropna().shape[<span class="dv">0</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>We have the depression score, vitamin D levels, blood counts, blood lead and cadmium levels, and c-reactive protien levels for 4591 patients</code></pre>
 </div>
 </div>
-<div id="2f9d3313-75d3-40d9-8551-d2f831235604" class="cell" data-execution_count="27">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>master.corr()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="27">
+</section>
+<section id="correlations" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="correlations"><span class="header-section-number">9.3</span> Correlations</h2>
+<div id="2f9d3313-75d3-40d9-8551-d2f831235604" class="cell" data-execution_count="52">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>master.corr()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="52">
 <div>
 
 
@@ -444,30 +415,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="odd">
 <td data-quarto-table-cell-role="th">DepressionScore</td>
 <td>1.000000</td>
-<td>0.085398</td>
-<td>0.085371</td>
-<td>0.020539</td>
-<td>0.020622</td>
-<td>0.086490</td>
-<td>-0.030192</td>
-<td>-0.044846</td>
-<td>0.043374</td>
-<td>-0.029398</td>
+<td>0.082749</td>
+<td>0.082723</td>
+<td>0.035489</td>
+<td>0.035579</td>
+<td>0.082526</td>
+<td>-0.029590</td>
+<td>-0.036054</td>
+<td>0.041125</td>
+<td>-0.030285</td>
 <td>...</td>
-<td>-0.089145</td>
-<td>-0.083913</td>
-<td>-0.008400</td>
-<td>-0.018395</td>
-<td>-0.034045</td>
-<td>0.118649</td>
-<td>0.062647</td>
-<td>0.000353</td>
-<td>0.083865</td>
-<td>-0.062181</td>
+<td>-0.069491</td>
+<td>-0.064322</td>
+<td>-0.014322</td>
+<td>-0.022460</td>
+<td>-0.033314</td>
+<td>0.108660</td>
+<td>0.069111</td>
+<td>-0.004458</td>
+<td>0.088166</td>
+<td>-0.044873</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">LBXBCD</td>
-<td>0.085398</td>
+<td>0.082749</td>
 <td>1.000000</td>
 <td>1.000000</td>
 <td>0.182772</td>
@@ -491,7 +462,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">LBDBCDSI</td>
-<td>0.085371</td>
+<td>0.082723</td>
 <td>1.000000</td>
 <td>1.000000</td>
 <td>0.182733</td>
@@ -515,7 +486,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">LBXBPB</td>
-<td>0.020539</td>
+<td>0.035489</td>
 <td>0.182772</td>
 <td>0.182733</td>
 <td>1.000000</td>
@@ -539,7 +510,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">LBDBPBSI</td>
-<td>0.020622</td>
+<td>0.035579</td>
 <td>0.182755</td>
 <td>0.182716</td>
 <td>0.999994</td>
@@ -563,7 +534,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">LBXWBCSI</td>
-<td>0.086490</td>
+<td>0.082526</td>
 <td>0.095528</td>
 <td>0.095535</td>
 <td>-0.049471</td>
@@ -587,7 +558,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">LBXLYPCT</td>
-<td>-0.030192</td>
+<td>-0.029590</td>
 <td>-0.004143</td>
 <td>-0.004135</td>
 <td>-0.011938</td>
@@ -611,7 +582,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">LBXMOPCT</td>
-<td>-0.044846</td>
+<td>-0.036054</td>
 <td>-0.005835</td>
 <td>-0.005856</td>
 <td>0.076952</td>
@@ -635,7 +606,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">LBXNEPCT</td>
-<td>0.043374</td>
+<td>0.041125</td>
 <td>-0.000458</td>
 <td>-0.000459</td>
 <td>-0.012851</td>
@@ -659,7 +630,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">LBXEOPCT</td>
-<td>-0.029398</td>
+<td>-0.030285</td>
 <td>0.012948</td>
 <td>0.012954</td>
 <td>0.022808</td>
@@ -683,7 +654,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">LBXBAPCT</td>
-<td>0.002643</td>
+<td>0.001274</td>
 <td>0.055152</td>
 <td>0.055148</td>
 <td>0.011470</td>
@@ -707,7 +678,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">LBDLYMNO</td>
-<td>0.024749</td>
+<td>0.029916</td>
 <td>0.054873</td>
 <td>0.054877</td>
 <td>-0.025833</td>
@@ -731,7 +702,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">LBDMONO</td>
-<td>0.039166</td>
+<td>0.045381</td>
 <td>0.078116</td>
 <td>0.078108</td>
 <td>0.027674</td>
@@ -755,7 +726,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">LBDNENO</td>
-<td>0.093702</td>
+<td>0.084803</td>
 <td>0.073871</td>
 <td>0.073879</td>
 <td>-0.052466</td>
@@ -779,7 +750,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">LBDEONO</td>
-<td>0.010203</td>
+<td>0.008392</td>
 <td>0.059920</td>
 <td>0.059928</td>
 <td>0.011694</td>
@@ -803,7 +774,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">LBDBANO</td>
-<td>0.031255</td>
+<td>0.031953</td>
 <td>0.071271</td>
 <td>0.071277</td>
 <td>-0.008167</td>
@@ -827,7 +798,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">LBXRBCSI</td>
-<td>-0.078206</td>
+<td>-0.055626</td>
 <td>0.054540</td>
 <td>0.054570</td>
 <td>0.087274</td>
@@ -851,7 +822,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">LBXHGB</td>
-<td>-0.089145</td>
+<td>-0.069491</td>
 <td>0.140983</td>
 <td>0.141013</td>
 <td>0.128587</td>
@@ -875,7 +846,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">LBXHCT</td>
-<td>-0.083913</td>
+<td>-0.064322</td>
 <td>0.140536</td>
 <td>0.140560</td>
 <td>0.142448</td>
@@ -899,7 +870,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">LBXMCVSI</td>
-<td>-0.008400</td>
+<td>-0.014322</td>
 <td>0.138290</td>
 <td>0.138275</td>
 <td>0.090765</td>
@@ -923,7 +894,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">LBXMCHSI</td>
-<td>-0.018395</td>
+<td>-0.022460</td>
 <td>0.122018</td>
 <td>0.122016</td>
 <td>0.059423</td>
@@ -947,7 +918,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">LBXMC</td>
-<td>-0.034045</td>
+<td>-0.033314</td>
 <td>0.012417</td>
 <td>0.012446</td>
 <td>-0.045515</td>
@@ -971,7 +942,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">LBXRDW</td>
-<td>0.118649</td>
+<td>0.108660</td>
 <td>0.084576</td>
 <td>0.084538</td>
 <td>0.115427</td>
@@ -995,7 +966,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">LBXPLTSI</td>
-<td>0.062647</td>
+<td>0.069111</td>
 <td>0.005530</td>
 <td>0.005544</td>
 <td>-0.101594</td>
@@ -1019,7 +990,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">LBXMPSI</td>
-<td>0.000353</td>
+<td>-0.004458</td>
 <td>-0.021277</td>
 <td>-0.021291</td>
 <td>0.016290</td>
@@ -1043,7 +1014,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">LBXCRP</td>
-<td>0.083865</td>
+<td>0.088166</td>
 <td>0.012294</td>
 <td>0.012298</td>
 <td>-0.014597</td>
@@ -1067,7 +1038,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">LBXVID</td>
-<td>-0.062181</td>
+<td>-0.044873</td>
 <td>-0.007821</td>
 <td>-0.007837</td>
 <td>-0.025229</td>
@@ -1097,42 +1068,54 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>We do have some redundant columns in the data now. LBXBCD - Cadmium (ug/L) and LBDBCDSI Cadmium (nmol/L) both measured the same thing, hence the correlation of 1.00 between the two variables. Other redundancies include: LBXBPB and LBDBPBSI, LBXLYPCT and LBDLYMNO, LBXMOPCT and LBDMONO, LBXNEPCT and LBDNENO, LBXBAPCT and LBDBANO, LBXEOPCT and LBDEONO, LBXHGB and LBXHCT, LBXMCHSI and LBXMCVSI and LBXMC</p>
-<div id="61210d33-4630-44ca-ae6c-f815be43f029" class="cell" data-execution_count="28">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>to_drop <span class="op">=</span> [<span class="st">"LBDBPBSI"</span>, <span class="st">"LBXLYPCT"</span>, <span class="st">"LBXMOPCT"</span>, <span class="st">"LBXNEPCT"</span>, <span class="st">"LBXBAPCT"</span>, <span class="st">"LBXEOPCT"</span>, <span class="st">"LBXHCT"</span>, <span class="st">"LBXMCVSI"</span>, <span class="st">"LBXMC"</span>]</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>master.drop(to_drop, axis <span class="op">=</span> <span class="dv">1</span>, inplace <span class="op">=</span> <span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Also, note that the depression score is not highly correlated with any of our predictors. It’s highest correlation is 0.108660 to LBXRDW</p>
+<div id="61210d33-4630-44ca-ae6c-f815be43f029" class="cell" data-execution_count="53">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># drop redundant variables</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>to_drop <span class="op">=</span> [<span class="st">"LBDBPBSI"</span>, <span class="st">"LBXLYPCT"</span>, <span class="st">"LBXMOPCT"</span>, <span class="st">"LBXNEPCT"</span>, <span class="st">"LBXBAPCT"</span>, <span class="st">"LBXEOPCT"</span>, <span class="st">"LBXHCT"</span>, <span class="st">"LBXMCVSI"</span>, <span class="st">"LBXMC"</span>]</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>master.drop(to_drop, axis <span class="op">=</span> <span class="dv">1</span>, inplace <span class="op">=</span> <span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="3d6d7379" class="cell" data-execution_count="30">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>master.to_csv(os.path.dirname(os.path.dirname(os.getcwd()))<span class="op">+</span><span class="st">"/Data/NHANES/master_depression.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="3d6d7379" class="cell" data-execution_count="54">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>master.to_csv(os.path.dirname(os.path.dirname(os.getcwd()))<span class="op">+</span><span class="st">"/Data/NHANES/master_depression.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="model-fitting" class="level2" data-number="9.1">
-<h2 data-number="9.1" class="anchored" data-anchor-id="model-fitting"><span class="header-section-number">9.1</span> Model Fitting</h2>
-<div id="74dc2e96-32a0-4a3f-a41b-7aec510385e3" class="cell" data-execution_count="29">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>trainX, testX, trainy, testy <span class="op">=</span> train_test_split(master.dropna().drop(<span class="st">"DepressionScore"</span>, axis <span class="op">=</span> <span class="dv">1</span>), master.dropna()[<span class="st">"DepressionScore"</span>], test_size<span class="op">=</span><span class="fl">0.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="model-fitting" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="model-fitting"><span class="header-section-number">9.4</span> Model Fitting</h2>
+<p>First I will the data set into a training and testing set. The models will be trained and selected using the training set and the final performance will be evaluated using the training set.</p>
+<div id="74dc2e96-32a0-4a3f-a41b-7aec510385e3" class="cell" data-execution_count="65">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split, cross_val_score</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>trainX, testX, trainy, testy <span class="op">=</span> train_test_split(master.dropna().drop(<span class="st">"DepressionScore"</span>, axis <span class="op">=</span> <span class="dv">1</span>), master.dropna()[<span class="st">"DepressionScore"</span>], test_size<span class="op">=</span><span class="fl">0.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="d5ee3398-6093-4987-8e66-c4b57c87aee6" class="cell" data-execution_count="49">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>lm <span class="op">=</span> LinearRegression().fit(trainX, trainy)</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>preds_lm <span class="op">=</span> lm.predict(testX)</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>lm.score(trainX, trainy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="49">
-<pre><code>0.05273780957104557</code></pre>
-</div>
-</div>
-<p>R^2 is 0.05 - linear model preforms very poorly. Either the linear model poorly measures a non-linear relationship or the predictors contain very little information about the mental health of our participants. Let’s try a tree-based method:</p>
-<div id="5a04f8d1-3ed2-4371-91c6-4a2a1cb458a9" class="cell" data-execution_count="51">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestRegressor</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>rf <span class="op">=</span> RandomForestRegressor(max_depth <span class="op">=</span> <span class="dv">2</span>)</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>rf.fit(trainX, trainy)</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>preds_rf <span class="op">=</span> rf.predict(testX)</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>rf.score(trainX, trainy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="51">
-<pre><code>0.060034486182498625</code></pre>
+<div id="d5ee3398-6093-4987-8e66-c4b57c87aee6" class="cell" data-execution_count="76">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_squared_error, r2_score</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>lm <span class="op">=</span> LinearRegression().fit(trainX, trainy)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>preds_lm <span class="op">=</span> lm.predict(trainX)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>mse_scores <span class="op">=</span> cross_val_score(lm, trainX, trainy, scoring<span class="op">=</span><span class="st">'neg_mean_squared_error'</span>, cv<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Mean CV MSE: </span><span class="sc">{:.4f}</span><span class="st">"</span>.<span class="bu">format</span>(<span class="op">-</span>mse_scores.mean()))</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>r2_scores <span class="op">=</span> cross_val_score(lm, trainX, trainy, scoring<span class="op">=</span><span class="st">'r2'</span>, cv<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Mean CV R-Squared: </span><span class="sc">{:.2f}</span><span class="st">"</span>.<span class="bu">format</span>(r2_scores.mean()))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Mean CV MSE: 0.2510
+Mean CV R-Squared: 0.02</code></pre>
 </div>
 </div>
-<p>R^2 is 0.06 - our coefficient of determination only improves slightly with a non-linear model. This would lead me to conclude that our predictors contain no information about the mental health of our participants.</p>
+<p>R^2 is 0.02 - linear model preforms very poorly. My two assumptions are that either the linear model poorly measures a non-linear relationship or the predictors contain very little information about the mental health of our participants. Let’s try a tree-based method. If the assumption non-linear relationship is the correct one then maybe the tree will do better.</p>
+<div id="5a04f8d1-3ed2-4371-91c6-4a2a1cb458a9" class="cell" data-execution_count="79">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestRegressor</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>rf <span class="op">=</span> RandomForestRegressor(max_depth <span class="op">=</span> <span class="dv">2</span>)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>rf.fit(trainX, trainy)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>mse_scores <span class="op">=</span> cross_val_score(rf, trainX, trainy, scoring<span class="op">=</span><span class="st">'neg_mean_squared_error'</span>, cv<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Random Forest Mean CV MSE: </span><span class="sc">{:.4f}</span><span class="st">"</span>.<span class="bu">format</span>(<span class="op">-</span>mse_scores.mean()))</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>r2_scores <span class="op">=</span> cross_val_score(rf, trainX, trainy, scoring<span class="op">=</span><span class="st">'r2'</span>, cv<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Random Forest Mean CV R-Squared: </span><span class="sc">{:.2f}</span><span class="st">"</span>.<span class="bu">format</span>(r2_scores.mean()))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Random Forest Mean CV MSE: 0.2522
+Random Forest Mean CV R-Squared: 0.02</code></pre>
+</div>
+</div>
+<p>R^2 is 0.02 - our coefficient of determination does not improve with a non-linear model. This would lead me to believe that our predictors contain no information about the mental health of our participants.</p>
 
 
 </section>
