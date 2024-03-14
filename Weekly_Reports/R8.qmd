@@ -29,15 +29,18 @@ Application 5| Implement Neural Nets with LIME and SHAP
 https://doi.org/10.1186/s12874-022-01540-w
 
 This paper attempts to create machine learning models that predict an ICU patient’s survival. Several models are trained and SHAP values are fit for each and compared across models to show the discrepancies leading to predictions in different models. The authors also demonstrate how SHAP is used in the health care field. An example is using the force plot of a single observation to say for example: the patient’s age is a factor pushing the predictions towards survival or the patient’s temperature has the most significant impact on our prediction. All in all, it is a good demonstration of a positive use of explainable AI in health care. I would like to review other papers that have a more critical perspective on XAI in health care.
+
 ### Explainable AI and Interpretable Machine Learning: A Case Study in Perspective
 https://www.sciencedirect.com/science/article/pii/S1877050922008432
 
 Poor quality -> didn’t even have a designated results section and the images where screenshots of code from notebook
+
 ### Generating Counterfactual and Contrastive Explanations using SHAP
 http://arxiv.org/abs/1906.09293
 
 This paper is written to address the General Data Protection Regulations that have been created to address data protection in high-risk use cases. The specific focus is on “the right to explanation”. Under some circumstances, the user that is being affected by the decisions of the model has the right to know how the model is coming to its decision (A good example is somebody who is applying for a loan). This is significant for two reasons: 1. Data Scientists must now extend their models to include explanations that comply with the GDPR and 2. the inner workings of a proprietary model will be exposed.
  In the paper, the authors outline the characteristics of an explanation and how the explanation must be formatted in order to comply with the right to explanation. Counterfactual explanations are significant and are described as “the minimum possible change required to generate the desired output” ([Rathi, 2019, p. 2](zotero://select/library/items/HQQAYWNK)) ([pdf](zotero://open-pdf/library/items/2FHMVRLP?page=2)). The authors describe a loss function that takes the instance of interest as well as a counterfactual outcome and measures how much the input is changed for it to result in the counterfactual outcome (THIS IS SUPER INTERESTING IMO, feels like this will lead to some new statistical domain of explainability).To answer the question why P not Q (eg why am I declined and not accepted for this loan) the shap values determined for classes P and Q. The positive effects for P are given and the negative effects for Q are given. This way the user can understand what factors are leading to P and ‘steering them away’ from Q. For counterfactual explanations, the nearest neighbors of an instance are generated until a counterfactual is produced.
+
 ### The Disagreement Problem in Explainable Machine Learning: A Practitioner's Perspective
 http://arxiv.org/abs/2202.01602
 
