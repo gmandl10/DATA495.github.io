@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.549">
+<meta name="generator" content="quarto-1.4.551">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="">
-<meta name="dcterms.date" content="2024-03-11">
+<meta name="dcterms.date" content="2024-03-13">
 
-<title>9&nbsp; Initial Modeling of NHANES Data</title>
+<title>10&nbsp; Initial Modeling of NHANES Data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -122,7 +122,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Applications/Application1/EDA.html">Applications</a></li><li class="breadcrumb-item"><a href="../../Applications/Application1/Elementary_Modeling.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Initial Modeling of NHANES Data</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Applications/Application1/EDA.html">Applications</a></li><li class="breadcrumb-item"><a href="../../Applications/Application1/Elementary_Modeling.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Initial Modeling of NHANES Data</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -194,7 +194,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Weekly_Reports/R7.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">DATA495 Weekly Report 5</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">DATA495 Weekly Report 7</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Weekly_Reports/R8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">DATA495 Weekly Report 8</span></span></a>
   </div>
 </li>
       </ul>
@@ -211,25 +217,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Applications/Application1/EDA.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data Pre-Processing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data Pre-Processing</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Applications/Application1/Elementary_Modeling.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Initial Modeling of NHANES Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Initial Modeling of NHANES Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Applications/Application2/boosting.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Boosting on CGC Data</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../Applications/Application2/zero_inflated_model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">NHANES Extension to Zero Inflated Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Boosting on CGC Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -262,19 +262,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#loading-target-variable" id="toc-loading-target-variable" class="nav-link active" data-scroll-target="#loading-target-variable"><span class="header-section-number">9.1</span> Loading Target Variable</a></li>
-  <li><a href="#loading-predictors" id="toc-loading-predictors" class="nav-link" data-scroll-target="#loading-predictors"><span class="header-section-number">9.2</span> Loading Predictors</a></li>
-  <li><a href="#correlations" id="toc-correlations" class="nav-link" data-scroll-target="#correlations"><span class="header-section-number">9.3</span> Correlations</a></li>
-  <li><a href="#model-fitting" id="toc-model-fitting" class="nav-link" data-scroll-target="#model-fitting"><span class="header-section-number">9.4</span> Model Fitting</a></li>
+  <li><a href="#loading-target-variable" id="toc-loading-target-variable" class="nav-link active" data-scroll-target="#loading-target-variable"><span class="header-section-number">10.1</span> Loading Target Variable</a></li>
+  <li><a href="#loading-predictors" id="toc-loading-predictors" class="nav-link" data-scroll-target="#loading-predictors"><span class="header-section-number">10.2</span> Loading Predictors</a></li>
+  <li><a href="#correlations" id="toc-correlations" class="nav-link" data-scroll-target="#correlations"><span class="header-section-number">10.3</span> Correlations</a></li>
+  <li><a href="#model-fitting" id="toc-model-fitting" class="nav-link" data-scroll-target="#model-fitting"><span class="header-section-number">10.4</span> Model Fitting</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Applications/Application1/EDA.html">Applications</a></li><li class="breadcrumb-item"><a href="../../Applications/Application1/Elementary_Modeling.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Initial Modeling of NHANES Data</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Applications/Application1/EDA.html">Applications</a></li><li class="breadcrumb-item"><a href="../../Applications/Application1/Elementary_Modeling.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Initial Modeling of NHANES Data</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Initial Modeling of NHANES Data</span></h1>
+<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Initial Modeling of NHANES Data</span></h1>
 </div>
 
 
@@ -285,7 +285,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2024-03-11</p>
+      <p class="date">2024-03-13</p>
     </div>
   </div>
   
@@ -303,8 +303,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="loading-target-variable" class="level2" data-number="9.1">
-<h2 data-number="9.1" class="anchored" data-anchor-id="loading-target-variable"><span class="header-section-number">9.1</span> Loading Target Variable</h2>
+<section id="loading-target-variable" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="loading-target-variable"><span class="header-section-number">10.1</span> Loading Target Variable</h2>
 <div id="84a28b4e-d9d2-4cf4-825b-e88a413d9a42" class="cell" data-execution_count="45">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>master <span class="op">=</span> pd.read_csv(os.path.dirname(os.path.dirname(os.getcwd()))<span class="op">+</span><span class="st">"/Data/NHANES/depression_table.csv"</span>).set_index(<span class="st">"SEQN"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>master <span class="op">=</span> pd.DataFrame(master.loc[:, <span class="st">"DepressionScore"</span>])</span>
@@ -314,8 +314,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="loading-predictors" class="level2" data-number="9.2">
-<h2 data-number="9.2" class="anchored" data-anchor-id="loading-predictors"><span class="header-section-number">9.2</span> Loading Predictors</h2>
+<section id="loading-predictors" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="loading-predictors"><span class="header-section-number">10.2</span> Loading Predictors</h2>
 <div id="469bdf71-c5e0-4227-b678-2458fe325470" class="cell" data-execution_count="46">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Blood lead and Blood Cadmium</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>DS0102 <span class="op">=</span> pd.read_csv(os.path.dirname(os.path.dirname(os.getcwd()))<span class="op">+</span><span class="st">"/Data/NHANES/ICPSR_25504/"</span><span class="op">+</span><span class="st">"DS0102/25504-0102-Data.tsv"</span>, sep <span class="op">=</span> <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>).set_index(<span class="st">"SEQN"</span>)</span>
@@ -376,11 +376,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="correlations" class="level2" data-number="9.3">
-<h2 data-number="9.3" class="anchored" data-anchor-id="correlations"><span class="header-section-number">9.3</span> Correlations</h2>
+<section id="correlations" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="correlations"><span class="header-section-number">10.3</span> Correlations</h2>
 <div id="2f9d3313-75d3-40d9-8551-d2f831235604" class="cell" data-execution_count="52">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>master.corr()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="52">
+<div>
 <div>
 
 
@@ -1067,6 +1068,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+</div>
 <p>We do have some redundant columns in the data now. LBXBCD - Cadmium (ug/L) and LBDBCDSI Cadmium (nmol/L) both measured the same thing, hence the correlation of 1.00 between the two variables. Other redundancies include: LBXBPB and LBDBPBSI, LBXLYPCT and LBDLYMNO, LBXMOPCT and LBDMONO, LBXNEPCT and LBDNENO, LBXBAPCT and LBDBANO, LBXEOPCT and LBDEONO, LBXHGB and LBXHCT, LBXMCHSI and LBXMCVSI and LBXMC</p>
 <p>Also, note that the depression score is not highly correlated with any of our predictors. It’s highest correlation is 0.108660 to LBXRDW</p>
 <div id="61210d33-4630-44ca-ae6c-f815be43f029" class="cell" data-execution_count="53">
@@ -1078,8 +1080,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>master.to_csv(os.path.dirname(os.path.dirname(os.getcwd()))<span class="op">+</span><span class="st">"/Data/NHANES/master_depression.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="model-fitting" class="level2" data-number="9.4">
-<h2 data-number="9.4" class="anchored" data-anchor-id="model-fitting"><span class="header-section-number">9.4</span> Model Fitting</h2>
+<section id="model-fitting" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="model-fitting"><span class="header-section-number">10.4</span> Model Fitting</h2>
 <p>First I will the data set into a training and testing set. The models will be trained and selected using the training set and the final performance will be evaluated using the training set.</p>
 <div id="74dc2e96-32a0-4a3f-a41b-7aec510385e3" class="cell" data-execution_count="65">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split, cross_val_score</span>
@@ -1344,6 +1346,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -1378,7 +1398,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -1654,13 +1678,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../Applications/Application1/EDA.html" class="pagination-link  aria-label=" &lt;span="" pre-processing&lt;="" span&gt;"="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data Pre-Processing</span></span>
+      <a href="../../Applications/Application1/EDA.html" class="pagination-link" aria-label="Data Pre-Processing">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data Pre-Processing</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../Applications/Application2/boosting.html" class="pagination-link" aria-label="<span class='chapter-number'>10</span>&nbsp; <span class='chapter-title'>Boosting on CGC Data</span>">
-        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Boosting on CGC Data</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../Applications/Application2/boosting.html" class="pagination-link" aria-label="Boosting on CGC Data">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Boosting on CGC Data</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

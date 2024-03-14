@@ -4,7 +4,7 @@
 library(tidyverse)
 library(randomForest)
 library(caret)
-master<-read.csv("C:\\Users\\gmandl\\Documents\\GitHub\\DATA495.github.io\\Data\\NHANES\\master_depression.csv")
+master<-read.csv("Documents\\GitHub\\DATA495.github.io\\Data\\NHANES\\master_depression.csv")
  ``` 
 
  ```{r}

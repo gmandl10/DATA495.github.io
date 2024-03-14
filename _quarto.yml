@@ -26,12 +26,13 @@ book:
       - Weekly_Reports/R4.qmd
       - Weekly_Reports/R5.qmd
       - Weekly_Reports/R7.qmd
+      - Weekly_Reports/R8.qmd
     - part: Applications
       chapters:
         - Applications/Application1/EDA.ipynb
         - Applications/Application1/Elementary_Modeling.ipynb
         - Applications/Application2/boosting.ipynb
-        - Applications/Application2/zero_inflated_model.qmd
+        #- Applications/Application2/zero_inflated_model.qmd
         - Applications/Application3/boosting2.ipynb
         - Applications/Application3/tree_based_zero_inflated_models.ipynb
         - Applications/Application4/interpretability.ipynb

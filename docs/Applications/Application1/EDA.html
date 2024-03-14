@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.549">
+<meta name="generator" content="quarto-1.4.551">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="">
-<meta name="dcterms.date" content="2024-03-11">
+<meta name="dcterms.date" content="2024-03-13">
 
-<title>8&nbsp; Data Pre-Processing</title>
+<title>9&nbsp; Data Pre-Processing</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -67,7 +67,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
 <link href="../../Applications/Application1/Elementary_Modeling.html" rel="next">
-<link href="../../Weekly_Reports/R7.html" rel="prev">
+<link href="../../Weekly_Reports/R8.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -122,7 +122,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Applications/Application1/EDA.html">Applications</a></li><li class="breadcrumb-item"><a href="../../Applications/Application1/EDA.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data Pre-Processing</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Applications/Application1/EDA.html">Applications</a></li><li class="breadcrumb-item"><a href="../../Applications/Application1/EDA.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data Pre-Processing</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -194,7 +194,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Weekly_Reports/R7.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">DATA495 Weekly Report 5</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">DATA495 Weekly Report 7</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Weekly_Reports/R8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">DATA495 Weekly Report 8</span></span></a>
   </div>
 </li>
       </ul>
@@ -211,25 +217,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Applications/Application1/EDA.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data Pre-Processing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data Pre-Processing</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Applications/Application1/Elementary_Modeling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Initial Modeling of NHANES Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Initial Modeling of NHANES Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Applications/Application2/boosting.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Boosting on CGC Data</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../Applications/Application2/zero_inflated_model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">NHANES Extension to Zero Inflated Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Boosting on CGC Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -262,22 +262,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#ds0215" id="toc-ds0215" class="nav-link active" data-scroll-target="#ds0215"><span class="header-section-number">8.1</span> DS0215</a></li>
-  <li><a href="#ds0216" id="toc-ds0216" class="nav-link" data-scroll-target="#ds0216"><span class="header-section-number">8.2</span> DS0216</a></li>
-  <li><a href="#ds0235" id="toc-ds0235" class="nav-link" data-scroll-target="#ds0235"><span class="header-section-number">8.3</span> DS0235</a></li>
-  <li><a href="#year-to-year-survey-data-consistency" id="toc-year-to-year-survey-data-consistency" class="nav-link" data-scroll-target="#year-to-year-survey-data-consistency"><span class="header-section-number">8.4</span> Year to Year Survey Data Consistency</a></li>
-  <li><a href="#joining-datasets" id="toc-joining-datasets" class="nav-link" data-scroll-target="#joining-datasets"><span class="header-section-number">8.5</span> Joining Datasets</a></li>
-  <li><a href="#ds209---depression-screener" id="toc-ds209---depression-screener" class="nav-link" data-scroll-target="#ds209---depression-screener"><span class="header-section-number">8.6</span> DS209 - Depression Screener</a></li>
-  <li><a href="#distribution-of-target-variable" id="toc-distribution-of-target-variable" class="nav-link" data-scroll-target="#distribution-of-target-variable"><span class="header-section-number">8.7</span> Distribution of target variable</a></li>
+  <li><a href="#ds0215" id="toc-ds0215" class="nav-link active" data-scroll-target="#ds0215"><span class="header-section-number">9.1</span> DS0215</a></li>
+  <li><a href="#ds0216" id="toc-ds0216" class="nav-link" data-scroll-target="#ds0216"><span class="header-section-number">9.2</span> DS0216</a></li>
+  <li><a href="#ds0235" id="toc-ds0235" class="nav-link" data-scroll-target="#ds0235"><span class="header-section-number">9.3</span> DS0235</a></li>
+  <li><a href="#year-to-year-survey-data-consistency" id="toc-year-to-year-survey-data-consistency" class="nav-link" data-scroll-target="#year-to-year-survey-data-consistency"><span class="header-section-number">9.4</span> Year to Year Survey Data Consistency</a></li>
+  <li><a href="#joining-datasets" id="toc-joining-datasets" class="nav-link" data-scroll-target="#joining-datasets"><span class="header-section-number">9.5</span> Joining Datasets</a></li>
+  <li><a href="#ds209---depression-screener" id="toc-ds209---depression-screener" class="nav-link" data-scroll-target="#ds209---depression-screener"><span class="header-section-number">9.6</span> DS209 - Depression Screener</a></li>
+  <li><a href="#distribution-of-target-variable" id="toc-distribution-of-target-variable" class="nav-link" data-scroll-target="#distribution-of-target-variable"><span class="header-section-number">9.7</span> Distribution of target variable</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Applications/Application1/EDA.html">Applications</a></li><li class="breadcrumb-item"><a href="../../Applications/Application1/EDA.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data Pre-Processing</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Applications/Application1/EDA.html">Applications</a></li><li class="breadcrumb-item"><a href="../../Applications/Application1/EDA.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data Pre-Processing</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data Pre-Processing</span></h1>
+<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data Pre-Processing</span></h1>
 </div>
 
 
@@ -288,7 +288,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2024-03-11</p>
+      <p class="date">2024-03-13</p>
     </div>
   </div>
   
@@ -397,8 +397,8 @@ DS0215</code></pre>
 </div>
 <p>A key thing to note is that a participant who is not using supplements is not included in this visualization. This analysis is only representative of a participant that uses one or multiple supplement(s)</p>
 <p>Let’s look at the next dataset that does not contain the sequence number or data release number</p>
-<section id="ds0215" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="ds0215"><span class="header-section-number">8.1</span> DS0215</h2>
+<section id="ds0215" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="ds0215"><span class="header-section-number">9.1</span> DS0215</h2>
 <p>Dietary Supplement Use – Ingredient Information</p>
 <p>The Supplement ID number (DSDSUPID) is also the primary key in DS0214 and is a foreign key in DS0213</p>
 <p>Can a supplement have several ingredients and what is the distributions of number ingredients in a supplements</p>
@@ -421,13 +421,13 @@ DS0215</code></pre>
 </div>
 </div>
 </section>
-<section id="ds0216" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="ds0216"><span class="header-section-number">8.2</span> DS0216</h2>
+<section id="ds0216" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="ds0216"><span class="header-section-number">9.2</span> DS0216</h2>
 <p>Dietary Supplement Use – Supplement Blend</p>
 <p>The primary key in DS0216 is the Ingredient ID number which is a foreign key in DS0215</p>
 </section>
-<section id="ds0235" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="ds0235"><span class="header-section-number">8.3</span> DS0235</h2>
+<section id="ds0235" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="ds0235"><span class="header-section-number">9.3</span> DS0235</h2>
 <p>Drug Information</p>
 <p>The primary key for DS0235 is the Generic Drug Code (RXDDRGID). Let’s find which dataset has the generic drug code as a foreign key.</p>
 <div id="cell-18" class="cell" data-execution_count="24">
@@ -450,6 +450,7 @@ DS0235</code></pre>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Partipicant 41025 uses 20 perscription drugs</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>DS2034[DS2034[<span class="st">"SEQN"</span>] <span class="op">==</span> <span class="dv">41025</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="26">
+<div>
 <div>
 
 
@@ -968,6 +969,7 @@ DS0235</code></pre>
 </div>
 </div>
 </div>
+</div>
 <div id="cell-22" class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>plt.hist(num_drugs[<span class="st">"Count"</span>], bins <span class="op">=</span> <span class="dv">10</span>)</span>
@@ -985,8 +987,8 @@ DS0235</code></pre>
 </div>
 <p>Note: Like with supplement usage, the patients who do not use prescription medications are not represented in this visualization</p>
 </section>
-<section id="year-to-year-survey-data-consistency" class="level2" data-number="8.4">
-<h2 data-number="8.4" class="anchored" data-anchor-id="year-to-year-survey-data-consistency"><span class="header-section-number">8.4</span> Year to Year Survey Data Consistency</h2>
+<section id="year-to-year-survey-data-consistency" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="year-to-year-survey-data-consistency"><span class="header-section-number">9.4</span> Year to Year Survey Data Consistency</h2>
 <p>The data that we have been working with from the dataset ICPSR_25504 is the National Health and Nutrition Examination Survey (NHANES) from 2005-2006. Next we have downloaded the Survey from 2005-2006 and we will look to see if the data architecture is consistent across year.</p>
 <p>First let’s check if each data set exists in both surveys and if their columns are the same</p>
 <div id="cell-25" class="cell" data-execution_count="31">
@@ -1162,8 +1164,8 @@ DS0213</code></pre>
 <p>There seems to be little value in analyzing multiple surveys because we can’t create variables that look at year to year changes in the same patient and the data architecture is not consistent across years.</p>
 <p>The only potential uses of having surveys from different years is to see if a model built on data from one year generalizes to the survey data from other years. In order to do some we must choose variables and datasets that exist in all surveys.</p>
 </section>
-<section id="joining-datasets" class="level2" data-number="8.5">
-<h2 data-number="8.5" class="anchored" data-anchor-id="joining-datasets"><span class="header-section-number">8.5</span> Joining Datasets</h2>
+<section id="joining-datasets" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="joining-datasets"><span class="header-section-number">9.5</span> Joining Datasets</h2>
 <div id="cell-31" class="cell" data-execution_count="34">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>DS0132<span class="op">=</span> pd.read_csv(os.path.dirname(os.path.dirname(os.getcwd())) <span class="op">+</span> <span class="st">"</span><span class="ch">\\</span><span class="st">Data</span><span class="ch">\\</span><span class="st">NHANES</span><span class="ch">\\</span><span class="st">ICPSR_25504</span><span class="ch">\\</span><span class="st">DS0132</span><span class="ch">\\</span><span class="st">25504-0132-Data.tsv"</span>, sep <span class="op">=</span> <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span>
@@ -1173,6 +1175,7 @@ DS0213</code></pre>
 <div id="cell-32" class="cell" data-execution_count="36">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>joined.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="36">
+<div>
 <div>
 
 
@@ -1355,6 +1358,7 @@ DS0213</code></pre>
 </div>
 </div>
 </div>
+</div>
 <p>Let’s see if the columns that occur in both dataframes are redundant</p>
 <div id="cell-34" class="cell" data-execution_count="37">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>(joined[<span class="st">"AIALANG_DS0123"</span>] <span class="op">==</span> joined[<span class="st">"AIALANG_DS0132"</span>]).mean()</span>
@@ -1437,6 +1441,7 @@ DS0213</code></pre>
 <div id="cell-37" class="cell">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>joined_master.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="41">
+<div>
 <div>
 
 
@@ -1619,10 +1624,11 @@ DS0213</code></pre>
 </div>
 </div>
 </div>
+</div>
 <p>The data is far too large to combine into one so I will choose critical datasets to focus the analysis on</p>
 </section>
-<section id="ds209---depression-screener" class="level2" data-number="8.6">
-<h2 data-number="8.6" class="anchored" data-anchor-id="ds209---depression-screener"><span class="header-section-number">8.6</span> DS209 - Depression Screener</h2>
+<section id="ds209---depression-screener" class="level2" data-number="9.6">
+<h2 data-number="9.6" class="anchored" data-anchor-id="ds209---depression-screener"><span class="header-section-number">9.6</span> DS209 - Depression Screener</h2>
 <p>This data set is a Questionnaire with 10 questions about depressive symptoms (Eg. Thought you would be better off dead.) The response are categorical from 0-3 with 0 being non-depressive behaviour (Not at all) and 4 being depressive behaviour (Nearly every day).</p>
 <p>We will create a target variable that aggregate the results of these questions, taking the mean response of the questions which scores a participants depressive state. 0 meaning low, 4 high</p>
 <p>The respondant can answer a question as “Don’t know” and will be assigned the number 9 which can throw off our scores. I will remove these values from the average calculations. So for example, if a respondant answers “Don’t know” for 2 questions, their score will be the average of their repsonses to the other 8 questions.</p>
@@ -1632,6 +1638,7 @@ DS0213</code></pre>
 <div id="cell-41" class="cell" data-execution_count="46">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>DS209.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="46">
+<div>
 <div>
 
 
@@ -1790,6 +1797,7 @@ DS0213</code></pre>
 </div>
 </div>
 </div>
+</div>
 <div id="cell-42" class="cell" data-execution_count="47">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>DS209.dtypes[<span class="st">"DPQ010"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="47">
@@ -1840,8 +1848,8 @@ dtype: object</code></pre>
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>final <span class="op">=</span> pd.concat([clean, depression_score], axis <span class="op">=</span> <span class="dv">1</span>).rename(columns <span class="op">=</span> {<span class="dv">0</span>:<span class="st">"DepressionScore"</span>}).set_index(<span class="st">"SEQN"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="distribution-of-target-variable" class="level2" data-number="8.7">
-<h2 data-number="8.7" class="anchored" data-anchor-id="distribution-of-target-variable"><span class="header-section-number">8.7</span> Distribution of target variable</h2>
+<section id="distribution-of-target-variable" class="level2" data-number="9.7">
+<h2 data-number="9.7" class="anchored" data-anchor-id="distribution-of-target-variable"><span class="header-section-number">9.7</span> Distribution of target variable</h2>
 <div id="cell-53" class="cell" data-execution_count="63">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>final[<span class="st">"DepressionScore"</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="63">
@@ -2103,6 +2111,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -2137,7 +2163,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -2413,13 +2443,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../Weekly_Reports/R7.html" class="pagination-link  aria-label=" &lt;span="" weekly="" report="" 5&lt;="" span&gt;"="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">DATA495 Weekly Report 5</span></span>
+      <a href="../../Weekly_Reports/R8.html" class="pagination-link" aria-label="DATA495 Weekly Report 8">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">DATA495 Weekly Report 8</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../Applications/Application1/Elementary_Modeling.html" class="pagination-link" aria-label="<span class='chapter-number'>9</span>&nbsp; <span class='chapter-title'>Initial Modeling of NHANES Data</span>">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Initial Modeling of NHANES Data</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../Applications/Application1/Elementary_Modeling.html" class="pagination-link" aria-label="Initial Modeling of NHANES Data">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Initial Modeling of NHANES Data</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
