@@ -36,7 +36,9 @@ book:
         - Applications/Application3/boosting2.ipynb
         - Applications/Application3/tree_based_zero_inflated_models.ipynb
         - Applications/Application4/interpretability.ipynb
-
+        - Applications/Application5/radiation-oncology-qa.ipynb
+        - Applications/Application5/neural-networks.ipynb
+        
 execute: 
   warning: false
 
