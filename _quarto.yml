@@ -27,6 +27,8 @@ book:
       - Weekly_Reports/R5.qmd
       - Weekly_Reports/R7.qmd
       - Weekly_Reports/R8.qmd
+      - Weekly_Reports/R9.qmd
+      - Weekly_Reports/R10.qmd
     - part: Applications
       chapters:
         - Applications/Application1/EDA.ipynb
