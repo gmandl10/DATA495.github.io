@@ -1,0 +1,22 @@
+---
+title: "DATA495 Weekly Report 9"
+format: html
+---
+
+# Weekly Report 9
+Date: March 22nd, 2024
+
+## Past Objective Status
+Objective|Description|Status
+----|-------|---
+Literature Review|More SHAP and LIME (maybe as they pertain to neural nets)|Incomplete
+Application 5| Implement Neural Nets with LIME and SHAP|In Progress
+## Weekly Work Log
+Activity|Description|Time Allocated
+----|------|--:
+Application 5|Neural Nets with LIME and SHAP|3 hours
+
+## Upcoming Objectives
+Objective|Description
+----|-------
+Application 5| Complete Implement Neural Nets with LIME and SHAP
