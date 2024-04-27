@@ -1,0 +1,26 @@
+# DATA495 Directed Research in Data Science - Final Report
+George Mandl 
+April 26th, 2024
+
+## Introduction
+
+After taking courses in machine learning and statistical learning during my third year of undergraduate studies, I realized that machine learning is a topic that I am very interested in and would like to know more about. In these courses, I worked on projects in the biomedical space such as brain tumor image classification. I felt that there was still much more for me to learn about these topics but no courses offered, so it was fitting to create a self-directed research course. This past semester I have worked through this self directed research course focused on 'Machine Learning in the Biosciences' under the supervision of Dr. Devan Becker and Dr. Sukhjit Singh Sehra. The specific areas that I wanted to focus on in biosciences were ones adjacent to health care and medicine, which are two fields that I find very appealing for a future career. Genetics is a space where health care and biology meet and offers a vast amount of data. It so happens that during the semester, I also received an internship offer at biotech startup which works with genetic data. There were three data sets used in this course for applications of research topics. The first and most popular is the National Health and Nutrition Examination Survey (NHANES) dataset which collects information on the health, nutrition, and demographics of individuals in the United States through interviews, physical examinations, and laboratory tests. This dataset had a variety of useful features but the specific use in the applications was using vitamin and blood counts to predict depression scores. The second dataset was retrieved from the Cancer Genomics Cloud and contained miRNA counts of various patients. The miRNA counts were used to predict the patients mortality status and the type of cancer. The final dataset was one that I was already working with parallely for my full year undergraduate research in MA489. I was fortunate to recieve radiation oncology data from the Princess Margaret Hospital. These data contained the treatment plans for various radiation machines that needed to be tested in a qualtiy assurance before being administered to the patient. The goal was to predict whether the plan passed or failed the QA and recurrent neural networks achieved the superior performance. These RNNs were incorporated into this course in an attempt to show the application of explainability to deep learning models. 
+
+
+## Boosting
+Boosting is a popular ensemble learning technique used in machine learning. Boosting combines weak learners into a strong learner by sequentially training models and giving more weight to misclassified instances in each iteration. Boosting was performed on the cancer genomic data for binary classification of patient outcomes (dead/alive). The boosting algorithm used was ADA Boost and distribution of decision functions were analyzed based on the classification outcome of the model. If was overall difficult to dissect the distributions since there were more negative class (patient died) than positive classes. Various hyperparameters of the boosting model were tuned including the number of estimators, learning rates, the algorithm for fitting the model (SAMME vs SAMME.R), and various algorithms for the weak classifier. 
+
+
+![Alt text](image_url)I
+
+## Random Forest
+
+## Explainability 
+
+### SHAP
+
+### Lime
+
+## Neural Networks
+
+## 
